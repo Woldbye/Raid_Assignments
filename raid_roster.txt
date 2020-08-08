@@ -1,0 +1,252 @@
+/*
+Info:
+	- Loading the raid roster requires the following tables to be filled out and maintained. 
+	- All tables need to be encapsulated by [tableName]{tableContent},
+		- The final table should retain the ','-symbol.
+	- Current table names:
+		- Roster
+		- Tank_Order
+		- Healer_Order
+		- Interrupt_Order
+		- Kiter_Order
+	- After #END (the bottom of this file) information about each table is depicted.
+*/
+#START
+[Tables_List]
+{
+ Roster
+ Tank_Order
+ Healer_Order 
+ Kiter_Order
+ Interrupt_Order
+},
+[Roster]
+{ 
+   [Name]			[Class]		[Role]    	[Interrupt] 	[OT]	[Admin]
+ 	Poppers		 	 Druid		 Healer		 No				 No		 No
+ 	Yrotaris		 Druid 		 Tank		 No				 Yes	 Yes	
+ 	Juumanji		 Druid 		 Melee		 No				 Yes	 Yes
+ 	Mooxia			 Druid 		 Healer		 No				 No		 No
+ 	Thalls 			 Druid 		 Healer		 No				 No		 No
+ 	Mcfast			 Hunter		 Ranged		 No				 No		 No
+ 	Dethamder		 Hunter		 Ranged		 No				 No		 No	
+ 	Ybambe			 Hunter		 Ranged 	 No 			 No 	 No
+ 	Rahmon			 Hunter		 Ranged 	 No 			 No 	 No
+ 	Vobi			 Hunter		 Ranged 	 No 			 No 	 No
+ 	Hectic			 Mage		 Ranged		 Yes			 No		 Yes
+ 	Psykosen		 Mage		 Ranged		 Yes			 No		 No
+ 	Thallspring	 	 Mage		 Ranged		 Yes			 No		 No
+ 	IAmRarelyMad	 Mage		 Ranged		 Yes			 No		 No
+ 	Plaffe			 Mage		 Ranged		 Yes			 No		 No
+ 	Druzudrix		 Mage		 Ranged		 Yes			 No		 No
+ 	Ricuto			 Mage		 Ranged		 Yes 			 No 	 No
+ 	Vuze			 Priest		 Ranged		 No				 No		 Yes
+ 	Lambilam		 Priest		 Healer		 No				 No		 Yes	
+ 	Buksekrabben	 Priest		 Healer		 No				 No		 No	
+ 	Dadaz			 Priest		 Healer		 No				 No		 No		
+ 	Mangopray		 Priest		 Healer		 No				 No		 No	
+ 	Diazepam		 Priest		 Healer		 No				 No		 No	
+ 	Provst			 Priest		 Healer		 No				 No		 No		
+ 	Snodda			 Priest		 Healer		 No				 No		 No		
+ 	Tazer			 Rogue		 Melee		 Yes			 No		 No			
+ 	Eigilmusen		 Rogue		 Melee		 Yes			 No		 No	
+ 	Daroka			 Rogue		 Melee		 Yes			 No		 No	
+ 	Exavian			 Rogue		 Melee		 Yes			 No		 No	
+ 	Redmah			 Rogue		 Melee		 Yes			 No		 No	
+ 	Vomitangel		 Rogue		 Melee		 Yes			 No		 No	
+ 	Stabbia			 Rogue		 Melee		 Yes			 No		 No	
+ 	Blowmymace		 Shaman		 Healer		 No				 No		 No	
+ 	Toms			 Shaman		 Healer		 No				 No		 No	
+ 	Koeler			 Shaman		 Healer		 No				 No		 No	
+ 	Tilskueren		 Shaman		 Healer		 No				 No		 No	
+ 	Spillemand		 Shaman		 Healer		 No				 No		 No	
+ 	Baktøsen		 Shaman		 Healer		 No				 No		 No	
+ 	Polio			 Warlock	 Ranged 	 No 			 No 	 No
+ 	Mosés			 Warlock	 Ranged 	 No 			 No 	 No
+ 	Aaniz			 Warlock	 Ranged 	 No 			 No 	 No
+ 	Missdot			 Warlock	 Ranged 	 No 			 No 	 No
+ 	Jourbah			 Warrior	 Tank		 No				 Yes	 Yes		
+ 	Slæde			 Warrior	 Tank		 No				 Yes	 Yes		
+ 	Tresur			 Warrior	 Melee		 Yes			 Yes	 Yes
+ 	Dolpadin		 Warrior	 Melee		 Yes			 No		 No
+ 	Junboi			 Warrior	 Melee		 Yes			 No		 No
+ 	Roktar			 Warrior	 Melee		 Yes			 Yes	 No
+ 	Grollak			 Warrior	 Melee		 Yes			 Yes	 No
+ 	Fumblebumble	 Warrior	 Melee		 Yes			 No		 No
+ 	Trænpartner	 	 Warrior	 Melee		 Yes			 No		 No
+ 	Gufast			 Warrior	 Melee		 Yes			 No		 No
+ 	Therokk		 	 Warrior	 Melee		 Yes			 No		 No 
+}, 
+[Tank_Order]
+{
+   [Name]
+	Jourbah
+	Yrotaris
+	Slæde
+	Juumanji
+	Tresur
+	Roktar
+	Grollak
+	Junboi
+	Fumblebumble
+	Trænpartner
+	Dolpadin
+	Gufast
+	Therokk
+},
+[Healer_Order]
+{
+   [Name]
+	Jourbah
+	Yrotaris
+	Slæde
+	Juumanji
+	Tresur
+	Roktar
+	Grollak
+	Junboi
+	Fumblebumble
+	Trænpartner
+	Dolpadin
+	Gufast
+	Therokk
+},
+[Interrupt Order]
+{
+   [Name]
+	Tazer			 				
+ 	Daroka			 	
+ 	Exavian			 	
+ 	Redmah			 	
+ 	Vomitangel		 	
+ 	Stabbia
+ 	Eigilmusen			 
+ 	Dolpadin		 
+ 	Junboi			 			 
+ 	Fumblebumble	 
+ 	Trænpartner	 	 
+ 	Gufast			 
+ 	Therokk
+ 	Grollak
+ 	Roktar	
+ 	Tresur	
+ 	Hectic			 
+ 	Thallspring
+ 	Psykosen		 	 	 
+ 	IAmRarelyMad	 
+ 	Plaffe			 
+ 	Druzudrix	
+ 	Ricuto	  	  
+},
+[Kiter Order]
+{
+	Ybambe
+	Dethamder
+	Mcfast
+	Rahmon
+	Vobi
+}
+#END
+
+/*
+Formats:
+	// should contain a list of all the names of the other tables. Needs to be the first table
+	Tables_List format:
+	[Tables_List]
+	{
+		table_1
+		table_2
+		...
+		table_n
+	}
+
+	Roster Format:
+	[Roster] 
+	{
+	   [Name]			[Class]		[Role]		[Interrupt]	[OT]	[Admin]
+	    nameOne			 Warrior	 Healer		 Yes 			 Yes	 Yes
+	}
+	
+	Tank Order Format:
+	[Tank_Order]
+	{
+		nameOne
+		nameTwo
+		nameThree	
+	}
+
+	Healer Order Format:
+	[Healer_Order]
+
+	{
+		nameOne
+		nameTwo
+		nameThree	
+	}
+
+	Interrupt Order Format:
+	[Interrupt Order]
+	{
+		nameOne
+		nameTwo
+		nameThree	
+
+	}
+
+	Kiter Order Format:
+	[Kiter Order]
+	{
+		nameOne
+		nameTwo
+		nameThree
+	}
+
+	Information:
+	- Roster
+		Should contain the entire raiding roster.
+
+	- Tank Order
+		Should contain all players whom can tank. 
+		It needs to be a prioritzed list - 1. MT
+										   2. 1st OT 
+										   3. 2nd OT 
+										   4. 1st Tank DPS or OT
+										  ...
+										   n. (n-3) Tank DPS
+        The tank assignments will be chosen based on this order.
+
+	- Healer Order
+		Should contain all players whom can heals. 
+			It needs to be a prioritzed list - 1. 1st Tank Healer
+											   2. 2nd Tank Healer
+											   3. 3rd Tank Healer 
+											   4. 4th Tank Healer
+											   5. 5th Tank Healer
+											   6. 1st DPS Healer
+											  ...
+											   n. (n-5) DPS Healer
+		 The healer assignments will be chosen based on this order.
+
+	- Interrupt Order
+		Should contain all players whom can interrupt. 
+			It needs to be a prioritzed list - 1. 1st Rogue
+											   2. 2nd Rogue 
+											  ...
+											   i. Last warrior on tank order
+											  ... 
+											   j. First warrior on tank order. // Active tanks should be omitted 
+											 j+1. 1st Mage
+											  ...
+											   k. k'th mage
+											 k+1. 1st Shaman
+											  ...
+											   n. n'th Shaman
+		The interrupt assignments will be chosen based on this order.
+
+	- Kiter Order
+		Should contain all hunters whom kite.
+			It needs to be a prioritzed list - 1. 1st Hunter
+											   2. 2nd Hunter
+											  ... 
+											   n. n'th hunter
+*/
