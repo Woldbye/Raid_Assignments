@@ -6,7 +6,8 @@ using System.Collections.Generic;
 
 namespace Generics {
     // If alliance replace shaman with paladin
-    public enum Wow_Class {
+    public enum Wow_Class 
+    {
         Druid, // 0
         Hunter, // 1
         Mage, // 2
@@ -17,28 +18,24 @@ namespace Generics {
         Warrior
     }; // 3 bits
 
-    public enum Role {
+    public enum Role 
+    {
         Tank, // 0
         Healer, // 1
         Melee, // 2
         Ranged // 3
     }; // 2 bit
-	/*
-		Player:
-			-- Player base object --
-			Name: String
 
-			Role - 4 options: (tank), (melee DPS), (ranged DPS), (healer) 
-				Best represented by 2 bits: 00 (4 options)
-			Class:
-				8 options - 000 3 bits
-			in total we can represent with 7 bits
-			2 for role, 3 for class, 1 for back-up tank, 1 for interrupter = 7
-			0*0*{0}[0 00](00): (Role) [class] {back-up tank} *interrupter*
-	*/
+    public enum Priority
+    {
+        Tank,
+        Healer,
+        Interrupt,
+        Kiters
+    };
+
     public class Table 
     {
-        // TO:DO MAKE GETTERS FOR tableNames, tableIndexes, startIndex and endIndex.
         private readonly List<string> tableNames;
         private readonly int[] indexToTables;
         private readonly string[] rawLines;
@@ -48,7 +45,6 @@ namespace Generics {
 
         public Table(string path) 
         {
-            // TO:DO ALL INITS
             this.tableNames = new List<string>();
             // head is the init table name
             this.tableNames.Add(Table.INIT_TABLE_NAME);
@@ -107,9 +103,25 @@ namespace Generics {
             #endif 
         }
 
+         // TO:DO MAKE GETTERS FOR tableNames, tableIndexes, startIndex and endIndex.
+        public int getTableIndex(int i)
+        {
+            return this.tableIndexes[i];
+        }
+
+        public int getStartIndex() 
+        {
+            return this.startIndex;
+        }
+
+        public int getEndIndex() 
+        {
+            return this.endIndex;
+        }
+
         public string[] getRawTableLines() 
         {
-            return rawLines;
+            return this.rawLines;
         }
 
         public string toString() 
@@ -227,6 +239,19 @@ namespace Generics {
         }
     }
 
+    /*
+        Player:
+            -- Player base object --
+            Name: String
+
+            Role - 4 options: (tank), (melee DPS), (ranged DPS), (healer) 
+                Best represented by 2 bits: 00 (4 options)
+            Class:
+                8 options - 000 3 bits
+            in total we can represent with 7 bits
+            2 for role, 3 for class, 1 for back-up tank, 1 for interrupter = 7
+            0*0*{0}[0 00](00): (Role) [class] {back-up tank} *interrupter*
+    */
     public class Player
     { 
     	private Byte[] nameID;
@@ -338,16 +363,46 @@ namespace Generics {
         private List<string> ranged_a; // hold name of ranged whom should receive ranged assignments
         private List<string> melee_a; // hold name of melees whom should  receive melee assignments
         private List<string>[] class_a; // class_A[(int) Wow_Class.Class] will output list of all players of that class
+
+        public AssignmentReceivers(List<string>[] namesByClass, List<string> admins, ) 
+        {
+            this.admin_a = admins;
+            this.class_a = nameByClass;
+        }
+
+        // interrupt = Rogues, Warriors, Mages, Shamans, Admins
+        // healer = Priests, Druids, Shamans, Admins
+        // tanks = Warriors, Druids, Admins, healer_a
+        // ranged = healer_a, Warlocks, Mages, Hunters, 
+        // melee = Warriors, Rogues, Druids, Admins
+
+        public getNamesOfClass(enum wow_class)  
+        {
+            return this.class_a[wow_class]; 
+        }
     }
 
     // Receives orders in init.
     // Object to hold all order stacks.
-    public class Orders 
+    public class Priorities 
     {
-        private Stack<string> tank_o; // tank order, remember first in, last out -> bottom of list gets pushed first
-        private Stack<string> healer_o; // healer order
-        private Stack<string> interrupt_o; // interrupt order
-        private Stack<string> kiter_o; // kite order
+        private Stack<string>[] priorities;
+        /*
+        private Stack<string> tanks; // tank order, remember first in, last out -> bottom of list gets pushed first
+        private Stack<string> healers; // healer order
+        private Stack<string> interrupt; // interrupt order
+        private Stack<string> kiters; // kite order
+        */
+        // receives a Stack<string> array. The index of the array should match the enum priority
+        public Priorities(Stack<string>[] priorities)  
+        {
+            this.priorities = priorities;
+        }
+
+        public Stack<string> getPriority(enum priority) 
+        {
+            return this.priorities[(int) priority];
+        }
     }
 
     public class RosterDictionary
