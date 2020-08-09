@@ -15,7 +15,7 @@ namespace Generics {
         Rogue, // 4
         Shaman, // 5
         Warlock, // 6
-        Warrior
+        Warrior // 7
     }; // 3 bits
 
     public enum Role 
@@ -239,7 +239,7 @@ namespace Generics {
         }
     }
 
-    /*
+    /*  0  111
         Player:
             -- Player base object --
             Name: String
@@ -353,7 +353,6 @@ namespace Generics {
     }
 
     // Object to hold all names of the receivers of each assignment.
-    // Should init all the lists, after only receiving class_a and admin_a
     public class AssignmentReceivers
     {
         private List<string> admin_a; // hold name for admins whom should receive all assignments
@@ -364,21 +363,118 @@ namespace Generics {
         private List<string> melee_a; // hold name of melees whom should  receive melee assignments
         private List<string>[] class_a; // class_A[(int) Wow_Class.Class] will output list of all players of that class
 
-        public AssignmentReceivers(List<string>[] namesByClass, List<string> admins, ) 
+        public AssignmentReceivers(List<string>[] namesByClass, List<string> admins) 
         {
             this.admin_a = admins;
             this.class_a = nameByClass;
+            // init healers first as tank_a and ranged_a depends on healers.
+            this.healer_a = this.initHealer();
+            this.rranged_a = this.initRanged();
+            this.interrupt_a = this.initInterrupt();
+            this.melee_a = this.initMelee();
+            this.tank_a = this.initTank();
+        }
+
+        // healer = Priests, Druids, Shamans, Admins
+        private List<string> initHealer() 
+        {
+            List<string> healers = new List<string>();
+            Wow_Class[] healerClasses = [Wow_Class.Druid, Wow_Class.Priest, Wow_Class.Shaman];
+            for (int i=0; i < healerClasses.Length-1; i++) 
+            {
+                Wow_Class healerClass = healerClasses[i];
+                healers.addRange(this.class_a[healerClass]);
+            } 
+            healers.addRange(this.admin_a);
+            return healers;
+        }
+
+        // ranged = healer_a, Warlocks, Mages, Hunters,
+        private List<string> initRanged() 
+        {
+            List<string> ranged = new List<string>();
+            Wow_Class[] rangedClasses = [Wow_Class.Warlocks, Wow_Class.Mage, Wow_Class.Hunter];
+            for (int i=0; i < rangedClasses.Length-1; i++) 
+            {
+                Wow_Class rangedClass = rangedClasses[i];
+                ranged.addRange(this.class_a[rangedClass]);
+            } 
+            ranged.addRange(this.admin_a);
+            ranged.addRange(this.healer_a);
+            return ranged;
+        }
+
+        // melee = Warriors, Rogues, Druids, Admins
+        private List<string> initMelee() 
+        {
+            List<string> melee = new List<string>();
+            Wow_Class[] meleeClasses = [Wow_Class.Warrior, Wow_Class.Rogue, Wow_Class.Druid];
+            for (int i=0; i < meleeClasses.Length-1; i++) 
+            {
+                Wow_Class meleeClass = meleeClasses[i];
+                melee.addRange(this.class_a[meleeClass]);
+            } 
+            melee.addRange(this.admin_a);
+            return melee;
+        }
+
+        // tanks = Warriors, Druids, Admins, healer_a
+        private List<string> initTank() 
+        {
+            List<string> tanks = new List<string>();
+            Wow_Class[] tankClasses = [Wow_Class.Druid, Wow_Class.Warrior];
+            for (int i=0; i < tankClasses.Length-1; i++) 
+            {
+                Wow_Class tankClass = tankClasses[i];
+                tanks.addRange(this.class_a[tankClass]);
+            } 
+            tanks.addRange(this.admin_a);
+            tanks.addRange(this.healer_a);
+            return tanks;
         }
 
         // interrupt = Rogues, Warriors, Mages, Shamans, Admins
-        // healer = Priests, Druids, Shamans, Admins
-        // tanks = Warriors, Druids, Admins, healer_a
-        // ranged = healer_a, Warlocks, Mages, Hunters, 
-        // melee = Warriors, Rogues, Druids, Admins
+        private List<string> initInterrupt() 
+        {
+            List<string> interrupters = new List<string>();
+            Wow_Class[] interruptClasses = [Wow_Class.Rogue, Wow_Class.Mage, Wow_Class.Warrior, Wow_Class.Shaman];
+            for (int i=0; i < interruptClasses.Length-1; i++) 
+            {
+                Wow_Class interruptClass = interruptClasses[i];
+                interrupters.addRange(this.class_a[interruptClass]);
+            } 
+            interrupters.addRange(this.admin_a);
+            return interrupters;
+        }
 
         public getNamesOfClass(enum wow_class)  
         {
             return this.class_a[wow_class]; 
+        }
+
+        public List<string> getTanks() 
+        {
+            return this.tank_a;
+        }
+
+        public List<string> getHealers() 
+        {
+            return this.healer_a;
+        }
+
+        public List<string> getInterrupters() 
+        {
+            return this.interrupt_a;
+        }
+
+        public List<string> getMelees()
+        {
+            return this.melee_a;
+        }
+        
+        public List<string> getRanged() 
+        {
+            return this.ranged_a;
         }
     }
 
@@ -387,26 +483,23 @@ namespace Generics {
     public class Priorities 
     {
         private Stack<string>[] priorities;
-        /*
-        private Stack<string> tanks; // tank order, remember first in, last out -> bottom of list gets pushed first
-        private Stack<string> healers; // healer order
-        private Stack<string> interrupt; // interrupt order
-        private Stack<string> kiters; // kite order
-        */
+
         // receives a Stack<string> array. The index of the array should match the enum priority
         public Priorities(Stack<string>[] priorities)  
         {
             this.priorities = priorities;
         }
 
-        public Stack<string> getPriority(enum priority) 
+        public Stack<string> getPriority(Priority priority) 
         {
             return this.priorities[(int) priority];
         }
     }
 
+    // Object holding the RosterDictionary
     public class RosterDictionary
     {
         private Dictionary<string, Player> roster = new Dictionary<string, Player>();
+
     }
 }

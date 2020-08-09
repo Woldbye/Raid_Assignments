@@ -131,6 +131,7 @@ namespace Translate // utilities
 			#endif
 				*/
 		}
+
 		/*		 
 		reads a valid roster_format string and sets 
 			admin_a
@@ -142,7 +143,6 @@ namespace Translate // utilities
 			class_a
 			roster dict
 		*/ 
-
 		private void readRoster(string roster_format) {
 
 		}

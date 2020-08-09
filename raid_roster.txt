@@ -29,7 +29,7 @@ Info:
  	Mooxia			 Druid 		 Healer		 No				 No		 No
  	Thalls 			 Druid 		 Healer		 No				 No		 No
  	Mcfast			 Hunter		 Ranged		 No				 No		 No
- 	Dethamder		 Hunter		 Ranged		 No				 No		 No	
+ 	Dethamder		 Hunter		 Ranged		 No				 No		 No
  	Ybambe			 Hunter		 Ranged 	 No 			 No 	 No
  	Rahmon			 Hunter		 Ranged 	 No 			 No 	 No
  	Vobi			 Hunter		 Ranged 	 No 			 No 	 No
@@ -42,31 +42,32 @@ Info:
  	Ricuto			 Mage		 Ranged		 Yes 			 No 	 No
  	Vuze			 Priest		 Ranged		 No				 No		 Yes
  	Lambilam		 Priest		 Healer		 No				 No		 Yes	
- 	Buksekrabben	 Priest		 Healer		 No				 No		 No	
- 	Dadaz			 Priest		 Healer		 No				 No		 No		
- 	Mangopray		 Priest		 Healer		 No				 No		 No	
- 	Diazepam		 Priest		 Healer		 No				 No		 No	
- 	Provst			 Priest		 Healer		 No				 No		 No		
- 	Snodda			 Priest		 Healer		 No				 No		 No		
- 	Tazer			 Rogue		 Melee		 Yes			 No		 No			
- 	Eigilmusen		 Rogue		 Melee		 Yes			 No		 No	
- 	Daroka			 Rogue		 Melee		 Yes			 No		 No	
- 	Exavian			 Rogue		 Melee		 Yes			 No		 No	
- 	Redmah			 Rogue		 Melee		 Yes			 No		 No	
- 	Vomitangel		 Rogue		 Melee		 Yes			 No		 No	
- 	Stabbia			 Rogue		 Melee		 Yes			 No		 No	
- 	Blowmymace		 Shaman		 Healer		 No				 No		 No	
- 	Toms			 Shaman		 Healer		 No				 No		 No	
- 	Koeler			 Shaman		 Healer		 No				 No		 No	
- 	Tilskueren		 Shaman		 Healer		 No				 No		 No	
- 	Spillemand		 Shaman		 Healer		 No				 No		 No	
- 	Baktøsen		 Shaman		 Healer		 No				 No		 No	
+ 	Buksekrabben	 Priest		 Healer		 No				 No		 No
+ 	Dadaz			 Priest		 Healer		 No				 No		 No	
+ 	Mangopray		 Priest		 Healer		 No				 No		 No
+ 	Diazepam		 Priest		 Healer		 No				 No		 No
+ 	Provst			 Priest		 Healer		 No				 No		 No	
+ 	Snodda			 Priest		 Healer		 No				 No		 No	
+ 	Tazer			 Rogue		 Melee		 Yes			 No		 No
+ 	Eigilmusen		 Rogue		 Melee		 Yes			 No		 No
+ 	Daroka			 Rogue		 Melee		 Yes			 No		 No
+ 	Exavian			 Rogue		 Melee		 Yes			 No		 No
+ 	Redmah			 Rogue		 Melee		 Yes			 No		 No
+ 	Vomitangel		 Rogue		 Melee		 Yes			 No		 No
+ 	Stabbia			 Rogue		 Melee		 Yes			 No		 No
+ 	Blowmymace		 Shaman		 Healer		 Yes			 No		 No
+ 	Toms			 Shaman		 Healer		 Yes			 No		 No
+ 	Koeler			 Shaman		 Healer		 Yes			 No		 No
+ 	Tilskueren		 Shaman		 Healer		 Yes			 No		 No
+ 	Spillemand		 Shaman		 Healer		 Yes			 No		 No
+ 	Baktøsen		 Shaman		 Healer		 Yes			 No		 No
+ 	Soopamanluva	 Shaman 	 Healer 	 Yes 			 No 	 No
  	Polio			 Warlock	 Ranged 	 No 			 No 	 No
  	Mosés			 Warlock	 Ranged 	 No 			 No 	 No
  	Aaniz			 Warlock	 Ranged 	 No 			 No 	 No
  	Missdot			 Warlock	 Ranged 	 No 			 No 	 No
- 	Jourbah			 Warrior	 Tank		 No				 Yes	 Yes		
- 	Slæde			 Warrior	 Tank		 No				 Yes	 Yes		
+ 	Jourbah			 Warrior	 Tank		 No				 Yes	 Yes
+ 	Slæde			 Warrior	 Tank		 No				 Yes	 Yes
  	Tresur			 Warrior	 Melee		 Yes			 Yes	 Yes
  	Dolpadin		 Warrior	 Melee		 Yes			 No		 No
  	Junboi			 Warrior	 Melee		 Yes			 No		 No
@@ -75,10 +76,10 @@ Info:
  	Fumblebumble	 Warrior	 Melee		 Yes			 No		 No
  	Trænpartner	 	 Warrior	 Melee		 Yes			 No		 No
  	Gufast			 Warrior	 Melee		 Yes			 No		 No
- 	Therokk		 	 Warrior	 Melee		 Yes			 No		 No 
+ 	Therokk		 	 Warrior	 Melee		 Yes			 No		 No
 }, 
 [Tank_Order]
-{
+{ 
    [Name]
 	Jourbah
 	Yrotaris
@@ -97,19 +98,25 @@ Info:
 [Healer_Order]
 {
    [Name]
-	Jourbah
-	Yrotaris
-	Slæde
-	Juumanji
-	Tresur
-	Roktar
-	Grollak
-	Junboi
-	Fumblebumble
-	Trænpartner
-	Dolpadin
-	Gufast
-	Therokk
+   	Lambilam
+	Toms
+	Mooxia
+	Dadaz
+	Koeler
+	Snodda
+	Jaikyro
+	Tilskueren
+	Mango
+	Diazepam
+	Provst
+	Poppers
+	Blowmymace
+	Spillemand
+	Toptunov
+	Buksekrabben
+	Thalls
+	Baktøsen
+	Soopamanluva
 },
 [Interrupt Order]
 {
@@ -136,7 +143,8 @@ Info:
  	IAmRarelyMad	 
  	Plaffe			 
  	Druzudrix	
- 	Ricuto	  	  
+ 	Ricuto	  	
+ 	// TO:DO Add Shamans  
 },
 [Kiter Order]
 {
@@ -159,12 +167,11 @@ Formats:
 		...
 		table_n
 	}
-
 	Roster Format:
 	[Roster] 
 	{
 	   [Name]			[Class]		[Role]		[Interrupt]	[OT]	[Admin]
-	    nameOne			 Warrior	 Healer		 Yes 			 Yes	 Yes
+	    nameOne			 Warrior	 Healer		 Yes 		 Yes	 Yes
 	}
 	
 	Tank Order Format:
