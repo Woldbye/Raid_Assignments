@@ -1,6 +1,7 @@
 using Util;
 using System;
 using System.IO;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Generics {
@@ -39,18 +40,18 @@ namespace Generics {
     {
         // TO:DO MAKE GETTERS FOR tableNames, tableIndexes, startIndex and endIndex.
         private readonly List<string> tableNames;
-        private readonly int[] tableIndexes;
+        private readonly int[] indexToTables;
         private readonly string[] rawLines;
         private readonly int startIndex;
         private readonly int endIndex;
-        private const string ÌNIT_TABLE_NAME = "tables_list";
+        private const string INIT_TABLE_NAME = "tables_list";
 
         public Table(string path) 
         {
             // TO:DO ALL INITS
             this.tableNames = new List<string>();
             // head is the init table name
-            this.tableNames.Add(INIT_TABLE_NAME);
+            this.tableNames.Add(Table.INIT_TABLE_NAME);
 
             this.rawLines = File.ReadAllText(path).Split("\n");
             // extract tables and send them to their respective handlers
@@ -70,13 +71,22 @@ namespace Generics {
             this.startIndex = i;
             i++;
             int j = 0; // table index
+
+            // loop through entire file, till the end is reached.
+            // For each table found, set the index to the Table and extract tableNames if its the first table.
             while (!aLine.Contains("#END")) 
             {
                 aLine = this.rawLines[i];
                 if (aLine.Contains("[")) 
                 {
-                    string tableName = this.readTableName(lines[j]);
-                    i = this.readTable(i, this.rawLines, tableName); // i is now equal to the line with }, 
+                    int indexToTable = i;
+                    string tableName = this.readTableName(aLine);
+                    i = this.readTable(i, this.rawLines, tableName); // i is now equal to the line with },
+                    if (tableName.Equals(this.tableNames.First())) 
+                    {
+                        this.indexToTables = new int[this.tableNames.Count];
+                    }
+                    this.indexToTables[j] = indexToTable;
                     #if (DEBUG)
                         Console.WriteLine(String.Format("Read table {0}", tableName));
                         if (!this.tableNames.Contains(tableName)) 
@@ -86,17 +96,45 @@ namespace Generics {
                                     , tableName, this.tableNames));
                         } 
                     #endif
-                    this.tableIndexes = new Array<int>(this.tableNames.Count);
-                    this.tableIndexes[j];
                     j++;
                 } 
                 i++; // next table or end.
             }
+            endIndex = i-1;
+            #if (DEBUG)
+                Console.WriteLine("Finished initializing <Table>:");
+                Console.WriteLine(this.toString());
+            #endif 
         }
 
+        public string[] getRawTableLines() 
+        {
+            return rawLines;
+        }
+
+        public string toString() 
+        {
+            string ret = "<Table>:";
+            ret += String.Format("\n\t<INIT_TABLE_NAME>:\t{0}", Table.INIT_TABLE_NAME);
+            ret += String.Format("\n\t<Start index of tables>:\t{0}", startIndex);
+            ret += String.Format("\n\t<End index of tables>:\t{0}", endIndex);
+            ret += "\n\t<Index to Tables array>:";
+            for (int i=0; i < this.indexToTables.Length-1; i++)
+            {
+                ret += String.Format("\n\t\t{0}:\t{1}", i, this.indexToTables[i]);
+            }
+            ret += "\n\t<Table names list>:";
+            for (int i=0; i < this.tableNames.Count-1; i++)
+            {
+                ret += String.Format("\n\t\t{0}:\t{1}", i, this.tableNames[i]);
+            }
+            return ret;
+        }
+
+        // Table name in format [tableName] so we just trim (also converts to lower-case)
+        // and remove the first and last letter.
         private string readTableName(string line) 
         {
-            // Table name in format [tableName] so we just trim (also converts to lower-case) and remove the first and last letter.
             string trimmedLine = Strings.Trim(line);
             return trimmedLine.Substring(1, trimmedLine.Length-2);
         }
@@ -104,21 +142,28 @@ namespace Generics {
         // Take index to table and read the table by updating the index info and tableNames variables
         // This reader assumes the format is correct on the table, and the received index i points to the declartion of the table.
         //      It further assumes there are no empty tables.
+        // The function will also initialize the indexToTables array, as its the first function to 
+        // confirm the size of the array.
+        // Parameters: 
+        //      <i> - Type int: Index to the beginning of the table   
+        //      <lines> - Type string[]: file containing the tables as a string array for each line.
+        //      <name> - Type string: name of the table to read.
         //      Function returns the end index of the table
         private int readTable(int i, string[] lines, string name) 
         {
             int j = i;
+            string aLine = "";
             #if (DEBUG)
                 Console.WriteLine("----readTable DEBUG info----");
                 Console.WriteLine(String.Format("\t\tReceived i: <{0}>", i));
                 Console.WriteLine(String.Format("\t\tTrying to read table: <{0}>", name));
             #endif
-            if (name.Equal(this.tableNames.First())) 
+            if (name.Equals(this.tableNames.First())) 
             {
                 j = this.findStartIndex(lines, j);
                 while(true) 
                 {
-                    string aLine = fileLines[j];
+                    aLine = lines[j];
                     if (aLine == null)
                     {
                         Error.ThrowRosterError();
@@ -127,7 +172,6 @@ namespace Generics {
                     {
                         return j;
                     }
-
                     string subTable = this.readTableName(aLine);
                     #if (DEBUG)
                         Console.WriteLine(String.Format("Adding table named <{0}> to List<string> tableNames", subTable));
@@ -136,12 +180,11 @@ namespace Generics {
                     j++;
                 }  
             } else {
-                Error.NotImplemented(String.Format("Read of table: <{0}> is not implemented yet", subTable));
                 // reading of any other table simply involves finding the end indice of the table
                 while(!aLine.Contains("}"))
                 {
                     // start index doesnt matter here as we dont need the info
-                    string aLine = fileLines[j];
+                    aLine = lines[j];
                     if (aLine == null)
                     {
                         Error.ThrowRosterError();
@@ -153,6 +196,7 @@ namespace Generics {
                 }
                 //switch (aLine)                
             } // this.tableStartIndexes and 
+            return Error.UNKNOWN_ERR;
         }
 
         private int findStartIndex(string[] lines, int index) 
@@ -160,7 +204,7 @@ namespace Generics {
             string aLine = "";
             char flag = '{';        
             int i = index;
-            while(!aLine.contains(flag))
+            while(!aLine.Contains(flag))
             {
                 aLine = lines[i];
                 i++;
@@ -170,11 +214,12 @@ namespace Generics {
 
         // Checks the format for the beginning two lines of a table
         public bool checkTableStartFormat(string[] fileLines, int index, string tbName) {
-            string aLine = fileLines[startIndex];
+            string aLine = fileLines[index];
             if(!aLine.Contains("[" + tbName + "]")) {
                 return false;
             }
-            startIndex++;
+            index++;
+            aLine = fileLines[index];
             if(!aLine.Contains("{")) {
                 return false;
             }
@@ -280,5 +325,33 @@ namespace Generics {
         	ret += "\n\t<Off-Tank>\n\t\t" + (this.isOT() ? "Yes" : "No");
         	return ret;
         }
+    }
+
+    // Object to hold all names of the receivers of each assignment.
+    // Should init all the lists, after only receiving class_a and admin_a
+    public class AssignmentReceivers
+    {
+        private List<string> admin_a; // hold name for admins whom should receive all assignments
+        private List<string> interrupt_a; // hold name of interrupters whom should receive interrupt assignments
+        private List<string> tank_a; // hold name of tanks whom should receive tank assignments
+        private List<string> healer_a; // hold name of healers whom should receive healer assignments
+        private List<string> ranged_a; // hold name of ranged whom should receive ranged assignments
+        private List<string> melee_a; // hold name of melees whom should  receive melee assignments
+        private List<string>[] class_a; // class_A[(int) Wow_Class.Class] will output list of all players of that class
+    }
+
+    // Receives orders in init.
+    // Object to hold all order stacks.
+    public class Orders 
+    {
+        private Stack<string> tank_o; // tank order, remember first in, last out -> bottom of list gets pushed first
+        private Stack<string> healer_o; // healer order
+        private Stack<string> interrupt_o; // interrupt order
+        private Stack<string> kiter_o; // kite order
+    }
+
+    public class RosterDictionary
+    {
+        private Dictionary<string, Player> roster = new Dictionary<string, Player>();
     }
 }

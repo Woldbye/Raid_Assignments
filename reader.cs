@@ -38,9 +38,8 @@ namespace Translate // utilities
 		public getFunctions
 	*/
 	// Table reader for raid_roster.txt
-	public class TbReader 
+	public class TableReader 
 	{	
-		private const string RAID_ROSTER_PATH = "raid_roster.txt";
 		private List<string> admin_a; // hold name for admins whom should receive all assignments
 		private List<string> interrupt_a; // hold name of interrupters whom should receive interrupt assignments
 		private List<string> tank_a; // hold name of tanks whom should receive tank assignments
@@ -55,12 +54,20 @@ namespace Translate // utilities
 		// NOTE: Dict cant be omitted - needed for signed_up(string sign_up) 
 		// key: name -> Player obj
 		private Dictionary<string, Player> roster = new Dictionary<string, Player>();
+		// ALL THE ABOVE HAVE BEEN MOVED TO CLASSES INSTEAD
+		// This class should instead just init AssignmentReceivers, RosterDic and Orders.
+		// The information can then be extracted by accessing the subobjects.
+		// private AssignmentReceivers assignStrings;
+		// private RosterDictionary;
+		// private Orders; 
+		// private Table;
 
-		public TbReader() {
+
+		public TableReader() {
 			// Inits
-			string[] rawRosterLines = File.ReadAllText(RAID_ROSTER_PATH).Split("\n");
+			string[] rawRosterLines = File.ReadAllText(Strings.RAID_ROSTER_PATH).Split("\n");
 			#if (DEBUG)
-				Console.WriteLine("--- Read {0} Printing Entire File Content ---\n{0}", RAID_ROSTER_PATH, fileLines);
+				Console.WriteLine("--- Read {0}---", Strings.RAID_ROSTER_PATH);
 				int debug_count = 0;
 			#endif
 			int initSize_o = 8;
@@ -94,7 +101,7 @@ namespace Translate // utilities
 			    startIndex++;
 			    if (aLine == null)
 			    {
-			    	Error.throwRosterError();
+			    	Error.ThrowRosterError();
 			    } else if (aLine.Equals("#START")) {
 			    	break;
 			    }
@@ -107,9 +114,11 @@ namespace Translate // utilities
 			// Read from the first table how many tables in total.
 			List<string> table_names = new List<string>();
 			aLine = rawRosterLines[startIndex];
+			/*
 			if (!this.checkTableStartFormat(this.rosterLines, startIndex, tbName)) {
 				Error.throwRosterError();
 			}
+			*/
 			while(!aLine.Contains(",")) {
 				aLine = fileLines[startIndex];
 				startIndex++;
@@ -122,7 +131,7 @@ namespace Translate // utilities
 			#endif
 				*/
 		}
-		/* 
+		/*		 
 		reads a valid roster_format string and sets 
 			admin_a
 			interrupt_a

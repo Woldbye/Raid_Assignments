@@ -1,11 +1,14 @@
 using System;
 using Generics;
 using System.Runtime.InteropServices;
+using System.Linq;
 
 namespace Util // utilities
 {	
 	public static class Strings
 	{
+		public const string RAID_ROSTER_PATH = "raid_roster.txt";
+
 		public static string[] CLASS_TO_STR = {"Druid", "Hunter", "Mage", "Priest", "Rogue", "Shaman", "Warlock"};
 		public static string[] ROLE_TO_STR = {"Tank", "Healer", "Melee", "Ranged"};
 		// no need for constructor
@@ -33,9 +36,11 @@ namespace Util // utilities
 
 	public static class Error 
 	{
+		public const int UNKNOWN_ERR = -1;
+
 		public static void ThrowRosterError() 
 		{
-			throw new FormatException(String.Format("Invalid format of {0}", RAID_ROSTER_PATH));	
+			throw new FormatException(String.Format("Invalid format of {0}", Strings.RAID_ROSTER_PATH));	
 		}
 
 		public static void NotImplemented(string funcName) 
