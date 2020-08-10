@@ -34,12 +34,31 @@ namespace Generics {
         Kiters
     };
 
+    // Should match the names of the priority tables.
+    private const string PRIO_FLAG = "prio";
+    public static string[] PRIORITY_STR = ["tank_" + PRIO_FLAG, "healer_" + PRIO_FLAG, "interrupt_" + PRIO_FLAG, "kiter_" + PRIO_FLAG];
+    // Constructor receives path to raid_roster.txt, and the table object 
+    // will hold index to each of the tables to read, and the name of the tables.
     public class Table 
     {
+        // Holds the name of each table
         private readonly List<string> tableNames;
+        // Holds the index to each of the priority tables
+        private readonly List<int> indexToPrios;
+        /*
+         Holds the index to all of the tables in rawLines.
+         If tableA is contained at index 2 in tableNames, its index in rawLines will similarily 
+         be contained at indexToTables[2]
+         TO:DO Convert type to List<int> for simplification.
+        */
         private readonly int[] indexToTables;
+        /*
+         The path file as RawLines. Each line in the array corresponds to a line in the file such that 1st line in file is at index 0.
+        */
         private readonly string[] rawLines;
+        // The index where all the tables start
         private readonly int startIndex;
+        // The index where all the tables end
         private readonly int endIndex;
         private const string INIT_TABLE_NAME = "tables_list";
 
@@ -48,8 +67,8 @@ namespace Generics {
             this.tableNames = new List<string>();
             // head is the init table name
             this.tableNames.Add(Table.INIT_TABLE_NAME);
-
             this.rawLines = File.ReadAllText(path).Split("\n");
+            this.indexToPrios = new List<int>(); // we init this as a list since we dont know beforehand how many prio tables are present
             // extract tables and send them to their respective handlers
             int i = 0;    
             string aLine = "";
@@ -75,38 +94,76 @@ namespace Generics {
                 aLine = this.rawLines[i];
                 if (aLine.Contains("[")) 
                 {
-                    int indexToTable = i;
+                    bool isPrio;
+                    int indexToTable = -1;
+                    int endIndex = -1;
+
                     string tableName = this.readTableName(aLine);
-                    i = this.readTable(i, this.rawLines, tableName); // i is now equal to the line with },
+                    Tuple<bool, int> tableInfo = this.readTable(i, this.rawLines, tableName); 
+                    // extract tuple info
+                    isPrio = tableInfo.Item1; 
+                    i = tableInfo.Item2; // i is now equal to the line with },
+                    indexToTable = tableInfo.Item3;
+                    
                     if (tableName.Equals(this.tableNames.First())) 
                     {
                         this.indexToTables = new int[this.tableNames.Count];
+                    } else if (!this.tableNames.Contains(tableName))
+                    {
+                        Error.Exception(String
+                                .Format("Invalid name: <{0}>\n\ttableNames doesn't contain the object. tableNames is equal to: <{2}>"
+                                    , tableName, this.tableNames));
                     }
+                    if (isPrio)
+                    {
+                        this.indexToPrios.Add(indexToTable);    
+                    }
+                    // Would be faster to append, but we use index here for clarity
                     this.indexToTables[j] = indexToTable;
                     #if (DEBUG)
                         Console.WriteLine(String.Format("Read table {0}", tableName));
-                        if (!this.tableNames.Contains(tableName)) 
-                        {
-                            Error.Exception(String
-                                .Format("Invalid name: <{0}>\n\ttableNames doesn't contain the object. tableNames is equal to: <{2}>"
-                                    , tableName, this.tableNames));
-                        } 
                     #endif
                     j++;
                 } 
                 i++; // next table or end.
             }
+            // small check
+            if (this.indexToPrios.Count != Priority.GetNames(typeof(Priority)).Length)
+            {
+                Error.ThrowRosterError();
+            }
+
             endIndex = i-1;
             #if (DEBUG)
                 Console.WriteLine("Finished initializing <Table>:");
                 Console.WriteLine(this.toString());
             #endif 
         }
+        public int[] getTableIndexes()
+        {
+            return this.indexToTables;
+        }
 
-         // TO:DO MAKE GETTERS FOR tableNames, tableIndexes, startIndex and endIndex.
         public int getTableIndex(int i)
         {
             return this.tableIndexes[i];
+        }
+
+        public List<int> getPrioIndexes()
+        {
+            return this.indexToPrios;
+        }
+
+        // returns -1 if it cant be found
+        public int getTableIndexByName(string name)
+        {
+            int index = this.tableNames.FindIndex(x => x.Contains(name.ToLower()));
+            if (index == -1) 
+            {
+                return index;
+            } else {
+                return this.tableIndexs[index];
+            }
         }
 
         public int getStartIndex() 
@@ -119,26 +176,39 @@ namespace Generics {
             return this.endIndex;
         }
 
-        public string[] getRawTableLines() 
+        public string[] getRawLines() 
         {
             return this.rawLines;
         }
 
-        public string toString() 
+        public List<string> getTableNames()
+        {
+            return this.tableNames;
+        }
+
+        public string getTableName(int i) 
+        {
+            return this.tableNames[i];
+        }
+
+        public override string toString() 
         {
             string ret = "<Table>:";
             ret += String.Format("\n\t<INIT_TABLE_NAME>:\t{0}", Table.INIT_TABLE_NAME);
             ret += String.Format("\n\t<Start index of tables>:\t{0}", startIndex);
             ret += String.Format("\n\t<End index of tables>:\t{0}", endIndex);
-            ret += "\n\t<Index to Tables array>:";
+            ret += "\n\t<TableNames and their indexes>:";
+            ret += String.Format("\n\t\tNum:\tName\tIndex");
             for (int i=0; i < this.indexToTables.Length-1; i++)
             {
-                ret += String.Format("\n\t\t{0}:\t{1}", i, this.indexToTables[i]);
+                ret += String.Format("\n\t\t{0}:\t{1}:\t{2}", i+1, this.getTableName(i), this.indexToTables[i]);
             }
-            ret += "\n\t<Table names list>:";
-            for (int i=0; i < this.tableNames.Count-1; i++)
+            ret += "\n\t<Index to Priority Table>:";
+            int i=0;
+            foreach (int prioI in this.indexToPrios)
             {
-                ret += String.Format("\n\t\t{0}:\t{1}", i, this.tableNames[i]);
+                ret += String.Format("\n\t\t{0}:\t{1}", i+1, prioI);
+                i++;
             }
             return ret;
         }
@@ -160,11 +230,16 @@ namespace Generics {
         //      <i> - Type int: Index to the beginning of the table   
         //      <lines> - Type string[]: file containing the tables as a string array for each line.
         //      <name> - Type string: name of the table to read.
-        //      Function returns the end index of the table
-        private int readTable(int i, string[] lines, string name) 
+        //      Function returns a tuple containing: 
+        //          {bool} whether the table is a priority table, 
+        //          {int} end index of the table,
+        //          {int} start index of the table lines
+        private Tuple<bool, int, int> readTable(int i, string[] lines, string name) 
         {
             int j = i;
+            bool isPrio = false;
             string aLine = "";
+            int beginIndex = -1;
             #if (DEBUG)
                 Console.WriteLine("----readTable DEBUG info----");
                 Console.WriteLine(String.Format("\t\tReceived i: <{0}>", i));
@@ -172,7 +247,8 @@ namespace Generics {
             #endif
             if (name.Equals(this.tableNames.First())) 
             {
-                j = this.findStartIndex(lines, j);
+                beginIndex = this.findStartIndex(lines, j);
+                j = beginIndex;
                 while(true) 
                 {
                     aLine = lines[j];
@@ -182,18 +258,37 @@ namespace Generics {
                     } 
                     if (aLine.Contains("}")) 
                     {
-                        return j;
+                        break;
                     }
-                    string subTable = this.readTableName(aLine);
+                    string subTable = Strings.Trim(aLine);
                     #if (DEBUG)
                         Console.WriteLine(String.Format("Adding table named <{0}> to List<string> tableNames", subTable));
                     #endif
                     this.tableNames.Add(subTable);
                     j++;
                 }  
+            } else if(PRIORITY_STR.Any(s => s.Contains(name))) {
+                isPrio = true;
+                beginIndex = this.findStartIndex(lines, j);
+                j = beginIndex;
+                while(true)
+                {
+                    aLine = lines[j];
+                    if (aLine == null)
+                    {
+                        Error.ThrowRosterError();
+                    } 
+                    if (aLine.Contains("}")) 
+                    {
+                        break;
+                    }
+                    j++;
+                }
             } else {
+                beginIndex = this.findStartIndex(lines, j);
+                j = beginIndex;
                 // reading of any other table simply involves finding the end indice of the table
-                while(!aLine.Contains("}"))
+                while(true)
                 {
                     // start index doesnt matter here as we dont need the info
                     aLine = lines[j];
@@ -203,14 +298,20 @@ namespace Generics {
                     } 
                     if (aLine.Contains("}")) 
                     {
-                        return j;
+                        break;
                     }
-                }
-                //switch (aLine)                
-            } // this.tableStartIndexes and 
-            return Error.UNKNOWN_ERR;
+                    j++;
+                }       
+            } 
+            if (j < 0 | beginIndex < 0)
+            {
+                Error.ThrowRosterError();
+            }
+            return Tuple.Create(isPrio, j, beginIndex);
         }
 
+        // Input: receive the file lines and the current index. 
+        // Output: it returns the start index of the table content.
         private int findStartIndex(string[] lines, int index) 
         {
             string aLine = "";
@@ -353,6 +454,7 @@ namespace Generics {
     }
 
     // Object to hold all names of the receivers of each assignment.
+    // constructor receives List<string>[] namesByClass, List<string> admins
     public class AssignmentReceivers
     {
         private List<string> admin_a; // hold name for admins whom should receive all assignments
@@ -478,8 +580,8 @@ namespace Generics {
         }
     }
 
-    // Receives orders in init.
     // Object to hold all order stacks.
+    // constructor receives Stack<string>[] priorities
     public class Priorities 
     {
         private Stack<string>[] priorities;
@@ -496,10 +598,12 @@ namespace Generics {
         }
     }
 
+    /*
     // Object holding the RosterDictionary
     public class RosterDictionary
     {
         private Dictionary<string, Player> roster = new Dictionary<string, Player>();
 
     }
+    */
 }

@@ -84,6 +84,12 @@ namespace Util // utilities
 		    return b1.Length == b2.Length && memcmp(b1, b2, b1.Length) == 0;
 		}
 
+		// Extracts a bit from a byte b
+		// Can receive any number :)
+		public static bool GetBit<T>(T b, T bitNumber)
+		{
+			return ((b & (1 << bitNumber-1)) != 0);
+		}
 		/*
 		setBitsToNum
 		set bits in N equal to M in the range i-j and return value

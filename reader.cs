@@ -9,7 +9,7 @@ namespace Translate // utilities
 {
 	/*
 	Table Reader, for reading roster_tables.txt and extracting information.
-	so it will be able to be called as: TableReader reader = new TableReader(path_to_roster_tables.txt)
+	so it will be able to be called as: Reader reader = new Reader(path_to_roster_tables.txt)
 										reader.getAdmins_a()
 										reader.getClass_a
 										...
@@ -38,8 +38,18 @@ namespace Translate // utilities
 		public getFunctions
 	*/
 	// Table reader for raid_roster.txt
-	public class TableReader 
+	public class Reader 
 	{	
+		// Holds the names of all the assignment receivers.
+		// constructor receives List<string>[] namesByClass, List<string> admins
+		private AssignmentReceivers a_receivers;
+		// Holds the priority stacks.
+		// constructor receives Stack<string>[] priorities
+		private Priorities priorities;
+		// Constructor receives path to raid_roster.txt, and the table object 
+		// Holds variety of table information including but not limited to indexes of each table and names.
+		private Table tableInfo;
+		/*
 		private List<string> admin_a; // hold name for admins whom should receive all assignments
 		private List<string> interrupt_a; // hold name of interrupters whom should receive interrupt assignments
 		private List<string> tank_a; // hold name of tanks whom should receive tank assignments
@@ -51,85 +61,23 @@ namespace Translate // utilities
 		private Stack<string> interrupt_o; // interrupt order
 		private Stack<string> kiter_o; // kite order
 		private List<string>[] class_a; // class_A[(int) Wow_Class.Class] will output list of all players of that class
+		*/
 		// NOTE: Dict cant be omitted - needed for signed_up(string sign_up) 
 		// key: name -> Player obj
 		private Dictionary<string, Player> roster = new Dictionary<string, Player>();
-		// ALL THE ABOVE HAVE BEEN MOVED TO CLASSES INSTEAD
-		// This class should instead just init AssignmentReceivers, RosterDic and Orders.
-		// The information can then be extracted by accessing the subobjects.
-		// private AssignmentReceivers assignStrings;
-		// private RosterDictionary;
-		// private Orders; 
-		// private Table;
-
-
-		public TableReader() {
-			// Inits
-			string[] rawRosterLines = File.ReadAllText(Strings.RAID_ROSTER_PATH).Split("\n");
-			#if (DEBUG)
-				Console.WriteLine("--- Read {0}---", Strings.RAID_ROSTER_PATH);
-				int debug_count = 0;
-			#endif
-			int initSize_o = 8;
-			int initSize_a = 12;
-			this.interrupt_a = new List<string>(initSize_a);
-			this.admin_a = new List<string>(initSize_a);
-			this.healer_a = new List<string>(initSize_a);
-			this.ranged_a = new List<string>(initSize_a);
-			this.tank_a = new List<string>(initSize_a);
-			this.melee_a = new List<string>(initSize_a);
-			this.tank_o = new Stack<string>(initSize_o);
-			this.healer_o = new Stack<string>(initSize_o);
-			this.interrupt_o = new Stack<string>(initSize_o);
-			this.kiter_o = new Stack<string>(initSize_o);
-			this.class_a = new List<string>[Enum.GetNames(typeof(Wow_Class)).Length];
-			// Init loop for Array of lists class_a
-			foreach(Wow_Class class_ in Enum.GetValues(typeof(Wow_Class))) {
-				this.class_a[(int) class_] = new List<string>();
-				#if (DEBUG)
-					debug_count++;
-					Console.WriteLine("this.class_a[{0}] init complete", debug_count);
-				#endif 
-			}
-			this.roster = new Dictionary<string, Player>();
-			// extract tables and send them to their respective handlers
-			string aLine = "";
-			int startIndex = 0;
-			while(true)
-			{
-				aLine = rawRosterLines[startIndex];
-			    startIndex++;
-			    if (aLine == null)
-			    {
-			    	Error.ThrowRosterError();
-			    } else if (aLine.Equals("#START")) {
-			    	break;
-			    }
-			}
-			// Tables start at startIndex :)
-			#if (DEBUG)
-				Console.WriteLine("Start index of file: {0}", startIndex);
-			#endif
-
-			// Read from the first table how many tables in total.
-			List<string> table_names = new List<string>();
-			aLine = rawRosterLines[startIndex];
-			/*
-			if (!this.checkTableStartFormat(this.rosterLines, startIndex, tbName)) {
-				Error.throwRosterError();
-			}
+		
+		public Reader() {
+			this.tableInfo = new Table(Strings.RAID_ROSTER_PATH);
+			int[] tableIndexes = this.tableInfo.getTableIndexes();
+			/* TO:DO
+				Make function readRoster.
+					Read first table (roster table) and init AssignmentReceivers:
+						-Loop first table
+						*init this.roster
+						*init this.class_a
+						-Then send it to Assignment Receivers
 			*/
-			while(!aLine.Contains(",")) {
-				aLine = fileLines[startIndex];
-				startIndex++;
-			}
-			/*
-			loop through file, for each [object] use appripriate readerFunction
-			call functions to Read tables
-			#if (DEBUG)
-				print roster
-			#endif
-				*/
+			this.priorities = new Priority(this.readPriorities());
 		}
 
 		/*		 
@@ -144,43 +92,46 @@ namespace Translate // utilities
 			roster dict
 		*/ 
 		private void readRoster(string roster_format) {
-
+			Error.Exception();
 		}
 
-		private void readInterruptO(string TankO_Format) {
-
-		}
-
-		private void readHealerO(string TankO_Format) {
-			
-		}
-
-		private void readKiteO(string TankO_Format) {
-			
-		}
-
-		private void readTankO(string TankO_Format) {
-			
-		}
-
-		public Stack<string> getTankO() {
-			throw new Exception();
-		}
-
-		public Stack<string> getInterruptO() {
-			throw new Exception();
-		}
-
-		public Stack<string> getHealerO() {
-			throw new Exception();
-		}
-
-		public Stack getKiteO() {
-			throw new Exception();
+		// Extracts priority info and outputs it in a Stack<string>[]. 
+		private Stack<string>[] readPriorities()
+		{
+			string[] file = this.tableInfo.getRawLines();
+			string aLine = "";
+			Stack<string>[] priorities = new Stack<string>[this.tableInfo.getPrioIndexes().Count];
+			for (int i=0; i < tableIndexes.Length-1; i++)
+			{
+				// init the priority stack
+				priorities[i] = new Stack<string>();
+				// index to the start of the table content
+				int fileIndex = tableIndexes[i];
+				// reading of any other table simply involves finding the end indice of the table
+                while(true)
+                {
+                    // start index doesnt matter here as we dont need the info
+                    aLine = Strings.Trim(file[fileIndex]);
+                    if (aLine == null)
+                    {
+                        Error.ThrowRosterError();
+                    } 
+                    if (aLine.Contains("}")) 
+                    {
+                        break;
+                    }
+                    // TO:DO IMPLEMENT CHECK FOR PLAYER IN ROSTER DURING DEBUG
+                    #if (DEBUG)
+                    	Console.WriteLine(String.Format("Adding {0} to Priority Stack:{1}", aLine, (Priority) i))
+                    #endif
+                    priorities[i].Push(aLine);
+                } 
+			}
+			return priorities;
 		}
 
 		public Player getPlayerInRoster(string name) {
-			throw new Exception();
+			Error.Exception();
 		}
 	}
 	/*
