@@ -5,20 +5,20 @@ Info:
 		- The final table should retain the ','-symbol.
 	- Current table names:
 		- Roster
-		- Tank_Order
-		- Healer_Order
-		- Interrupt_Order
-		- Kiter_Order
+		- Tank_Prio
+		- Healer_Prio
+		- Interrupt_Prio
+		- Kiter_Prio
 	- After #END (the bottom of this file) information about each table is depicted.
 */
 #START
 [Tables_List]
 {
  Roster
- Tank_Order
- Healer_Order 
- Kiter_Order
- Interrupt_Order
+ Tank_Prio
+ Healer_Prio 
+ Kiter_Prio
+ Interrupt_Prio
 },
 [Roster]
 { 
@@ -78,7 +78,7 @@ Info:
  	Gufast			 Warrior	 Melee		 Yes			 No		 No
  	Therokk		 	 Warrior	 Melee		 Yes			 No		 No
 }, 
-[Tank_Order]
+[Tank_Prio]
 { 
    [Name]
 	Jourbah
@@ -95,7 +95,7 @@ Info:
 	Gufast
 	Therokk
 },
-[Healer_Order]
+[Healer_Prio]
 {
    [Name]
    	Lambilam
@@ -118,7 +118,7 @@ Info:
 	Baktøsen
 	Soopamanluva
 },
-[Interrupt Order]
+[Interrupt_Prio]
 {
    [Name]
 	Tazer			 				
@@ -146,7 +146,7 @@ Info:
  	Ricuto	  	
  	// TO:DO Add Shamans  
 },
-[Kiter Order]
+[Kiter_Prio]
 {
 	Ybambe
 	Dethamder
@@ -174,16 +174,16 @@ Formats:
 	    nameOne			 Warrior	 Healer		 Yes 		 Yes	 Yes
 	}
 	
-	Tank Order Format:
-	[Tank_Order]
+	Tank Prio Format:
+	[Tank_Prio]
 	{
 		nameOne
 		nameTwo
 		nameThree	
 	}
 
-	Healer Order Format:
-	[Healer_Order]
+	Healer Prio Format:
+	[Healer_Prio]
 
 	{
 		nameOne
@@ -191,8 +191,8 @@ Formats:
 		nameThree	
 	}
 
-	Interrupt Order Format:
-	[Interrupt Order]
+	Interrupt Prio Format:
+	[Interrupt Prio]
 	{
 		nameOne
 		nameTwo
@@ -200,8 +200,8 @@ Formats:
 
 	}
 
-	Kiter Order Format:
-	[Kiter Order]
+	Kiter Prio Format:
+	[Kiter Prio]
 	{
 		nameOne
 		nameTwo
@@ -212,7 +212,7 @@ Formats:
 	- Roster
 		Should contain the entire raiding roster.
 
-	- Tank Order
+	- Tank Prio
 		Should contain all players whom can tank. 
 		It needs to be a prioritzed list - 1. MT
 										   2. 1st OT 
@@ -220,9 +220,9 @@ Formats:
 										   4. 1st Tank DPS or OT
 										  ...
 										   n. (n-3) Tank DPS
-        The tank assignments will be chosen based on this order.
+        The tank assignments will be chosen based on this Prio.
 
-	- Healer Order
+	- Healer Prio
 		Should contain all players whom can heals. 
 			It needs to be a prioritzed list - 1. 1st Tank Healer
 											   2. 2nd Tank Healer
@@ -232,25 +232,25 @@ Formats:
 											   6. 1st DPS Healer
 											  ...
 											   n. (n-5) DPS Healer
-		 The healer assignments will be chosen based on this order.
+		 The healer assignments will be chosen based on this Prio.
 
-	- Interrupt Order
+	- Interrupt Prio
 		Should contain all players whom can interrupt. 
 			It needs to be a prioritzed list - 1. 1st Rogue
 											   2. 2nd Rogue 
 											  ...
-											   i. Last warrior on tank order
+											   i. Last warrior on tank Prio
 											  ... 
-											   j. First warrior on tank order. // Active tanks should be omitted 
+											   j. First warrior on tank Prio. // Active tanks should be omitted 
 											 j+1. 1st Mage
 											  ...
 											   k. k'th mage
 											 k+1. 1st Shaman
 											  ...
 											   n. n'th Shaman
-		The interrupt assignments will be chosen based on this order.
+		The interrupt assignments will be chosen based on this Prio.
 
-	- Kiter Order
+	- Kiter Prio
 		Should contain all hunters whom kite.
 			It needs to be a prioritzed list - 1. 1st Hunter
 											   2. 2nd Hunter
