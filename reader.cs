@@ -6,7 +6,16 @@ using Util;
 using Generics;
 
 namespace Translate // utilities
-{
+{	
+	/*
+	public class SignUp()
+	{
+		public SignUp()
+		{
+
+		}
+	}
+	*/
 	/*
 	Table Reader, for reading roster_tables.txt and extracting information.
 	so it will be able to be called as: Reader reader = new Reader(path_to_roster_tables.txt)
@@ -67,91 +76,154 @@ namespace Translate // utilities
 		private Dictionary<string, Player> roster = new Dictionary<string, Player>();
 		
 		public Reader() {
+			// table needs init first, as other function depends on it.
 			this.tableInfo = new Table(Strings.RAID_ROSTER_PATH);
-			int[] tableIndexes = this.tableInfo.getTableIndexes();
-			/* TO:DO
-				Make function readRoster.
-					Read first table (roster table) and init AssignmentReceivers:
-						-Loop first table
-						*init this.roster
-						*init this.class_a
-						-Then send it to Assignment Receivers
-			*/
-			this.priorities = new Priority(this.readPriorities());
+			Tuple<Dictionary<string, Player>, List<string>[], List<string>> readRoster = this.readRoster();
+			this.roster = readRoster.Item1;
+			this.a_receivers = new AssignmentReceivers(readRoster.Item2, readRoster.Item3);
+			this.priorities = new Priorities(this.readPriorities());
 		}
 
 		/*		 
-		reads a valid roster_format string and sets 
-			admin_a
-			interrupt_a
-			tank_a
-			healer_a
-			ranged_a
-			melee_a
-			class_a
-			roster dict
+		reads a valid roster string and returns 
+			class_a = List<String>[sizeOf(Wow_Class Enum)], each index 
+				contains a list of all the the names of players of that class.
+			DRoster = Dictionary<string, player>, look up for each player by name.
+			admins = name of all admins
 		*/ 
-		private void readRoster(string roster_format) {
-			Error.Exception();
+		private Tuple<Dictionary<string, Player>, List<string>[], List<string>> readRoster() 
+		{
+			// name of roster table
+			const string nameRosterTb = "roster"; 
+			int rosterIndex = this.tableInfo.getTableIndexByName(nameRosterTb);
+			string[] file = this.tableInfo.getRawLines();
+			string aLine = "";
+
+			// A few inits :)
+			Dictionary<string, Player> DRoster = new Dictionary<string, Player>(this.tableInfo.getRosterCount());
+			int arraySize = Wow_Class.GetNames(typeof(Wow_Class)).Length;
+			List<string>[] class_a = new List<string>[arraySize];
+			List<string> admins = new List<string>();
+
+			for(int i=0; i < arraySize; i++) 
+			{
+				class_a[i] = new List<string>();
+			} 
+			int counter = 1;
+			while (true)
+			{
+				aLine = file[rosterIndex];
+				if (aLine == null)
+        {
+            Error.ThrowRosterError();
+        } 
+        if (aLine[0].Equals(Table.FINISH_FLAG)) 
+        {
+            break;
+        }
+        Player player = this.ExtractPlayer(aLine);
+        // add player to all three lists:
+        string name = player.getName();
+        DRoster.Add(name, player);
+        class_a[(int) player.getClass()].Add(name);
+        if (player.isAdmin())
+        {
+        	admins.Add(name);
+        }
+        rosterIndex++;
+        counter++;
+			}
+
+			return Tuple.Create(DRoster, class_a, admins);
 		}
+		// public Player(string name, Wow_Class class_, Role role_, bool isOT, bool isInt)
+    private Player ExtractPlayer(string pl_line)
+    {
+    	#if (DEBUG)
+    		string[] plInfoStr = {"name", "class", "role", "isOT", "isInt", "isAdmin"};
+            Console.WriteLine("----ExtractPlayer DEBUG info----");
+            Console.WriteLine(String.Format("\tReceived pl_line: <{0}>", pl_line));
+      #endif
+      string line = pl_line;
+			List<int> infoIndexes = this.tableInfo.getPlayerInfoIndexes();
+			string[] info = new string[infoIndexes.Count];
+			int i = 0;
+
+			// extract info
+			foreach(int start in infoIndexes) 
+			{
+				bool last = false;
+				int j = start;
+				while (Char.IsLetter(line[j]))
+				{
+					if (line[j] == null)
+					{
+						Error.ThrowRosterError();
+					}
+					j++;
+					if (!(j < line.Length))
+					{
+						break;
+					}
+				}
+				int count = j - start;
+				info[i] = line.Substring(start, count);
+				#if (DEBUG)
+					Console.WriteLine(String.Format("\t\tAdded {0} as {1}", info[i], plInfoStr[i]));
+				#endif
+				i++;
+			}
+// int ot admin
+			// cast info and init player
+			string name = info[0];
+			Wow_Class wow_class = (Wow_Class) Array.IndexOf(Strings.CLASS_TO_STR, info[1]);
+			Role role = (Role) Array.IndexOf(Strings.ROLE_TO_STR, info[2]);
+			bool isOT = (info[4].Equals("Yes")) ? true : false;
+			bool isInt = (info[3].Equals("Yes")) ? true : false;
+			bool isAdmin = (info[5].Equals("Yes")) ? true : false;
+			Player retPlayer = new Player(name, wow_class, role, isOT, isInt, isAdmin);
+			return retPlayer;
+    }
 
 		// Extracts priority info and outputs it in a Stack<string>[]. 
 		private Stack<string>[] readPriorities()
 		{
 			string[] file = this.tableInfo.getRawLines();
 			string aLine = "";
-			Stack<string>[] priorities = new Stack<string>[this.tableInfo.getPrioIndexes().Count];
-			for (int i=0; i < tableIndexes.Length-1; i++)
+			List<int> prioIndexes = this.tableInfo.getPrioIndexes();
+			Stack<string>[] priorities = new Stack<string>[prioIndexes.Count];
+			int i = 0;
+			foreach (int index in prioIndexes)
 			{
 				// init the priority stack
 				priorities[i] = new Stack<string>();
 				// index to the start of the table content
-				int fileIndex = tableIndexes[i];
+				int prioIndex = index; 
+
 				// reading of any other table simply involves finding the end indice of the table
                 while(true)
                 {
                     // start index doesnt matter here as we dont need the info
-                    aLine = Strings.Trim(file[fileIndex]);
+                    aLine = Strings.Trim(file[prioIndex]);
                     if (aLine == null)
                     {
                         Error.ThrowRosterError();
                     } 
-                    if (aLine.Contains("}")) 
+                    if (aLine[0].Equals(Table.FINISH_FLAG)) 
                     {
                         break;
                     }
-                    // TO:DO IMPLEMENT CHECK FOR PLAYER IN ROSTER DURING DEBUG
-                    #if (DEBUG)
-                    	Console.WriteLine(String.Format("Adding {0} to Priority Stack:{1}", aLine, (Priority) i))
-                    #endif
                     priorities[i].Push(aLine);
-                } 
+                    prioIndex++;
+                }
+                i++;
 			}
 			return priorities;
 		}
 
 		public Player getPlayerInRoster(string name) {
-			Error.Exception();
+			Error.Exception("invalid");
+			return null;
 		}
 	}
-	/*
-	What to read from roster_tables.txt:
-	  	Stacks:
-			tank_o
-			healer_o
-			interrupt_o
-			kiter_o
-		Array:
-		class_a[]
-			After this is read, we can read all the remaining _a lists
-		List:
-			admins_a
-			tanks_a 
-			healers_a
-			melee_a 
-			ranged_a
-			interrupt_a
-		Dictionary:
-			roster: 
-	*/
 }

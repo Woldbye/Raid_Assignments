@@ -34,9 +34,6 @@ namespace Generics {
         Kiters
     };
 
-    // Should match the names of the priority tables.
-    private const string PRIO_FLAG = "prio";
-    public static string[] PRIORITY_STR = ["tank_" + PRIO_FLAG, "healer_" + PRIO_FLAG, "interrupt_" + PRIO_FLAG, "kiter_" + PRIO_FLAG];
     // Constructor receives path to raid_roster.txt, and the table object 
     // will hold index to each of the tables to read, and the name of the tables.
     public class Table 
@@ -52,6 +49,7 @@ namespace Generics {
          TO:DO Convert type to List<int> for simplification.
         */
         private readonly int[] indexToTables;
+        private readonly List<int> playerInfoIndexes;
         /*
          The path file as RawLines. Each line in the array corresponds to a line in the file such that 1st line in file is at index 0.
         */
@@ -60,13 +58,22 @@ namespace Generics {
         private readonly int startIndex;
         // The index where all the tables end
         private readonly int endIndex;
+        private const string ROSTER_TABLE_NAME = "roster";
         private const string INIT_TABLE_NAME = "tables_list";
+        public const char FINISH_FLAG = '}'; 
+        public const char BEGIN_FLAG = '{';
+        public const char NAME_FLAG = '[';
+        public const char NAME_END_FLAG = ']';
+        public const string START_FLAG = "#START";
+        public const string END_FLAG = "#END";
+        private readonly int rosterCount;
 
         public Table(string path) 
         {
+            this.playerInfoIndexes = new List<int>();
             this.tableNames = new List<string>();
+            this.tableNames.Add(INIT_TABLE_NAME);
             // head is the init table name
-            this.tableNames.Add(Table.INIT_TABLE_NAME);
             this.rawLines = File.ReadAllText(path).Split("\n");
             this.indexToPrios = new List<int>(); // we init this as a list since we dont know beforehand how many prio tables are present
             // extract tables and send them to their respective handlers
@@ -78,38 +85,40 @@ namespace Generics {
                 if (aLine == null)
                 {
                     Error.ThrowRosterError();
-                } else if (aLine.Contains("#START")) 
+                } else if (aLine.Contains(Table.START_FLAG)) 
                 {
                     break;
                 }
+                i++;
             }
             this.startIndex = i;
             i++;
             int j = 0; // table index
-
+           
             // loop through entire file, till the end is reached.
             // For each table found, set the index to the Table and extract tableNames if its the first table.
-            while (!aLine.Contains("#END")) 
+            while (!aLine.Contains(Table.END_FLAG)) 
             {
                 aLine = this.rawLines[i];
-                if (aLine.Contains("[")) 
+                if (aLine[0].Equals(Table.NAME_FLAG)) 
                 {
                     bool isPrio;
                     int indexToTable = -1;
                     int endIndex = -1;
 
                     string tableName = this.readTableName(aLine);
-                    Tuple<bool, int> tableInfo = this.readTable(i, this.rawLines, tableName); 
+                    Tuple<bool, int, int> tableInfo = this.readTable(i, this.rawLines, tableName); 
                     // extract tuple info
                     isPrio = tableInfo.Item1; 
                     i = tableInfo.Item2; // i is now equal to the line with },
                     indexToTable = tableInfo.Item3;
                     
-                    if (tableName.Equals(this.tableNames.First())) 
+                    if (tableName.Equals(Table.INIT_TABLE_NAME)) 
                     {
                         this.indexToTables = new int[this.tableNames.Count];
-                    } else if (!this.tableNames.Contains(tableName))
-                    {
+                    } else if (tableName.Equals(Table.ROSTER_TABLE_NAME)) {
+                        this.rosterCount = i - indexToTable;
+                    } else if (!this.tableNames.Contains(tableName)) {
                         Error.Exception(String
                                 .Format("Invalid name: <{0}>\n\ttableNames doesn't contain the object. tableNames is equal to: <{2}>"
                                     , tableName, this.tableNames));
@@ -121,7 +130,7 @@ namespace Generics {
                     // Would be faster to append, but we use index here for clarity
                     this.indexToTables[j] = indexToTable;
                     #if (DEBUG)
-                        Console.WriteLine(String.Format("Read table {0}", tableName));
+                        Console.WriteLine(String.Format("Finished read of table {0}\n", tableName));
                     #endif
                     j++;
                 } 
@@ -136,9 +145,14 @@ namespace Generics {
             endIndex = i-1;
             #if (DEBUG)
                 Console.WriteLine("Finished initializing <Table>:");
-                Console.WriteLine(this.toString());
+                Console.WriteLine(this.ToString());
             #endif 
         }
+        public int getRosterCount()
+        {
+            return this.rosterCount;
+        }
+
         public int[] getTableIndexes()
         {
             return this.indexToTables;
@@ -146,12 +160,17 @@ namespace Generics {
 
         public int getTableIndex(int i)
         {
-            return this.tableIndexes[i];
+            return this.indexToTables[i];
         }
 
         public List<int> getPrioIndexes()
         {
             return this.indexToPrios;
+        }
+
+        public List<int> getPlayerInfoIndexes()
+        {
+            return this.playerInfoIndexes;
         }
 
         // returns -1 if it cant be found
@@ -162,7 +181,7 @@ namespace Generics {
             {
                 return index;
             } else {
-                return this.tableIndexs[index];
+                return this.indexToTables[index];
             }
         }
 
@@ -191,28 +210,6 @@ namespace Generics {
             return this.tableNames[i];
         }
 
-        public override string toString() 
-        {
-            string ret = "<Table>:";
-            ret += String.Format("\n\t<INIT_TABLE_NAME>:\t{0}", Table.INIT_TABLE_NAME);
-            ret += String.Format("\n\t<Start index of tables>:\t{0}", startIndex);
-            ret += String.Format("\n\t<End index of tables>:\t{0}", endIndex);
-            ret += "\n\t<TableNames and their indexes>:";
-            ret += String.Format("\n\t\tNum:\tName\tIndex");
-            for (int i=0; i < this.indexToTables.Length-1; i++)
-            {
-                ret += String.Format("\n\t\t{0}:\t{1}:\t{2}", i+1, this.getTableName(i), this.indexToTables[i]);
-            }
-            ret += "\n\t<Index to Priority Table>:";
-            int i=0;
-            foreach (int prioI in this.indexToPrios)
-            {
-                ret += String.Format("\n\t\t{0}:\t{1}", i+1, prioI);
-                i++;
-            }
-            return ret;
-        }
-
         // Table name in format [tableName] so we just trim (also converts to lower-case)
         // and remove the first and last letter.
         private string readTableName(string line) 
@@ -234,6 +231,7 @@ namespace Generics {
         //          {bool} whether the table is a priority table, 
         //          {int} end index of the table,
         //          {int} start index of the table lines
+        // TO:DO SIMPLIFY IF STATEMENTS TO AVOID CODE DUPLICATION
         private Tuple<bool, int, int> readTable(int i, string[] lines, string name) 
         {
             int j = i;
@@ -244,8 +242,9 @@ namespace Generics {
                 Console.WriteLine("----readTable DEBUG info----");
                 Console.WriteLine(String.Format("\t\tReceived i: <{0}>", i));
                 Console.WriteLine(String.Format("\t\tTrying to read table: <{0}>", name));
+                Console.WriteLine(String.Format("\t\tLine at start index equals:\n\t\t\t{0}", lines[i]));
             #endif
-            if (name.Equals(this.tableNames.First())) 
+            if (name.Equals(Table.INIT_TABLE_NAME)) 
             {
                 beginIndex = this.findStartIndex(lines, j);
                 j = beginIndex;
@@ -256,35 +255,40 @@ namespace Generics {
                     {
                         Error.ThrowRosterError();
                     } 
-                    if (aLine.Contains("}")) 
+                    if (aLine[0].Equals(Table.FINISH_FLAG)) 
                     {
                         break;
                     }
                     string subTable = Strings.Trim(aLine);
-                    #if (DEBUG)
-                        Console.WriteLine(String.Format("Adding table named <{0}> to List<string> tableNames", subTable));
-                    #endif
                     this.tableNames.Add(subTable);
                     j++;
                 }  
-            } else if(PRIORITY_STR.Any(s => s.Contains(name))) {
-                isPrio = true;
-                beginIndex = this.findStartIndex(lines, j);
-                j = beginIndex;
-                while(true)
-                {
-                    aLine = lines[j];
-                    if (aLine == null)
-                    {
-                        Error.ThrowRosterError();
-                    } 
-                    if (aLine.Contains("}")) 
-                    {
-                        break;
-                    }
-                    j++;
-                }
             } else {
+                if(Priorities.PRIO_STR.Any(s => s.Contains(name))) 
+                {
+                    isPrio = true;
+                // If its the roster table set this.playerInfoIndexes;
+                } else if (name.Equals(Table.ROSTER_TABLE_NAME)) 
+                {
+                    
+                    j++;
+                    // index into the line
+                    int k = 0;
+                    aLine = lines[j];
+                    foreach (char c in aLine)
+                    {
+                        if (c == null)
+                        {
+                            Error.ThrowRosterError();
+                        }
+                        if (c.Equals(Table.NAME_FLAG))
+                        {
+                            // +1 cuz we want the index to the first letter of the word.
+                            this.playerInfoIndexes.Add(k);
+                        }
+                        k++;
+                    }
+                }
                 beginIndex = this.findStartIndex(lines, j);
                 j = beginIndex;
                 // reading of any other table simply involves finding the end indice of the table
@@ -296,7 +300,7 @@ namespace Generics {
                     {
                         Error.ThrowRosterError();
                     } 
-                    if (aLine.Contains("}")) 
+                    if (aLine[0].Equals(Table.FINISH_FLAG)) 
                     {
                         break;
                     }
@@ -307,6 +311,13 @@ namespace Generics {
             {
                 Error.ThrowRosterError();
             }
+            #if (DEBUG)
+                Console.WriteLine(String.Format("\t\tEnd index of table: <{0}>", j));
+                Console.WriteLine(String.Format("\t\tLine at end index equals:\n\t\t\t{0}", lines[j]));
+                Console.WriteLine(String.Format("\t\tBegin index of table: <{0}>", beginIndex));
+                Console.WriteLine(String.Format("\t\tLine at begin index equals:\n\t\t\t{0}", lines[beginIndex]));
+                Console.WriteLine(String.Format("\t\tIs it a prio table?:\n\t\t\t{0}", isPrio));
+            #endif
             return Tuple.Create(isPrio, j, beginIndex);
         }
 
@@ -314,10 +325,9 @@ namespace Generics {
         // Output: it returns the start index of the table content.
         private int findStartIndex(string[] lines, int index) 
         {
-            string aLine = "";
-            char flag = '{';        
+            string aLine = "";       
             int i = index;
-            while(!aLine.Contains(flag))
+            while(!aLine.Contains(Table.BEGIN_FLAG))
             {
                 aLine = lines[i];
                 i++;
@@ -338,6 +348,42 @@ namespace Generics {
             }
             return true;
         }
+
+        public override string ToString() 
+        {
+            string ret = "<Table>:";
+            ret += String.Format("\n\t<INIT_TABLE_NAME>:\t{0}", Table.INIT_TABLE_NAME);
+            ret += String.Format("\n\t<Start index of tables>:\t{0}", startIndex);
+            ret += String.Format("\n\t<End index of tables>:\t{0}", endIndex);
+            ret += String.Format("\n\t<Roster Count>:\t{0}", this.rosterCount);
+            ret += "\n\t<TableNames and their indexes>:";
+            ret += String.Format("\n\t\tNum:\tName\t\tIndex");
+            for (int i=0; i < this.indexToTables.Length; i++)
+            {
+                if (i==1)
+                {
+                    ret += String.Format("\n\t\t{0}:\t{1}:\t\t{2}", i, this.tableNames[i], this.indexToTables[i]);    
+                } else {
+                    ret += String.Format("\n\t\t{0}:\t{1}:\t{2}", i, this.tableNames[i], this.indexToTables[i]);
+                }
+            }
+            ret += "\n\t<Index to Priority Table>:";
+            int j = 0;
+            foreach (int prioI in this.indexToPrios)
+            {
+                ret += String.Format("\n\t\t{0}:\t{1}", j+1, prioI);
+                j++;
+            }
+            ret += "\n\t<Index to Player Info>:";
+            j = 0;
+            foreach (int infoIndex in this.playerInfoIndexes)
+            {
+                ret += String.Format("\n\t\t{0}:\t{1}", j+1, infoIndex);
+                j++;
+            }
+            ret += "\n";
+            return ret;
+        }
     }
 
     /*  0  111
@@ -351,7 +397,7 @@ namespace Generics {
                 8 options - 000 3 bits
             in total we can represent with 7 bits
             2 for role, 3 for class, 1 for back-up tank, 1 for interrupter = 7
-            0*0*{0}[0 00](00): (Role) [class] {back-up tank} *interrupter*
+            |0|*0*{0}[0 00](00): (Role) [class] {back-up tank} *interrupter* |admin|
     */
     public class Player
     { 
@@ -359,10 +405,11 @@ namespace Generics {
     	private byte info;
     	// Constructor
     	// Int = interrupter
-    	public Player(string name, Wow_Class class_, Role role_, bool isOT, bool isInt) 
+    	public Player(string name, Wow_Class class_, Role role_, bool isOT, bool isInt, bool isAdmin) 
     	{	
     		this.nameID = Strings.Hash(name);
     		this.info = (byte) 0; 
+            this.setAdmin(isAdmin);
             this.setOT(isOT);
             this.setInterrupt(isInt);
     		this.setClass(class_);
@@ -373,6 +420,10 @@ namespace Generics {
     		#endif   		
     	}
 
+        public string getName()
+        {
+            return Strings.HashToString(this.nameID);
+        }
 
         public bool Equals(string str) {
             Byte[] strID = Strings.Hash(str);
@@ -411,6 +462,11 @@ namespace Generics {
     		return Convert.ToBoolean(this.info & (1 << 1));
     	}
 
+        public bool isAdmin()
+        {
+            return Convert.ToBoolean(this.info & 1);
+        }
+
     	public bool isInterrupter() 
     	{
     		return Convert.ToBoolean(this.info & (1 << 2));
@@ -433,6 +489,11 @@ namespace Generics {
     		this.info = ByteOP.modifyBit(this.info, 2, interrupt);
     	}
 
+        public void setAdmin(bool admin) 
+        {
+            this.info = ByteOP.modifyBit(this.info, 0, admin);
+        }
+
     	public void setOT(bool OT) 
     	{
     		this.info = ByteOP.modifyBit(this.info, 1, OT);
@@ -449,6 +510,7 @@ namespace Generics {
         	ret += "\n\t<Role>\n\t\t" + this.getRole().ToString();
         	ret += "\n\t<Interrupter>\n\t\t" + (this.isInterrupter() ? "Yes" : "No");
         	ret += "\n\t<Off-Tank>\n\t\t" + (this.isOT() ? "Yes" : "No");
+            ret += "\n\t<Admin>\n\t\t" + (this.isAdmin() ? "Yes" : "No");
         	return ret;
         }
     }
@@ -468,26 +530,57 @@ namespace Generics {
         public AssignmentReceivers(List<string>[] namesByClass, List<string> admins) 
         {
             this.admin_a = admins;
-            this.class_a = nameByClass;
+            this.class_a = namesByClass;
             // init healers first as tank_a and ranged_a depends on healers.
             this.healer_a = this.initHealer();
-            this.rranged_a = this.initRanged();
+            this.ranged_a = this.initRanged();
             this.interrupt_a = this.initInterrupt();
             this.melee_a = this.initMelee();
             this.tank_a = this.initTank();
+            #if (DEBUG)
+                Console.WriteLine("Finished Init of AssignmentReceivers");
+                Console.WriteLine(this.ToString());
+            #endif
+        }
+
+        /*
+        Receives a format string containing the class that needs assignments and outputs the corresponding exorsus
+        string that prints the assignments to those.
+        The end of the assignment string should be prepended by {/p}
+        List of format strings:
+            1: // for each role
+                {healer}
+                {/p}
+            2: // for each class
+                {rogue}
+                {/p}
+            3:  
+                {admin}
+                {/p}
+        Also supports + and - OPs. 
+            1:  // will add all healer_a and tank_a
+                {healer + tank}
+                {/p}
+            2: // will subtract all healer_a from tank_a and output any remaining
+                {tank_a - healer_a}
+                {/p}
+        */ 
+        public string ToExorsus(string format)
+        {
+            return "NOT SUPPORTED";
         }
 
         // healer = Priests, Druids, Shamans, Admins
         private List<string> initHealer() 
         {
             List<string> healers = new List<string>();
-            Wow_Class[] healerClasses = [Wow_Class.Druid, Wow_Class.Priest, Wow_Class.Shaman];
+            int[] healerClasses = {(int) Wow_Class.Druid, (int) Wow_Class.Priest, (int) Wow_Class.Shaman};
             for (int i=0; i < healerClasses.Length-1; i++) 
             {
-                Wow_Class healerClass = healerClasses[i];
-                healers.addRange(this.class_a[healerClass]);
+                int healerClass = healerClasses[i];
+                healers.AddRange(this.class_a[healerClass]);
             } 
-            healers.addRange(this.admin_a);
+            healers.AddRange(this.admin_a);
             return healers;
         }
 
@@ -495,14 +588,14 @@ namespace Generics {
         private List<string> initRanged() 
         {
             List<string> ranged = new List<string>();
-            Wow_Class[] rangedClasses = [Wow_Class.Warlocks, Wow_Class.Mage, Wow_Class.Hunter];
+            int[] rangedClasses = { (int) Wow_Class.Warlock, (int) Wow_Class.Mage, (int) Wow_Class.Hunter};
             for (int i=0; i < rangedClasses.Length-1; i++) 
             {
-                Wow_Class rangedClass = rangedClasses[i];
-                ranged.addRange(this.class_a[rangedClass]);
+                int rangedClass = rangedClasses[i];
+                ranged.AddRange(this.class_a[rangedClass]);
             } 
-            ranged.addRange(this.admin_a);
-            ranged.addRange(this.healer_a);
+            ranged.AddRange(this.admin_a);
+            ranged.AddRange(this.healer_a);
             return ranged;
         }
 
@@ -510,13 +603,13 @@ namespace Generics {
         private List<string> initMelee() 
         {
             List<string> melee = new List<string>();
-            Wow_Class[] meleeClasses = [Wow_Class.Warrior, Wow_Class.Rogue, Wow_Class.Druid];
+            int[] meleeClasses = { (int) Wow_Class.Warrior, (int) Wow_Class.Rogue, (int) Wow_Class.Druid};
             for (int i=0; i < meleeClasses.Length-1; i++) 
             {
-                Wow_Class meleeClass = meleeClasses[i];
-                melee.addRange(this.class_a[meleeClass]);
+                int meleeClass = meleeClasses[i];
+                melee.AddRange(this.class_a[meleeClass]);
             } 
-            melee.addRange(this.admin_a);
+            melee.AddRange(this.admin_a);
             return melee;
         }
 
@@ -524,14 +617,14 @@ namespace Generics {
         private List<string> initTank() 
         {
             List<string> tanks = new List<string>();
-            Wow_Class[] tankClasses = [Wow_Class.Druid, Wow_Class.Warrior];
+            int[] tankClasses = { (int) Wow_Class.Druid, (int) Wow_Class.Warrior};
             for (int i=0; i < tankClasses.Length-1; i++) 
             {
-                Wow_Class tankClass = tankClasses[i];
-                tanks.addRange(this.class_a[tankClass]);
+                int tankClass = tankClasses[i];
+                tanks.AddRange(this.class_a[tankClass]);
             } 
-            tanks.addRange(this.admin_a);
-            tanks.addRange(this.healer_a);
+            tanks.AddRange(this.admin_a);
+            tanks.AddRange(this.healer_a);
             return tanks;
         }
 
@@ -539,19 +632,24 @@ namespace Generics {
         private List<string> initInterrupt() 
         {
             List<string> interrupters = new List<string>();
-            Wow_Class[] interruptClasses = [Wow_Class.Rogue, Wow_Class.Mage, Wow_Class.Warrior, Wow_Class.Shaman];
+            int[] interruptClasses = { (int) Wow_Class.Rogue, (int) Wow_Class.Mage, (int) Wow_Class.Warrior, (int) Wow_Class.Shaman};
             for (int i=0; i < interruptClasses.Length-1; i++) 
             {
-                Wow_Class interruptClass = interruptClasses[i];
-                interrupters.addRange(this.class_a[interruptClass]);
+                int interruptClass = interruptClasses[i];
+                interrupters.AddRange(this.class_a[interruptClass]);
             } 
-            interrupters.addRange(this.admin_a);
+            interrupters.AddRange(this.admin_a);
             return interrupters;
         }
 
-        public getNamesOfClass(enum wow_class)  
+        public List<string> getNamesOfClass(int wow_class)  
         {
             return this.class_a[wow_class]; 
+        }
+
+        public List<string> getNamesOfClass(Wow_Class wow_class)  
+        {
+            return this.class_a[(int) wow_class]; 
         }
 
         public List<string> getTanks() 
@@ -578,6 +676,67 @@ namespace Generics {
         {
             return this.ranged_a;
         }
+
+        public override string ToString()
+        {
+            string ret = "<AssignmentReceivers>:";
+            ret += "\n\t<Melee>:";
+            int j = 0;
+            foreach (string melee in this.melee_a)
+            {
+                ret += String.Format("\n\t\t{0}:\t{1}", j+1, melee);
+                j++;
+            }
+            ret += "\n\t<Ranged>:";
+            j = 0;
+            foreach (string ranged in this.ranged_a)
+            {
+                ret += String.Format("\n\t\t{0}:\t{1}", j+1, ranged);
+                j++;
+            }
+            ret += "\n\t<Interrupters>:";
+            j = 0;
+            foreach (string interrupter in this.interrupt_a)
+            {
+                ret += String.Format("\n\t\t{0}:\t{1}", j+1, interrupter);
+                j++;
+            }
+            ret += "\n\t<Healers>:";
+            j = 0;
+            foreach (string healer in this.healer_a)
+            {
+                ret += String.Format("\n\t\t{0}:\t{1}", j+1, healer);
+                j++;
+            }
+            ret += "\n\t<Tanks>:";
+            j = 0;
+            foreach (string tank in this.tank_a)
+            {
+                ret += String.Format("\n\t\t{0}:\t{1}", j+1, tank);
+                j++;
+            }
+            ret += "\n\t<Admins>:";
+            j = 0;
+            foreach (string admin in this.admin_a)
+            {
+                ret += String.Format("\n\t\t{0}:\t{1}", j+1, admin);
+                j++;
+            }
+            ret += "\n\t<Players by class>:";
+            j = 0;
+            foreach (List<string> class_obj in this.class_a)
+            {
+                ret += String.Format("\n\t\t<{0}>", Strings.CLASS_TO_STR[j]);
+                int k = 0;
+                foreach (string name in class_obj)
+                {
+                    ret += String.Format("\n\t\t\t{0}:\t{1}", k+1, name);
+                    k++;
+                }
+                j++;
+            }
+            return ret;
+        }
     }
 
     // Object to hold all order stacks.
@@ -585,16 +744,38 @@ namespace Generics {
     public class Priorities 
     {
         private Stack<string>[] priorities;
-
+        // Should match the names of the priority tables.
+        public static string PRIO_FLAG = "prio";
+        public static string[] PRIO_STR = { "tank_" + PRIO_FLAG, "healer_" + PRIO_FLAG, "interrupt_" + PRIO_FLAG, "kiter_" + PRIO_FLAG};
+ 
         // receives a Stack<string> array. The index of the array should match the enum priority
         public Priorities(Stack<string>[] priorities)  
         {
             this.priorities = priorities;
+            #if (DEBUG)
+                Console.WriteLine(String.Format("Finished initializing {0}", typeof(Priorities).Name));
+                Console.WriteLine(this.ToString());
+            #endif
         }
 
         public Stack<string> getPriority(Priority priority) 
         {
             return this.priorities[(int) priority];
+        }
+
+        public override string ToString()
+        {
+            string ret = "<Priorities>:";
+            for (int i=0; i < this.priorities.Length; i++) 
+            {
+                Stack<string> prio_stack = this.priorities[i];
+                ret += String.Format("\n\t<{0}>:\n", PRIO_STR[i]);
+                while (prio_stack.Count > 0)
+                {
+                    ret += String.Format("\t\t{0}\n", prio_stack.Pop());
+                }
+            }  
+            return ret; 
         }
     }
 

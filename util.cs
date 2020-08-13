@@ -8,8 +8,7 @@ namespace Util // utilities
 	public static class Strings
 	{
 		public const string RAID_ROSTER_PATH = "raid_roster.txt";
-
-		public static string[] CLASS_TO_STR = {"Druid", "Hunter", "Mage", "Priest", "Rogue", "Shaman", "Warlock"};
+		public static string[] CLASS_TO_STR = {"Druid", "Hunter", "Mage", "Priest", "Rogue", "Shaman", "Warlock", "Warrior"};
 		public static string[] ROLE_TO_STR = {"Tank", "Healer", "Melee", "Ranged"};
 		// no need for constructor
 		public static string ByteToStr(byte byte_to_print) {
@@ -83,13 +82,24 @@ namespace Util // utilities
 		    // This also ensures that the count does not exceed the length of either buffer.  
 		    return b1.Length == b2.Length && memcmp(b1, b2, b1.Length) == 0;
 		}
-
+		/*
 		// Extracts a bit from a byte b
 		// Can receive any number :)
-		public static bool GetBit<T>(T b, T bitNumber)
+		public static bool GetBit<T>(ref T b, ref T bitNumber)
 		{
-			return ((b & (1 << bitNumber-1)) != 0);
+			int bitN = bitNumber as int;
+			if (bitN == null) 
+			{
+				Error.Exception(String.Format("Invalid type {0}", typeof(bitN)));
+			}
+			long b_l = b as long;
+			if (b_l == null) 
+			{
+				Error.Exception(String.Format("Invalid type {0}", typeof(b_l)));
+			}
+			return ((b_l & (long) (1 << bitN-1)) != 0);
 		}
+		*/
 		/*
 		setBitsToNum
 		set bits in N equal to M in the range i-j and return value
