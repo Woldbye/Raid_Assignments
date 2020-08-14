@@ -1,0 +1,48 @@
+:signups: 29
+:empty:
+:Tanks: 3 - Melee - 8 :Dps:
+‎
+:CMcalendar: 19-08-2020
+:empty:
+:Ranged: Ranged - 9 :Ranged:
+‎
+:CMclock: 18:45 GMT +2
+:empty:
+:Healers: Healers - 9 :Healers:
+‎
+:Tank: Tank (3) :
+:Tank: 9 Vogn/Slæde
+:Tank: 16 Jourbah
+:Tank: 27 Yrotaris
+‎
+:Hunter: Hunter (1) :
+:Hunter: 31 Vobi
+‎
+:Druid: Druid (3) :
+:Feral: 13 Soopa/Juuman
+:RestoDruid: 14 Mooxia
+:RestoDruid: 29 𝕻𝖔𝖕𝖕𝖊𝖗
+‎
+:Warrior: Warrior (3) :
+:Warrior: 5 Roktar/Andre
+:Warrior: 6 Grollak//M
+:Warrior: 24 Tresur
+‎
+:Mage: Mage (5) :
+:Mage: 4 IAmRarelyMad
+:Mage: 12 Psykosen
+:Mage: 15 Plaffe/Jon
+:Mage: 19 Hectic/Emil
+:Mage: 20 Chibsey
+‎
+:Shaman: Shaman (4) :
+:RestoShaman: 22 Koeler
+:RestoShaman: 23 Toms
+:RestoShaman: 25 Jogan
+:RestoShaman: 30 Tilskueren/
+‎
+:Rogue: Rogue (4) :
+:Rogue: 2 Hamder
+:Rogue: 8 Tazer
+:Rogue: 17 Daroka/Jespe
+:Rogue: 28 Eigilmusen

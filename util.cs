@@ -8,6 +8,18 @@ namespace Util // utilities
 	public static class Strings
 	{
 		public const string RAID_ROSTER_PATH = "raid_roster.txt";
+		public static string[] FACTION_TO_STR = {
+			"Tank",
+			"Hunter",
+			"Druid",
+			"Warrior",
+			"Mage",
+			"Shaman",
+			"Rogue",
+			"Warlock",
+			"Priest"
+		};
+
 		public static string[] CLASS_TO_STR = {"Druid", "Hunter", "Mage", "Priest", "Rogue", "Shaman", "Warlock", "Warrior"};
 		public static string[] ROLE_TO_STR = {"Tank", "Healer", "Melee", "Ranged"};
 		// no need for constructor

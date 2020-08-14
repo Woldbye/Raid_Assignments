@@ -18,6 +18,19 @@ namespace Generics {
         Warrior // 7
     }; // 3 bits
 
+    public enum Faction
+    {
+        Tank, // 0
+        Hunter, // 1
+        Druid, // 2
+        Warrior, // 3
+        Mage, // 4
+        Shaman, // 5
+        Rogue, // 6
+        Warlock, // 7
+        Priest // 8
+    }; // 4 bits
+
     public enum Role 
     {
         Tank, // 0
@@ -34,6 +47,70 @@ namespace Generics {
         Kiters
     };
 
+    public class SignUp
+    {
+        // total count of signed up players.
+        private readonly int count;
+        // count for each role
+        private readonly int[] rolesCount;
+        // the sign up files by lines.
+        private readonly string[] rawLines;
+        // Index to each of the "factions".
+        private readonly int[] indexToFaction;
+        // Any line that terminates with ":", corresponds to a new group that needs to be read.
+        public const char NEW_FLAG = ':';
+        // date of event.
+        private readonly DateTime date;
+        // headline name for each of the info regarding dates.
+        // calender is date, clock is time.
+        public const string[] DATE_NAMES = {"CMcalendar", "CMclock"};
+
+        public static int MAX_FACTION_COUNT = Faction.GetNames(typeof(Faction)).Length;
+        // Use Role lookup to find info
+        public SignUp(string path, Dictionary<string, Player> roster)
+        {
+            this.rolesCount = new int[Role.GetNames(typeof(Role)).Length];
+            this.indexToClass = new int[SignUp.MAX_FACTION_COUNT];
+            this.rawLines = File.ReadAllText(path).Split("\n");
+            // idea:
+        }
+
+        // Returns int[] containing info about the read date
+        // int[0] is ternary value, 
+        //      if (int[0] == -1) -> error
+        //      if (int[0] == 0) -> calender
+        //      if (int[0] == 1) -> clock
+        public int[] readDate(string line)
+        {
+            // Either its [type, day, month, year] or [type, hour, min]
+            const int MAX_INFO_SIZE = 4;
+            int[] ret = new int[MAX_INFO_SIZE];
+            string line_cp = line;
+            if (line[0] == NEW_FLAG)
+            {
+                line_cp = line_cp.Substring(1, line_cp.Length-1);
+            }
+
+            string dateName = SignUp.DATE_NAMES[i];
+            // Contains would be safer, but this is much faster :)
+            if (SignUp.DATE_NAMES[0].Equals(line_cp.Substring(0, SignUp.DATE_NAMES[0].Length)))
+            {
+                // handle CMcalendar: 19-08-2020 type string
+
+                // idea: Loop through string, find first int which will be day.
+                // day-month-year
+                // then we read it as above.
+            } else if (SignUp.DATE_NAMES[1].Equals(line_cp.Substring(0, SignUp.DATE_NAMES[1].Length)))
+            {
+                // handle CMclock: 18:45 GMT +2
+                // idea: Loop through string, find first int which will be hour count.
+                // hour:min GMT +2
+                // GMT +2 = zone.
+            }
+
+            return ret;
+        }
+    }
     // Constructor receives path to raid_roster.txt, and the table object 
     // will hold index to each of the tables to read, and the name of the tables.
     public class Table 
