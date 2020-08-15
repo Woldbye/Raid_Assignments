@@ -46,3 +46,13 @@
 :Rogue: 8 Tazer
 :Rogue: 17 Daroka/Jespe
 :Rogue: 28 Eigilmusen
+‎
+:Warlock: Warlock (2) :
+:Warlock: 1 Aaniz-Ande
+:Warlock: 7 Mosés
+‎
+:Priest: Priest (4) :
+:Shadow: 3 Vuze
+:Priest: 11 Lambilam/D
+:Priest: 18 Snodda/And
+:Priest: 26 Mango/Mads

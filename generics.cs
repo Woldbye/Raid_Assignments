@@ -47,10 +47,17 @@ namespace Generics {
         Kiters
     };
 
+    public enum Date
+    {
+        Error = -1,
+        Calender = 0,
+        Clock = 1
+    };
+
     public class SignUp
     {
         // total count of signed up players.
-        private readonly int count;
+        private int count;
         // count for each role
         private readonly int[] rolesCount;
         // the sign up files by lines.
@@ -72,43 +79,126 @@ namespace Generics {
             this.rolesCount = new int[Role.GetNames(typeof(Role)).Length];
             this.indexToClass = new int[SignUp.MAX_FACTION_COUNT];
             this.rawLines = File.ReadAllText(path).Split("\n");
-            // idea:
+            int i = initCount(this.rawLines);
+            // Next step is rolesCount and date
+
+            // next step is indexToFaction arr
         }
+
+        // Reads the lines and sets this.count accordingly. if Error it thwos an exception
+        // Will return the index to the :signups: line.
+        private int initCount(string[] lines)
+        {
+            int i = 0;
+            string signUpFlag = ":signups:";
+
+            while (true)
+            {
+                if (i >= lines.Length)
+                {
+                    throw new ArgumentOutOfRangeException(
+                       String.Format("The length of the file is {0} and the index is {1}", lines.Length, i));
+                }
+                string line = lines[i];
+                if (line.Length >= signUpFlag.Length && signUpFlag.Equals(line.Substring(0, signUpFlag.Length)))
+                {
+                    int imCount = Strings.ConvertToInt(line.Substring(line.Length-2, 2));
+                    if (imCount == Strings.Error)
+                    {
+                        Error.ThrowSignUpError();
+                    } else {
+                        #if (DEBUG)
+                            Console.WriteLine("Succesfully set count to " + imCount);
+                        #endif 
+                        this.count = imCount;
+                    }
+                    break;
+                }
+                i++;
+            }
+
+            return i;
+        }
+
 
         // Returns int[] containing info about the read date
         // int[0] is ternary value, 
         //      if (int[0] == -1) -> error
         //      if (int[0] == 0) -> calender
         //      if (int[0] == 1) -> clock
-        public int[] readDate(string line)
+        private int[] readDate(string line)
         {
-            // Either its [type, day, month, year] or [type, hour, min]
+            // Either its [type, day, month, year] or [type, hour, min, gmt+]
             const int MAX_INFO_SIZE = 4;
+            
             int[] ret = new int[MAX_INFO_SIZE];
+
             string line_cp = line;
-            if (line[0] == NEW_FLAG)
+            if (line[0].Equals(NEW_FLAG))
             {
                 line_cp = line_cp.Substring(1, line_cp.Length-1);
             }
+            // start at the shortest type i.
+            int i = SignUp.DATE_NAMES[1].Length;
+            // find first number
+            while (true)
+            {
+                if (line_cp.Length <= i)
+                {
+                    throw new ArgumentOutOfRangeException(
+                        String.Format("The length of the line is {0} and the index is {1}", line_cp.Length, i));
+                }
+                char c = line_cp[i];
+                if (c == null)
+                {
+                    ret[0] = (int) Date.Error;
+                    return ret;
+                } else if (Char.IsNumber(c)) 
+                {
+                    break;
+                }
+                i++;
+            }
 
-            string dateName = SignUp.DATE_NAMES[i];
             // Contains would be safer, but this is much faster :)
             if (SignUp.DATE_NAMES[0].Equals(line_cp.Substring(0, SignUp.DATE_NAMES[0].Length)))
             {
                 // handle CMcalendar: 19-08-2020 type string
-
-                // idea: Loop through string, find first int which will be day.
-                // day-month-year
-                // then we read it as above.
+                int day = Strings.ConvertToInt(line_cp[i].Substring(i, 2));
+                int month = Strings.ConvertToInt(line_cp[i].Substring(i+3, 2));
+                int year = Strings.ConvertToInt(line_cp[i].Substring(i+6, 4));
+                // Type
+                ret[0] = (int) Date.Calender;
+                ret[1] = day;
+                ret[2] = month;
+                ret[3] = year;
             } else if (SignUp.DATE_NAMES[1].Equals(line_cp.Substring(0, SignUp.DATE_NAMES[1].Length)))
             {
-                // handle CMclock: 18:45 GMT +2
-                // idea: Loop through string, find first int which will be hour count.
-                // hour:min GMT +2
-                // GMT +2 = zone.
+                // handle CMclock: 18:45 GMT +2  
+                ret[0] = (int) Date.Clock;  
+                int hour = Strings.ConvertToInt(line_cp[i].Substring(i, 2));
+                int min = Strings.ConvertToInt(line_cp[i].Substring(i+3, 2));
+                // last 3 symbols cause GMT can be two cipher
+                int GMToffset = Strings.ConvertToInt(line_cp[i].Substring(line_cp.Length-3, 3));
+                // Type
+                ret[0] = (int) Date.Clock;
+                ret[1] = hour;
+                ret[2] = min;
+                ret[3] = GMToffset;
+            } else {
+                ret[0] = (int) Date.ERROR;
             }
 
+            if (ret[1] == Strings.ERROR | ret[2] == Strings.ERROR | ret[3] == Strings.ERROR)
+            {
+                ret[0] = ERROR;
+            }
             return ret;
+        }
+
+        public int getCount()
+        {
+            return this.count;
         }
     }
     // Constructor receives path to raid_roster.txt, and the table object 

@@ -8,44 +8,28 @@ using Generics;
 namespace Translate // utilities
 {	
 	/*
-	public class SignUp()
-	{
-		public SignUp()
+		// TO:DO - 
+		// 	Implement class SignUp
+		//		  Should read a file which contains copy paste of discord sign up
+		// 		  Constructor receives path to file and look up roster dictionary.
+		//  	  For each signed member it should look up in dictionary and add the appropriate player.
+		//	
+		//  Lets say we need interrupters. We will now be able to:
+		//		cp interrupt stack
+		//		pop player from stack
+		//		if player in sign up
+		//			assign player to interrupt
+		//	  Same idea for healers
+	*/
+	public class Discord
+	{ 
+		
+		public Discord(string path, Dictionary<string, Player> roster)
 		{
-
+			// Same idea as Reader class. All info about the sign up is kept in the class SignUp.
+			// idea:
 		}
 	}
-	*/
-	/*
-	Table Reader, for reading roster_tables.txt and extracting information.
-	so it will be able to be called as: Reader reader = new Reader(path_to_roster_tables.txt)
-										reader.getAdmins_a()
-										reader.getClass_a
-										...
-										get function for all
-										no setter functions, all variables are private
-	
-	Class TbReader
-		private string file = read entire file in variable during constructor
-		private List admins_a =
-		...
-		private List interrupts_a
-		private Player class_A[','];
-		private Stacks
-		private Dictionary: Key Name -> Player obj
-
-		// path to roster_tables.txt
-		constructor(str path) 
-			File file = equal to file at path str path
-			read file into this.file
-			close file
-			init all variables;
-			call functions to Read tables
-
-		private readerFunctions
-
-		public getFunctions
-	*/
 	// Table reader for raid_roster.txt
 	public class Reader 
 	{	
@@ -58,21 +42,6 @@ namespace Translate // utilities
 		// Constructor receives path to raid_roster.txt, and the table object 
 		// Holds variety of table information including but not limited to indexes of each table and names.
 		private Table tableInfo;
-		/*
-		private List<string> admin_a; // hold name for admins whom should receive all assignments
-		private List<string> interrupt_a; // hold name of interrupters whom should receive interrupt assignments
-		private List<string> tank_a; // hold name of tanks whom should receive tank assignments
-		private List<string> healer_a; // hold name of healers whom should receive healer assignments
-		private List<string> ranged_a; // hold name of ranged whom should receive ranged assignments
-		private List<string> melee_a; // hold name of melees whom should  receive melee assignments
-		private Stack<string> tank_o; // tank order, remember first in, last out -> bottom of list gets pushed first
-		private Stack<string> healer_o; // healer order
-		private Stack<string> interrupt_o; // interrupt order
-		private Stack<string> kiter_o; // kite order
-		private List<string>[] class_a; // class_A[(int) Wow_Class.Class] will output list of all players of that class
-		*/
-		// NOTE: Dict cant be omitted - needed for signed_up(string sign_up) 
-		// key: name -> Player obj
 		private Dictionary<string, Player> roster = new Dictionary<string, Player>();
 		
 		public Reader() {

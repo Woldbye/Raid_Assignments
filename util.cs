@@ -7,6 +7,8 @@ namespace Util // utilities
 {	
 	public static class Strings
 	{
+		public static int ERROR = Int32.MinValue;
+		public const string DISCORD_SIGNUP_PATH = "discord_signup.txt";
 		public const string RAID_ROSTER_PATH = "raid_roster.txt";
 		public static string[] FACTION_TO_STR = {
 			"Tank",
@@ -43,6 +45,19 @@ namespace Util // utilities
 		        .Where(c => !Char.IsWhiteSpace(c))
 		        .ToArray()).ToLower();
 		}
+
+		// Returns Int32.MinValue on error
+		public static int ConvertToInt(string str)
+		{
+			int ret;
+
+			if (!Int32.TryParse(str, out ret))
+			{
+				ret = Strings.ERROR;
+			} 
+			
+			return ret;
+		}
 	}
 
 	public static class Error 
@@ -52,6 +67,11 @@ namespace Util // utilities
 		public static void ThrowRosterError() 
 		{
 			throw new FormatException(String.Format("Invalid format of {0}", Strings.RAID_ROSTER_PATH));	
+		}
+
+		public static void ThrowSignUpError() 
+		{
+			throw new FormatException(String.Format("Invalid format of {0}", Strings.DISCORD_SIGNUP_PATH));	
 		}
 
 		public static void NotImplemented(string funcName) 
