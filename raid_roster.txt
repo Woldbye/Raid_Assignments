@@ -66,6 +66,7 @@ Info:
   Mosés           Warlock     Ranged     No           No      No
   Aaniz           Warlock     Ranged     No           No      No
   Missdot         Warlock     Ranged     No           No      No
+  Mikkelele       Warlock     Ranged     No           No      No
   Jourbah         Warrior     Tank       No           Yes     Yes
   Slæde           Warrior     Tank       No           Yes     Yes
   Tresur          Warrior     Melee      Yes          Yes     Yes

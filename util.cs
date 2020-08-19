@@ -22,8 +22,84 @@ namespace Util // utilities
 			"Priest"
 		};
 
+		public static string[] DATE_TO_STR = {"CMcalender", "CMclock"}; 
 		public static string[] CLASS_TO_STR = {"Druid", "Hunter", "Mage", "Priest", "Rogue", "Shaman", "Warlock", "Warrior"};
 		public static string[] ROLE_TO_STR = {"Tank", "Healer", "Melee", "Ranged"};
+
+		// Find the first integer in the string
+		// Integer can be maximum two ciphers.
+		// Returns -1 if no such char
+		public static int FindInt(string str)
+		{
+			int num = -1;
+			for(int i=0; i < str.Length; i++)
+			{
+				char c = str[i];
+				if(Char.IsNumber(c))
+				{
+					if (i == str.Length-1)
+					{
+						return ((int) c - '0');
+					} else {
+						string numStr = c;
+						int j = i+1;
+						char next = str[j];
+						while (Char.IsNumber(next))
+						{
+							numStr += next;
+							j++;
+							if (j < str.Length)
+							{
+								next = str[j];
+							} else {
+								break;
+							}
+						}	
+						num = Int.Parse(numStr);
+						break;
+					}
+				}
+				i++;
+			}
+			return num;
+		}
+
+		// Find the index of the first integer in the string
+		// Returns -1 if no such char
+		public static Tuple<int, int> FindIntNIndex(string str)
+		{
+			int num = -1;
+			int index = -1;
+
+			for(int i=0; i < str.Length; i++)
+			{
+				char c = str[i];
+				if(Char.IsDigit(c))
+				{
+					if (i == str.Length-1)
+					{
+						return ((int) c - '0');
+					} else {
+						char fst = c;
+						char snd = str[i+1];
+						if (snd.IsDigit(c)) 
+						{
+							num = Int.Parse(fst + snd);
+						} else {
+							num = c - '0';
+						}
+
+						index = i;
+						break;
+					}
+				}
+				i++;
+			}
+
+			return Tuple.Create(num, index);
+		}
+ 
+
 		// no need for constructor
 		public static string ByteToStr(byte byte_to_print) {
 			string byte_str = Convert.ToString(byte_to_print, 2).PadLeft(8, '0');

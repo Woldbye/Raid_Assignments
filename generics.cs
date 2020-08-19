@@ -53,7 +53,8 @@ namespace Generics {
         Calender = 0,
         Clock = 1
     };
-
+    
+    /*
     public class SignUp
     {
         // total count of signed up players.
@@ -66,6 +67,7 @@ namespace Generics {
         private readonly int[] indexToFaction;
         // Any line that terminates with ":", corresponds to a new group that needs to be read.
         public const char NEW_FLAG = ':';
+        private int GMTOffset;
         // date of event.
         private readonly DateTime date;
         // headline name for each of the info regarding dates.
@@ -77,20 +79,193 @@ namespace Generics {
         public SignUp(string path, Dictionary<string, Player> roster)
         {
             this.rolesCount = new int[Role.GetNames(typeof(Role)).Length];
-            this.indexToClass = new int[SignUp.MAX_FACTION_COUNT];
+            this.indexToFaction = new int[SignUp.MAX_FACTION_COUNT];
             this.rawLines = File.ReadAllText(path).Split("\n");
             int i = initCount(this.rawLines);
             // Next step is rolesCount and date
+            Tuple<int[], DateTime, int> roleDateExtract = extractRolesCountNDate(this.rawLines, i);
+            this.rolesCount = roleDataExtract.Item1;
+            this.date = roleDataExtract.Item2;
+            i = roleDataExtract.Item3;
 
             // next step is indexToFaction arr
+            /*
+                loop through line for line
+                for each faction found, it will denote the starting index and 
+                
+                // receives index to the faction line:
+                :Tank: Tank (3) :
+                :Tank: 9 Vogn/Slæde
+                :Tank: 16 Jourbah
+                :Tank: 27 Yrotaris
+                // Here index would correspond to index to the first line.
+                // startIndex is index to ":Tank: 9 Vogn/Slæde"
+                // endIndex is index to ":Tank: 27 Yrotaris"
+                extractIndexToFaction(string lines[], int index)
+                    returns Tuple<startIndex, endIndex>   
+                
+                so main function should:
+                    while (true) 
+                        Extract headline,
+                        search Strings.FACTION_TO_STR.ToLowerCase array for index of headline
+                        if index exists => we found a faction.
+                            Now we can call extractIndexToFaction(this.rawLines, int currentIndex)
+                            this.indexToFaction[indexFromPreviousSearch] = Tuple.Item1 
+                            if (Tuple.Item2 != lines.Length-1)
+                                i = Tuple.item2 + 1
+                            else 
+                                end
+                        else 
+                            i++
+                
+                function increases index till it finds a valid faction. 
+
+        }
+        // for a line containing ":{info}:". "info" will be returned where no c in info is whitespace or upper
+        // if empty string is returned something went wrong
+        private string extractHeadline(string line)
+        {
+            int start = 0;
+            int end = 0;
+
+            string ret = "";
+            // Table name in format [tableName] so we just trim (also converts to lower-case)
+            // and remove the first and last letter.
+            if (line.Length > 0)
+            {
+                int count = 0;
+                for (int i=0; i < line.Length; i++)
+                {
+                    char c = line[i];
+
+                    if (c == NEW_FLAG)
+                    {
+                        count++;
+                        // if start we increase, if end we decrease
+                        if (count <= 1)
+                        {
+                            // if line is ":" return empty or we set start index.
+                            start = i+1;
+                        } else {
+                            end = i-1;
+                            break;
+                        }
+                    }
+                }
+                if (count > 1)
+                {
+                    ret = Strings.Trim(Line.SubString(start, (end - start)));    
+                }
+            } 
+
+            return ret;
+        }
+
+
+        //   :Tanks: 3 - Melee - 8 :Dps:
+        ‎//   
+        //   :CMcalendar: 19-08-2020
+        //   :empty:
+        //   :Ranged: Ranged - 9 :Ranged:
+        ‎//   
+        //   :CMclock: 18:45 GMT +2
+        //   :empty:
+        //   :Healers: Healers - 9 :Healers:
+        // Input: 
+        //      string[]: the discord_signup file in a string[]
+        //      int: startIndex of the search.
+        // Output:
+        //      int[]: RolesCount array
+        //      DateTime: the set time of the event
+        //      int: End index of search
+        // rolesCount arr
+        // Will return index to last line + 1, 
+        private Tuple<int[], DateTime, int> extractRolesCountNDate(string[] lines, int startIndex)
+        {  
+            const int ROLE_COUNT = Role.GetNames(typeof(Role)).Length;
+            int i = startIndex;
+            int[] ret = new int[ROLE_COUNT];
+            const int DATE_ARR_SIZE = 4;
+            int[] calender = new int[DATE_ARR_SIZE];
+            int[] clock = new int[DATE_ARR_SIZE];
+
+            while (true)
+            {
+                string line = lines[i];
+                int role = 0;
+                string roleStr = Strings.ROLE_TO_STR[role].ToLowerCase(); 
+
+                // if line_array find index can find rolestr 
+
+                if (line.Contains(roleStr))
+                {
+                    // role is int value of string so we know already based on match what string it is.
+                    // it can be tanks, ranged or healers. Ranged and healers should be handled the same,
+                    // tanks and melees together
+                    if (role == (int) Role.Tank) 
+                    {
+                        Tuple<int, int> numNIndex = Strings.FindIntNIndex(line);
+                        ret[(int) Role.Tank] = numNIndex.Item1;
+                        // Max int size is 2, so we simply do +2 and we will always
+                        //  move past first integer.
+                        int lineIndex = numNIndex.Item2 + 2;
+                        Console.WriteLine("Diff is " + (line.Length - lineIndex) " and length is " + line.Length);
+                        // Read melee now
+                        numNIndex = Strings.FindIntNIndex(line.Substring(lineIndex, line.Length-lineIndex));
+                        ret[(int) Role.Melee] = numNIndex.Item1;
+                    } else if (role != (int) Role.Melee)
+                    {
+                        // Ranged, Healer
+                        int num = Strings.FindInt(line);
+                        ret[role] = num;  
+                    }
+                    role++;  
+                } else if (line.Contains(Strings.DATE_TO_STR[(int) Date.Calender])) {
+                    calender = this.readDate(line);
+                    if (calender[0] == (int) Date.Error) 
+                    {
+                        Error.ThrowSignUpError();
+                    }
+                } else if (line.Contains(Strings.DATE_TO_STR[(int) Date.Clock])) {
+                    clock = this.readDate(line);
+                    if (clock[0] == (int) Date.Error) 
+                    {
+                        Error.ThrowSignUpError();
+                    }
+                }
+                i++;
+            }
+            // Check if date info is set
+            for (int j=0; j < DATE_ARR_SIZE; j++) 
+            {
+                if (clock[j] == null | calender[j] == null)
+                {
+                    Error.ThrowSignUpError();
+                }
+            }
+
+            // check if role info is set 
+            for (int j=0; j < ROLE_COUNT; j++) 
+            {
+                if (ret[j] == null)
+                {
+                    Error.ThrowSignUpError();
+                }
+            }
+            // year, month, day, hour, minute, second);
+            DateTime date = new DateTime(calender[1], calender[2], calender[3],
+                                         clock[1], clock[2], 0);
+            this.GMT_Offset = clock[3];
+
+            return Tuple.Create(ret, date, i);
         }
 
         // Reads the lines and sets this.count accordingly. if Error it thwos an exception
         // Will return the index to the :signups: line.
-        private int initCount(string[] lines)
+        private int extractCount(string[] lines)
         {
             int i = 0;
-            string signUpFlag = ":signups:";
+            string signUpFlag = "signups";
 
             while (true)
             {
@@ -100,7 +275,12 @@ namespace Generics {
                        String.Format("The length of the file is {0} and the index is {1}", lines.Length, i));
                 }
                 string line = lines[i];
-                if (line.Length >= signUpFlag.Length && signUpFlag.Equals(line.Substring(0, signUpFlag.Length)))
+                string headline = this.extractHeadline(lines[i]);
+                if (headline.Length <= 0)
+                {
+                    Error.ThrowSignUpError();
+                }
+                if (signUpFlag.Equals(headline))
                 {
                     int imCount = Strings.ConvertToInt(line.Substring(line.Length-2, 2));
                     if (imCount == Strings.Error)
@@ -139,7 +319,7 @@ namespace Generics {
                 line_cp = line_cp.Substring(1, line_cp.Length-1);
             }
             // start at the shortest type i.
-            int i = SignUp.DATE_NAMES[1].Length;
+            int i = Strings.DATE_TO_STR[(int) Date.Clock].Length;
             // find first number
             while (true)
             {
@@ -161,7 +341,7 @@ namespace Generics {
             }
 
             // Contains would be safer, but this is much faster :)
-            if (SignUp.DATE_NAMES[0].Equals(line_cp.Substring(0, SignUp.DATE_NAMES[0].Length)))
+            if (Strings.DATE_TO_STR[(int) Date.Calender].Equals(line_cp.Substring(0, Strings.DATE_TO_STR[(int) Date.Calender].Length)))
             {
                 // handle CMcalendar: 19-08-2020 type string
                 int day = Strings.ConvertToInt(line_cp[i].Substring(i, 2));
@@ -172,7 +352,7 @@ namespace Generics {
                 ret[1] = day;
                 ret[2] = month;
                 ret[3] = year;
-            } else if (SignUp.DATE_NAMES[1].Equals(line_cp.Substring(0, SignUp.DATE_NAMES[1].Length)))
+            } else if (Strings.DATE_TO_STR[(int) Date.Clock].Equals(line_cp.Substring(0, Strings.DATE_TO_STR[(int) Date.Clock].Length)))
             {
                 // handle CMclock: 18:45 GMT +2  
                 ret[0] = (int) Date.Clock;  
@@ -201,6 +381,7 @@ namespace Generics {
             return this.count;
         }
     }
+    */
     // Constructor receives path to raid_roster.txt, and the table object 
     // will hold index to each of the tables to read, and the name of the tables.
     public class Table 
@@ -710,6 +891,119 @@ namespace Generics {
             #endif
         }
 
+        private string assignment_To_String(string type)
+        {
+            string ret = "{p:";
+
+            switch (type)
+            {
+                case "tank":
+                    foreach(string tank in this.tank_a)
+                    {
+                       ret += tank;
+                       ret += ","; 
+                    }
+                    break;
+                case "healer":
+                    foreach(string healer in this.healer_a)
+                    {
+                       ret += healer;
+                       ret += ","; 
+                    }
+                    break;
+                case "melee":
+                    foreach(string melee in this.melee_a)
+                    {
+                       ret += melee;
+                       ret += ","; 
+                    }
+                    break;
+                case "ranged":
+                    foreach(string ranged in this.ranged_a)
+                    {
+                       ret += ranged;
+                       ret += ","; 
+                    }
+                    break;
+                // classes
+                case "druid":
+                    List<string> druids = this.class_a[(int) Wow_Class.Druid];
+                    foreach(string druid in druids)
+                    {
+                       ret += druid;
+                       ret += ","; 
+                    }
+                    break;
+                case "hunter":
+                    List<string> hunters = this.class_a[(int) Wow_Class.Hunter];
+                    foreach(string hunter in hunters)
+                    {
+                       ret += hunter;
+                       ret += ","; 
+                    }
+                    break;
+                case "mage":
+                    List<string> mages = this.class_a[(int) Wow_Class.Mage];
+                    foreach(string mage in mages)
+                    {
+                       ret += mage;
+                       ret += ","; 
+                    }
+                    break;
+                case "priest":
+                    List<string> priests = this.class_a[(int) Wow_Class.Priest];
+                    foreach(string priest in priests)
+                    {
+                       ret += priest;
+                       ret += ","; 
+                    }
+                    break;
+                case "rogue":
+                    List<string> rogues = this.class_a[(int) Wow_Class.Rogue];
+                    foreach(string rogue in rogues)
+                    {
+                       ret += rogue;
+                       ret += ","; 
+                    }
+                    break;
+                case "shaman":
+                    List<string> shamans = this.class_a[(int) Wow_Class.Shaman];
+                    foreach(string shaman in shamans)
+                    {
+                       ret += shaman;
+                       ret += ","; 
+                    }
+                    break;
+                case "warlock":
+                    List<string> warlocks = this.class_a[(int) Wow_Class.Warlock];
+                    foreach(string warlock in warlocks)
+                    {
+                       ret += warlock;
+                       ret += ","; 
+                    }
+                    break;
+                case "warrior":
+                    List<string> warriors = this.class_a[(int) Wow_Class.Warrior];
+                    foreach(string warrior in warriors)
+                    {
+                       ret += warrior;
+                       ret += ","; 
+                    }
+                    break;
+                case "admin":
+                    foreach(string admin in this.admin_a)
+                    {
+                       ret += admin;
+                       ret += ","; 
+                    }
+                    break;
+                default:
+                    throw new ArgumentException(String.Format("Argument {0} is invalid", msgType), "argument");
+            }
+            ret += "}";
+            return ret;
+        }
+
         /*
         Receives a format string containing the class that needs assignments and outputs the corresponding exorsus
         string that prints the assignments to those.
@@ -732,9 +1026,18 @@ namespace Generics {
                 {tank_a - healer_a}
                 {/p}
         */ 
-        public string ToExorsus(string format)
+        public string ToExorsus(string msgType, string[] msg)
         {
-            return "NOT SUPPORTED";
+            string ret = "";
+            ret += this.assignment_To_String(msgType);
+            ret += "\n";
+            foreach (string line in msg)
+            {
+                ret += line;
+                ret += "\n";
+            }
+            ret += "{/p}"
+            return ret;
         }
 
         // healer = Priests, Druids, Shamans, Admins

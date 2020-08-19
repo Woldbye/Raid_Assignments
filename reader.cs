@@ -21,6 +21,7 @@ namespace Translate // utilities
 		//			assign player to interrupt
 		//	  Same idea for healers
 	*/
+	/*
 	public class Discord
 	{ 
 		
@@ -30,6 +31,7 @@ namespace Translate // utilities
 			// idea:
 		}
 	}
+	*/
 	// Table reader for raid_roster.txt
 	public class Reader 
 	{	
