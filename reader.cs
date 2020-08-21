@@ -37,7 +37,7 @@ namespace Translate // utilities
 	{	
 		// Holds the names of all the assignment receivers.
 		// constructor receives List<string>[] namesByClass, List<string> admins
-		private AssignmentReceivers a_receivers;
+		private AssignmentReceivers receivers;
 		// Holds the priority stacks.
 		// constructor receives Stack<string>[] priorities
 		private Priorities priorities;
@@ -51,7 +51,7 @@ namespace Translate // utilities
 			this.tableInfo = new Table(Strings.RAID_ROSTER_PATH);
 			Tuple<Dictionary<string, Player>, List<string>[], List<string>> readRoster = this.readRoster();
 			this.roster = readRoster.Item1;
-			this.a_receivers = new AssignmentReceivers(readRoster.Item2, readRoster.Item3);
+			this.receivers = new AssignmentReceivers(readRoster.Item2, readRoster.Item3);
 			this.priorities = new Priorities(this.readPriorities());
 		}
 
@@ -123,7 +123,6 @@ namespace Translate // utilities
 			// extract info
 			foreach(int start in infoIndexes) 
 			{
-				bool last = false;
 				int j = start;
 				while (Char.IsLetter(line[j]))
 				{
@@ -144,7 +143,7 @@ namespace Translate // utilities
 				#endif
 				i++;
 			}
-// int ot admin
+      // int ot admin
 			// cast info and init player
 			string name = info[0];
 			Wow_Class wow_class = (Wow_Class) Array.IndexOf(Strings.CLASS_TO_STR, info[1]);
@@ -192,9 +191,18 @@ namespace Translate // utilities
 			return priorities;
 		}
 
+    public AssignmentReceivers getReceivers()
+    {
+      return this.receivers;
+    }
+
+    public Priorities getPriorities()
+    {
+      return this.priorities;
+    }
+
 		public Player getPlayerInRoster(string name) {
-			Error.Exception("invalid");
-			return null;
+			return this.roster[name];
 		}
 	}
 }

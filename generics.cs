@@ -54,7 +54,6 @@ namespace Generics {
         Clock = 1
     };
     
-    /*
     public class SignUp
     {
         // total count of signed up players.
@@ -72,7 +71,7 @@ namespace Generics {
         private readonly DateTime date;
         // headline name for each of the info regarding dates.
         // calender is date, clock is time.
-        public const string[] DATE_NAMES = {"CMcalendar", "CMclock"};
+        public readonly string[] DATE_NAMES = {"CMcalendar", "CMclock"};
 
         public static int MAX_FACTION_COUNT = Faction.GetNames(typeof(Faction)).Length;
         // Use Role lookup to find info
@@ -81,12 +80,12 @@ namespace Generics {
             this.rolesCount = new int[Role.GetNames(typeof(Role)).Length];
             this.indexToFaction = new int[SignUp.MAX_FACTION_COUNT];
             this.rawLines = File.ReadAllText(path).Split("\n");
-            int i = initCount(this.rawLines);
+            int i = this.extractCount(this.rawLines);
             // Next step is rolesCount and date
-            Tuple<int[], DateTime, int> roleDateExtract = extractRolesCountNDate(this.rawLines, i);
-            this.rolesCount = roleDataExtract.Item1;
-            this.date = roleDataExtract.Item2;
-            i = roleDataExtract.Item3;
+            Tuple<int[], DateTime, int> roleDateExtract = this.extractRolesCountNDate(this.rawLines, i);
+            this.rolesCount = roleDateExtract.Item1;
+            this.date = roleDateExtract.Item2;
+            i = roleDateExtract.Item3;
 
             // next step is indexToFaction arr
             /*
@@ -119,7 +118,7 @@ namespace Generics {
                             i++
                 
                 function increases index till it finds a valid faction. 
-
+            */
         }
         // for a line containing ":{info}:". "info" will be returned where no c in info is whitespace or upper
         // if empty string is returned something went wrong
@@ -154,23 +153,13 @@ namespace Generics {
                 }
                 if (count > 1)
                 {
-                    ret = Strings.Trim(Line.SubString(start, (end - start)));    
+                    ret = Strings.Trim(line.Substring(start, (end - start)));    
                 }
             } 
 
             return ret;
         }
 
-
-        //   :Tanks: 3 - Melee - 8 :Dps:
-        ‎//   
-        //   :CMcalendar: 19-08-2020
-        //   :empty:
-        //   :Ranged: Ranged - 9 :Ranged:
-        ‎//   
-        //   :CMclock: 18:45 GMT +2
-        //   :empty:
-        //   :Healers: Healers - 9 :Healers:
         // Input: 
         //      string[]: the discord_signup file in a string[]
         //      int: startIndex of the search.
@@ -182,18 +171,18 @@ namespace Generics {
         // Will return index to last line + 1, 
         private Tuple<int[], DateTime, int> extractRolesCountNDate(string[] lines, int startIndex)
         {  
-            const int ROLE_COUNT = Role.GetNames(typeof(Role)).Length;
+            int ROLE_COUNT = Role.GetNames(typeof(Role)).Length;
             int i = startIndex;
             int[] ret = new int[ROLE_COUNT];
             const int DATE_ARR_SIZE = 4;
             int[] calender = new int[DATE_ARR_SIZE];
             int[] clock = new int[DATE_ARR_SIZE];
+            int role = 0;
 
-            while (true)
+            while (role <= 3) 
             {
                 string line = lines[i];
-                int role = 0;
-                string roleStr = Strings.ROLE_TO_STR[role].ToLowerCase(); 
+                string roleStr = Strings.ROLE_TO_STR[role].ToLower(); 
 
                 // if line_array find index can find rolestr 
 
@@ -209,7 +198,7 @@ namespace Generics {
                         // Max int size is 2, so we simply do +2 and we will always
                         //  move past first integer.
                         int lineIndex = numNIndex.Item2 + 2;
-                        Console.WriteLine("Diff is " + (line.Length - lineIndex) " and length is " + line.Length);
+                        Console.WriteLine("Diff is " + (line.Length - lineIndex) + " and length is " + line.Length);
                         // Read melee now
                         numNIndex = Strings.FindIntNIndex(line.Substring(lineIndex, line.Length-lineIndex));
                         ret[(int) Role.Melee] = numNIndex.Item1;
@@ -235,27 +224,10 @@ namespace Generics {
                 }
                 i++;
             }
-            // Check if date info is set
-            for (int j=0; j < DATE_ARR_SIZE; j++) 
-            {
-                if (clock[j] == null | calender[j] == null)
-                {
-                    Error.ThrowSignUpError();
-                }
-            }
-
-            // check if role info is set 
-            for (int j=0; j < ROLE_COUNT; j++) 
-            {
-                if (ret[j] == null)
-                {
-                    Error.ThrowSignUpError();
-                }
-            }
             // year, month, day, hour, minute, second);
             DateTime date = new DateTime(calender[1], calender[2], calender[3],
                                          clock[1], clock[2], 0);
-            this.GMT_Offset = clock[3];
+            this.GMTOffset = clock[3];
 
             return Tuple.Create(ret, date, i);
         }
@@ -283,7 +255,7 @@ namespace Generics {
                 if (signUpFlag.Equals(headline))
                 {
                     int imCount = Strings.ConvertToInt(line.Substring(line.Length-2, 2));
-                    if (imCount == Strings.Error)
+                    if (imCount == Strings.ERROR)
                     {
                         Error.ThrowSignUpError();
                     } else {
@@ -344,9 +316,9 @@ namespace Generics {
             if (Strings.DATE_TO_STR[(int) Date.Calender].Equals(line_cp.Substring(0, Strings.DATE_TO_STR[(int) Date.Calender].Length)))
             {
                 // handle CMcalendar: 19-08-2020 type string
-                int day = Strings.ConvertToInt(line_cp[i].Substring(i, 2));
-                int month = Strings.ConvertToInt(line_cp[i].Substring(i+3, 2));
-                int year = Strings.ConvertToInt(line_cp[i].Substring(i+6, 4));
+                int day = Strings.ConvertToInt(line_cp.Substring(i, 2));
+                int month = Strings.ConvertToInt(line_cp.Substring(i+3, 2));
+                int year = Strings.ConvertToInt(line_cp.Substring(i+6, 4));
                 // Type
                 ret[0] = (int) Date.Calender;
                 ret[1] = day;
@@ -356,22 +328,68 @@ namespace Generics {
             {
                 // handle CMclock: 18:45 GMT +2  
                 ret[0] = (int) Date.Clock;  
-                int hour = Strings.ConvertToInt(line_cp[i].Substring(i, 2));
-                int min = Strings.ConvertToInt(line_cp[i].Substring(i+3, 2));
+                int hour = Strings.ConvertToInt(line_cp.Substring(i, 2));
+                int min = Strings.ConvertToInt(line_cp.Substring(i+3, 2));
                 // last 3 symbols cause GMT can be two cipher
-                int GMToffset = Strings.ConvertToInt(line_cp[i].Substring(line_cp.Length-3, 3));
+                int GMToffset = Strings.ConvertToInt(line_cp.Substring(line_cp.Length-3, 3));
                 // Type
                 ret[0] = (int) Date.Clock;
                 ret[1] = hour;
                 ret[2] = min;
                 ret[3] = GMToffset;
             } else {
-                ret[0] = (int) Date.ERROR;
+                ret[0] = (int) Date.Error;
             }
 
             if (ret[1] == Strings.ERROR | ret[2] == Strings.ERROR | ret[3] == Strings.ERROR)
             {
-                ret[0] = ERROR;
+                ret[0] = (int) Date.Error;
+            }
+            return ret;
+        }
+
+        /*
+         // total count of signed up players.
+        private int count;
+        // count for each role
+        private readonly int[] rolesCount;
+        // the sign up files by lines.
+        private readonly string[] rawLines;
+        // Index to each of the "factions".
+        private readonly int[] indexToFaction;
+        // Any line that terminates with ":", corresponds to a new group that needs to be read.
+        public const char NEW_FLAG = ':';
+        private int GMTOffset;
+        // date of event.
+        private readonly DateTime date;
+        // headline name for each of the info regarding dates.
+        // calender is date, clock is time.
+        public const string[] DATE_NAMES = {"CMcalendar", "CMclock"};
+        */
+        public override string ToString()
+        {
+            string ret = "<AssignmentReceivers>:";
+            ret += "\n\t<Date>";
+            ret += String.Format("\n\t\t{0} GMT {1}{2}", this.date.ToString(), (this.GMTOffset >= 0) ? "+" : "-", this.GMTOffset);
+            ret += "\n\t<Total number of signed players>:";
+            ret += String.Format("\n\t\t{0}", this.count);
+            ret += "\n\t<Total number of each role>";
+            for (int i=0; i < this.rolesCount.Length; i++)
+            {
+                string role = Strings.ROLE_TO_STR[i];
+                ret += String.Format("\n\t\t<{0} count>", role);                
+                ret += String.Format("\n\t\t\t{0}", this.rolesCount[i]);
+            }
+            ret += "\n\t<Indexes to sign up groups>";
+            for (int i=0; i < this.indexToFaction.Length; i++) 
+            {
+                string faction = Strings.FACTION_TO_STR[i];
+                ret += String.Format("\n\t\t<{0}>", faction);
+                ret += String.Format("\n\t\t\t{0}", indexToFaction[i]);
+                #if (DEBUG)
+                    ret += String.Format("\n\t\t\tLine at index:");
+                    ret += String.Format("\n\t\t\t\t{0}", this.rawLines[indexToFaction[i]]);
+                #endif
             }
             return ret;
         }
@@ -381,7 +399,6 @@ namespace Generics {
             return this.count;
         }
     }
-    */
     // Constructor receives path to raid_roster.txt, and the table object 
     // will hold index to each of the tables to read, and the name of the tables.
     public class Table 
@@ -625,10 +642,6 @@ namespace Generics {
                     aLine = lines[j];
                     foreach (char c in aLine)
                     {
-                        if (c == null)
-                        {
-                            Error.ThrowRosterError();
-                        }
                         if (c.Equals(Table.NAME_FLAG))
                         {
                             // +1 cuz we want the index to the first letter of the word.
@@ -897,32 +910,54 @@ namespace Generics {
 
             switch (type)
             {
+                case "interrupt":
+                    foreach(string interrupter in this.interrupt_a)
+                    {
+                        ret += interrupter;
+                        if (!(interrupter.Equals(this.interrupt_a.Last())))
+                        {
+                            ret += ","; 
+                        } 
+                    }
+                    break;
                 case "tank":
                     foreach(string tank in this.tank_a)
                     {
-                       ret += tank;
-                       ret += ","; 
+                        ret += tank;
+                        if (!(tank.Equals(this.tank_a.Last())))
+                        {
+                            ret += ","; 
+                        } 
                     }
                     break;
                 case "healer":
                     foreach(string healer in this.healer_a)
                     {
-                       ret += healer;
-                       ret += ","; 
+                        ret += healer;
+                        if (!(healer.Equals(this.healer_a.Last())))
+                        {
+                            ret += ","; 
+                        } 
                     }
                     break;
                 case "melee":
                     foreach(string melee in this.melee_a)
                     {
-                       ret += melee;
-                       ret += ","; 
+                        ret += melee;
+                        if (!(melee.Equals(this.melee_a.Last())))
+                        {
+                            ret += ","; 
+                        }
                     }
                     break;
                 case "ranged":
                     foreach(string ranged in this.ranged_a)
                     {
-                       ret += ranged;
-                       ret += ","; 
+                        ret += ranged;
+                        if (!(ranged.Equals(this.ranged_a.Last())))
+                        {
+                            ret += ","; 
+                        } 
                     }
                     break;
                 // classes
@@ -930,75 +965,102 @@ namespace Generics {
                     List<string> druids = this.class_a[(int) Wow_Class.Druid];
                     foreach(string druid in druids)
                     {
-                       ret += druid;
-                       ret += ","; 
+                        ret += druid;
+                        if (!(druid.Equals(druids.Last())))
+                        {
+                            ret += ","; 
+                        }
                     }
                     break;
                 case "hunter":
                     List<string> hunters = this.class_a[(int) Wow_Class.Hunter];
                     foreach(string hunter in hunters)
                     {
-                       ret += hunter;
-                       ret += ","; 
+                        ret += hunter;
+                        if (!(hunter.Equals(hunters.Last())))
+                        {
+                            ret += ","; 
+                        }
                     }
                     break;
                 case "mage":
                     List<string> mages = this.class_a[(int) Wow_Class.Mage];
                     foreach(string mage in mages)
                     {
-                       ret += mage;
-                       ret += ","; 
+                        ret += mage;
+                        if (!(mage.Equals(mages.Last())))
+                        {
+                            ret += ","; 
+                        } 
                     }
                     break;
                 case "priest":
                     List<string> priests = this.class_a[(int) Wow_Class.Priest];
                     foreach(string priest in priests)
                     {
-                       ret += priest;
-                       ret += ","; 
+                        ret += priest;
+                        if (!(priest.Equals(priests.Last())))
+                        {
+                            ret += ","; 
+                        }
                     }
                     break;
                 case "rogue":
                     List<string> rogues = this.class_a[(int) Wow_Class.Rogue];
                     foreach(string rogue in rogues)
                     {
-                       ret += rogue;
-                       ret += ","; 
+                        ret += rogue;
+                        if (!(rogue.Equals(rogues.Last())))
+                        {
+                            ret += ","; 
+                        } 
                     }
                     break;
                 case "shaman":
                     List<string> shamans = this.class_a[(int) Wow_Class.Shaman];
                     foreach(string shaman in shamans)
                     {
-                       ret += shaman;
-                       ret += ","; 
+                        ret += shaman;
+                        if (!(shaman.Equals(shamans.Last())))
+                        {
+                            ret += ","; 
+                        } 
                     }
                     break;
                 case "warlock":
                     List<string> warlocks = this.class_a[(int) Wow_Class.Warlock];
                     foreach(string warlock in warlocks)
                     {
-                       ret += warlock;
-                       ret += ","; 
+                        ret += warlock;
+                        if (!(warlock.Equals(warlocks.Last())))
+                        {
+                            ret += ","; 
+                        }
                     }
                     break;
                 case "warrior":
                     List<string> warriors = this.class_a[(int) Wow_Class.Warrior];
                     foreach(string warrior in warriors)
                     {
-                       ret += warrior;
-                       ret += ","; 
+                        ret += warrior;
+                        if (!(warrior.Equals(warriors.Last())))
+                        {
+                            ret += ","; 
+                        }
                     }
                     break;
                 case "admin":
                     foreach(string admin in this.admin_a)
                     {
-                       ret += admin;
-                       ret += ","; 
+                        ret += admin;
+                        if (!(admin.Equals(this.admin_a.Last())))
+                        {
+                            ret += ","; 
+                        }
                     }
                     break;
                 default:
-                    throw new ArgumentException(String.Format("Argument {0} is invalid", msgType), "argument");
+                    throw new ArgumentException(String.Format("Argument {0} is invalid", type), "argument");
             }
             ret += "}";
             return ret;
@@ -1036,7 +1098,7 @@ namespace Generics {
                 ret += line;
                 ret += "\n";
             }
-            ret += "{/p}"
+            ret += "{/p}";
             return ret;
         }
 
@@ -1045,13 +1107,13 @@ namespace Generics {
         {
             List<string> healers = new List<string>();
             int[] healerClasses = {(int) Wow_Class.Druid, (int) Wow_Class.Priest, (int) Wow_Class.Shaman};
-            for (int i=0; i < healerClasses.Length-1; i++) 
+            for (int i=0; i < healerClasses.Length; i++) 
             {
                 int healerClass = healerClasses[i];
                 healers.AddRange(this.class_a[healerClass]);
             } 
             healers.AddRange(this.admin_a);
-            return healers;
+            return healers.Distinct().ToList();
         }
 
         // ranged = healer_a, Warlocks, Mages, Hunters,
@@ -1059,14 +1121,14 @@ namespace Generics {
         {
             List<string> ranged = new List<string>();
             int[] rangedClasses = { (int) Wow_Class.Warlock, (int) Wow_Class.Mage, (int) Wow_Class.Hunter};
-            for (int i=0; i < rangedClasses.Length-1; i++) 
+            for (int i=0; i < rangedClasses.Length; i++) 
             {
                 int rangedClass = rangedClasses[i];
                 ranged.AddRange(this.class_a[rangedClass]);
             } 
             ranged.AddRange(this.admin_a);
             ranged.AddRange(this.healer_a);
-            return ranged;
+            return ranged.Distinct().ToList();
         }
 
         // melee = Warriors, Rogues, Druids, Admins
@@ -1074,13 +1136,13 @@ namespace Generics {
         {
             List<string> melee = new List<string>();
             int[] meleeClasses = { (int) Wow_Class.Warrior, (int) Wow_Class.Rogue, (int) Wow_Class.Druid};
-            for (int i=0; i < meleeClasses.Length-1; i++) 
+            for (int i=0; i < meleeClasses.Length; i++) 
             {
                 int meleeClass = meleeClasses[i];
                 melee.AddRange(this.class_a[meleeClass]);
             } 
             melee.AddRange(this.admin_a);
-            return melee;
+            return melee.Distinct().ToList();
         }
 
         // tanks = Warriors, Druids, Admins, healer_a
@@ -1088,14 +1150,14 @@ namespace Generics {
         {
             List<string> tanks = new List<string>();
             int[] tankClasses = { (int) Wow_Class.Druid, (int) Wow_Class.Warrior};
-            for (int i=0; i < tankClasses.Length-1; i++) 
+            for (int i=0; i < tankClasses.Length; i++) 
             {
                 int tankClass = tankClasses[i];
                 tanks.AddRange(this.class_a[tankClass]);
             } 
             tanks.AddRange(this.admin_a);
             tanks.AddRange(this.healer_a);
-            return tanks;
+            return tanks.Distinct().ToList();
         }
 
         // interrupt = Rogues, Warriors, Mages, Shamans, Admins
@@ -1103,13 +1165,13 @@ namespace Generics {
         {
             List<string> interrupters = new List<string>();
             int[] interruptClasses = { (int) Wow_Class.Rogue, (int) Wow_Class.Mage, (int) Wow_Class.Warrior, (int) Wow_Class.Shaman};
-            for (int i=0; i < interruptClasses.Length-1; i++) 
+            for (int i=0; i < interruptClasses.Length; i++) 
             {
                 int interruptClass = interruptClasses[i];
                 interrupters.AddRange(this.class_a[interruptClass]);
             } 
             interrupters.AddRange(this.admin_a);
-            return interrupters;
+            return interrupters.Distinct().ToList();
         }
 
         public List<string> getNamesOfClass(int wow_class)  

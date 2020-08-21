@@ -34,7 +34,26 @@ namespace Assignments {
 		//	After its finished I simply need to copy paste disscord sign up -> run raid_assign.cs -> copy paste each Assignment/Path into exorsus
 		public static int Main() 
 		{	
+			/*
 			Reader reader_test = new Reader();
+			string[] msg = new string[2];
+			msg[0] = "do this";
+			msg[1] = "do that";
+			Console.WriteLine("---Healers---");
+			Console.WriteLine(reader_test.getReceivers().ToExorsus("healer", msg));
+			Console.WriteLine("---Tanks---");
+			Console.WriteLine(reader_test.getReceivers().ToExorsus("tank", msg));
+			Console.WriteLine("---Melee---");
+			Console.WriteLine(reader_test.getReceivers().ToExorsus("melee", msg));
+			Console.WriteLine("---Ranged---");
+			Console.WriteLine(reader_test.getReceivers().ToExorsus("ranged", msg));
+			Console.WriteLine("---Warlocks---");
+			Console.WriteLine(reader_test.getReceivers().ToExorsus("warlock", msg));
+			Console.WriteLine("---Interrupters---");
+			Console.WriteLine(reader_test.getReceivers().ToExorsus("interrupt", msg));
+			Console.WriteLine("---Mages---");
+			Console.WriteLine(reader_test.getReceivers().ToExorsus("mage", msg));
+			*/
 			return 0;
 		}
 	}

@@ -34,12 +34,13 @@ Info:
   Rahmon          Hunter      Ranged     No           No      No
   Vobi            Hunter      Ranged     No           No      No
   Hectic          Mage        Ranged     Yes          No      Yes
-  Psykosen        Mage        Ranged     Yes          No      No
+  Psykosen        Mage        Ranged     Yes          No      Yes
   Thallspring     Mage        Ranged     Yes          No      No
   IAmRarelyMad    Mage        Ranged     Yes          No      No
   Plaffe          Mage        Ranged     Yes          No      No
   Druzudrix       Mage        Ranged     Yes          No      No
   Ricuto          Mage        Ranged     Yes          No      No
+  Chibsey         Mage        Ranged     Yes          No      No
   Vuze            Priest      Ranged     No           No      Yes
   Lambilam        Priest      Healer     No           No      Yes  
   Buksekrabben    Priest      Healer     No           No      No
@@ -62,6 +63,7 @@ Info:
   Spillemand      Shaman      Healer     Yes          No      No
   Baktøsen        Shaman      Healer     Yes          No      No
   Soopamanluva    Shaman      Healer     Yes          No      No
+  Jogan           Shaman      Healer     Yes          No      No
   Polio           Warlock     Ranged     No           No      No
   Mosés           Warlock     Ranged     No           No      No
   Aaniz           Warlock     Ranged     No           No      No
@@ -78,7 +80,8 @@ Info:
   Trænpartner     Warrior     Melee      Yes          No      No
   Gufast          Warrior     Melee      Yes          No      No
   Therokk         Warrior     Melee      Yes          No      No
-}, 
+  Frygten         Warrior     Melee      No           No      Yes
+},
 [Tank_Prio]
   [Name]
 { 
@@ -99,7 +102,8 @@ Info:
 [Healer_Prio]
   [Name]
 {
-     Lambilam
+  Lambilam
+  Jogan
   Toms
   Mooxia
   Dadaz
@@ -124,28 +128,29 @@ Info:
   [Name]
 {
   Tazer     
-   Daroka     
-   Exavian     
-   Redmah     
-   Vomitangel     
-   Stabbia
-   Eigilmusen   
-   Dolpadin   
-   Junboi      
-   Fumblebumble   
-   Trænpartner      
-   Gufast   
-   Therokk
-   Grollak
-   Roktar  
-   Tresur  
-   Hectic   
-   Thallspring
-   Psykosen         
-   IAmRarelyMad   
-   Plaffe   
-   Druzudrix  
-   Ricuto      
+  Daroka     
+  Exavian     
+  Redmah     
+  Vomitangel     
+  Stabbia
+  Eigilmusen   
+  Dolpadin   
+  Junboi      
+  Fumblebumble   
+  Trænpartner      
+  Gufast   
+  Therokk
+  Grollak
+  Roktar  
+  Tresur  
+  Hectic   
+  Thallspring
+  Psykosen         
+  IAmRarelyMad   
+  Plaffe   
+  Druzudrix  
+  Ricuto
+  Chibsey      
 },
 [Kiter_Prio]
   [Name]

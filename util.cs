@@ -41,7 +41,7 @@ namespace Util // utilities
 					{
 						return ((int) c - '0');
 					} else {
-						string numStr = c;
+						string numStr = c.ToString();
 						int j = i+1;
 						char next = str[j];
 						while (Char.IsNumber(next))
@@ -55,7 +55,7 @@ namespace Util // utilities
 								break;
 							}
 						}	
-						num = Int.Parse(numStr);
+						num = Int32.Parse(numStr);
 						break;
 					}
 				}
@@ -64,6 +64,7 @@ namespace Util // utilities
 			return num;
 		}
 
+		// TO:DO Make FindIntNIndex work for numbers larger than two digits.
 		// Find the index of the first integer in the string
 		// Returns -1 if no such char
 		public static Tuple<int, int> FindIntNIndex(string str)
@@ -78,13 +79,14 @@ namespace Util // utilities
 				{
 					if (i == str.Length-1)
 					{
-						return ((int) c - '0');
+						return Tuple.Create(c - '0', i);
 					} else {
 						char fst = c;
 						char snd = str[i+1];
-						if (snd.IsDigit(c)) 
+						if (Char.IsDigit(snd)) 
 						{
-							num = Int.Parse(fst + snd);
+							String numStr = fst.ToString() + snd.ToString();
+							num = Int32.Parse(numStr);
 						} else {
 							num = c - '0';
 						}
