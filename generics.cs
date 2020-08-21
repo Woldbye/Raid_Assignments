@@ -78,48 +78,104 @@ namespace Generics {
         public SignUp(string path, Dictionary<string, Player> roster)
         {
             this.rolesCount = new int[Role.GetNames(typeof(Role)).Length];
-            this.indexToFaction = new int[SignUp.MAX_FACTION_COUNT];
             this.rawLines = File.ReadAllText(path).Split("\n");
-            int i = this.extractCount(this.rawLines);
+            int i = this.setCount(this.rawLines);
             // Next step is rolesCount and date
             Tuple<int[], DateTime, int> roleDateExtract = this.extractRolesCountNDate(this.rawLines, i);
             this.rolesCount = roleDateExtract.Item1;
             this.date = roleDateExtract.Item2;
             i = roleDateExtract.Item3;
 
-            // next step is indexToFaction arr
-            /*
-                loop through line for line
-                for each faction found, it will denote the starting index and 
-                
-                // receives index to the faction line:
-                :Tank: Tank (3) :
-                :Tank: 9 Vogn/Slæde
-                :Tank: 16 Jourbah
-                :Tank: 27 Yrotaris
-                // Here index would correspond to index to the first line.
-                // startIndex is index to ":Tank: 9 Vogn/Slæde"
-                // endIndex is index to ":Tank: 27 Yrotaris"
-                extractIndexToFaction(string lines[], int index)
-                    returns Tuple<startIndex, endIndex>   
-                
-                so main function should:
-                    while (true) 
-                        Extract headline,
-                        search Strings.FACTION_TO_STR.ToLowerCase array for index of headline
-                        if index exists => we found a faction.
-                            Now we can call extractIndexToFaction(this.rawLines, int currentIndex)
-                            this.indexToFaction[indexFromPreviousSearch] = Tuple.Item1 
-                            if (Tuple.Item2 != lines.Length-1)
-                                i = Tuple.item2 + 1
-                            else 
-                                end
-                        else 
-                            i++
-                
-                function increases index till it finds a valid faction. 
-            */
+            this.indexToFaction = this.extractFactionIndexes(this.rawLines, i);
+            #if (DEBUG)
+                Console.WriteLine("----Finished init of SignUp----");
+                Console.WriteLine(this.ToString);
+            #endif
         }
+
+        public int[] extractFactionIndexes(string[] lines, int start)
+        {
+            int i = start;  
+            int[] ret = new int[SignUp.MAX_FACTION_COUNT];
+            #if (DEBUG)
+                ínt counter = 0;
+                Console.WriteLine("----Extract Faction Indexes debug info----");
+                Console.WriteLine(String.Format("\t\tReceived i: <{0}>", start));
+                Console.WriteLine(String.Format("\t\tMaximum i of lines is: <{0}>", lines.Length-1));
+                Console.WriteLine(String.Format("\t\tLine at start index equals:\n\t\t\t{0}", lines[start]));
+            #endif
+
+            while (i < lines.Length-1)
+            {
+                Tuple<int, int, int> factionInfo = this.nextFactionIndex(lines);
+                int faction = factionInfo.Item3;
+                int i = factionInfo.Item2;
+                int factionStart = factionInfo.Item1;
+                #if (DEBUG)
+                    counter++;
+                    Console.WriteLine(String.Format("\t\tRead new faction: <{0}>", Strings.FACTION_TO_STR[faction]));
+                    Console.WriteLine("\t\t\t<Indexes>:");
+                    Console.WriteLine(String.Format("\t\t\t\t<Start>: {0}", factionStart));
+                    Console.WriteLine(String.Format("\t\t\t\t<End>: {0}", i));
+                #endif
+                ret[faction] = factionStart;
+            }
+
+            return ret;
+        }
+
+        // Here index would correspond to index to the first line.
+        // startIndex is index to ":Tank: 9 Vogn/Slæde"
+        // endIndex is index to ":Tank: 27 Yrotaris"
+        // extractIndexToFaction(string lines[], int index)
+        //     returns Tuple<startIndex, endIndex, faction>   
+        private Tuple<int, int, int> nextFactionIndex(string[] lines, int start)
+        {
+            int startIndex = -1;
+            int endIndex = -1;
+            int faction = -1;
+            int i = start;
+
+            while (true)
+            {
+                if (i >= lines.Length)
+                {
+                    Error.ThrowSignUpError();
+                }
+                string line = lines[i];
+                string headline = this.extractHeadline(line); 
+                // array index
+                int j = Array.FindIndex(Strings.FACTION_TO_STR, 
+                        s => s.ToLower().Equals(headline));
+                if (j != -1)
+                {
+                    faction = j;
+                    startIndex = i;
+                    while (true)
+                    {
+                        if (i == lines.Length)
+                        {
+                            endIndex = i-1;
+                            break;
+                        }
+                        line = lines[i];
+                        if (line.Length == 0)
+                        {
+                            endIndex = i;
+                            break;
+                        }
+                        i++;
+                    }
+                    break;
+                } else {
+                    i++;
+                }
+            }
+
+            return Tuple.Create(startIndex, endIndex, faction);
+        }
+
+        // Extracts the first word in a line
         // for a line containing ":{info}:". "info" will be returned where no c in info is whitespace or upper
         // if empty string is returned something went wrong
         private string extractHeadline(string line)
@@ -234,7 +290,7 @@ namespace Generics {
 
         // Reads the lines and sets this.count accordingly. if Error it thwos an exception
         // Will return the index to the :signups: line.
-        private int extractCount(string[] lines)
+        private int setCount(string[] lines)
         {
             int i = 0;
             string signUpFlag = "signups";
@@ -368,7 +424,7 @@ namespace Generics {
         */
         public override string ToString()
         {
-            string ret = "<AssignmentReceivers>:";
+            string ret = "<Sign Up>:";
             ret += "\n\t<Date>";
             ret += String.Format("\n\t\t{0} GMT {1}{2}", this.date.ToString(), (this.GMTOffset >= 0) ? "+" : "-", this.GMTOffset);
             ret += "\n\t<Total number of signed players>:";
