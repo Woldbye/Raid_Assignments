@@ -78,9 +78,8 @@ namespace Generics {
         public SignUp(string path)
         {
             this.rolesCount = new int[Role.GetNames(typeof(Role)).Length];
-            this.indexToFaction = new int[SignUp.MAX_FACTION_COUNT];
             this.rawLines = File.ReadAllText(path).Split("\n");
-            int i = this.extractCount(this.rawLines);
+            int i = this.setCount(this.rawLines);
             // Next step is rolesCount and date
             Tuple<int[], DateTime, int> roleDateExtract = this.extractRolesCountNDate(this.rawLines, i);
             this.rolesCount = roleDateExtract.Item1;
@@ -94,6 +93,7 @@ namespace Generics {
                 Console.WriteLine(String.Format("{0}", this.ToString()));
             #endif
         }
+
 
         public int[] extractFactionIndexes(string[] lines, int start)
         {
@@ -176,6 +176,8 @@ namespace Generics {
 
             return Tuple.Create(startIndex, endIndex, faction);
         }
+
+        // Extracts the first word in a line
         // for a line containing ":{info}:". "info" will be returned where no c in info is whitespace or upper
         // if empty string is returned something went wrong
         public string extractHeadline(string line)
@@ -291,7 +293,7 @@ namespace Generics {
 
         // Reads the lines and sets this.count accordingly. if Error it thwos an exception
         // Will return the index to the :signups: line.
-        private int extractCount(string[] lines)
+        private int setCount(string[] lines)
         {
             int i = 0;
             string signUpFlag = "signups";
