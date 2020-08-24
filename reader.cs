@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections;
 using Util;
 using Generics;
+using System.Linq;
 
 namespace Translate // utilities
 {	
@@ -21,18 +22,120 @@ namespace Translate // utilities
 		//			assign player to interrupt
 		//	  Same idea for healers
 	*/
-	/*
+
 	public class Discord
 	{ 
-		
-		public Discord(string path, Dictionary<string, Player> roster)
+    private SignUp signUpInfo;
+    private Priorities prios;
+    private List<string> playerNames;
+
+		public Discord(string path, 
+                   Priorities allPrios, 
+                   List<string> allPlayerNames)
 		{
-			// Same idea as Reader class. All info about the sign up is kept in the class SignUp.
-			// idea:
+      this.signUpInfo = new SignUp(path);
+      this.playerNames = this.readPlayerNames(this.signUpInfo.getRawLines());
+      this.prios = this.adjustPriorities(allPrios, this.playerNames);
 		}
+
+    private Priorities adjustPriorities(Priorities allPrios, List<string> names)
+    {
+      string[] prios = Priority.GetNames(typeof(Priority));
+      int stackCount = prios.Length;
+      Stack<string>[] adjPrios = new Stack<string>[stackCount];
+      for (int i=0; i < stackCount; i++)
+      {
+        adjPrios[i] = new Stack<string>();
+
+      }
+
+      for (int i=0; i < stackCount; i++)
+      {
+        Priority priority = (Priority) i;
+        Stack<string> adjPrio = this.adjustPrio(allPrios.getPriority(priority), names); 
+        adjPrios[i] = adjPrio;
+      }
+
+      return new Priorities(adjPrios);
+    }
+
+    public Stack<string> getPriority(int priority)
+    {
+      return this.prios.getPriority((Priority) priority);
+    }
+
+    private Stack<string> adjustPrio(Stack<string> prio, List<string> names)
+    {
+      Stack<string> ret = new Stack<string>();
+      List<string> stackInitList = new List<string>();
+      foreach (string name in prio)
+      {
+        if (names.Contains(name))
+        {
+          stackInitList.Add(name);
+        }
+      }
+      int i = 1;
+      int length = stackInitList.Count;
+      string[] stackInitArray = new string[length];
+        
+      // push in reverse order so first we convert to array.
+      // fst in stackInitList is last to be pushed
+      foreach(string name in stackInitList) 
+      {
+        stackInitArray[length-i] = name;
+        i++;
+      }
+
+      for (int j=0; j < length; j++)
+      {
+        string name = stackInitArray[j];
+        ret.Push(name);
+      }
+
+      return ret;
+    }
+
+    private List<string> readPlayerNames(string[] lines)
+    {
+      List<string> playerNames = new List<string>();
+      // go to each index contained in SignUp
+      int factionCount = Faction.GetNames(typeof(Faction)).Length;
+      #if (DEBUG)
+          Console.WriteLine("----readTable DEBUG info----");
+      #endif
+      for (int i=0; i < factionCount; i++)
+      {
+        int faction = i;
+        string factionStr = Strings.FACTION_TO_STR[faction];
+        int index = this.signUpInfo.getIndexToFaction(faction);
+        #if (DEBUG)
+            Console.WriteLine(String.Format("\t\tReceived faction: <{0}>", factionStr));
+            Console.WriteLine(String.Format("\t\t\tTrying to read from line: <{0}>", index));
+        #endif
+        string line = lines[index];
+        string headline = this.signUpInfo.extractHeadline(line);
+        while(headline.Contains(factionStr))
+        {
+          string name = this.readName(line);
+          #if (DEBUG)
+            Console.WriteLine("\t\tPlayerNames add OP:");
+            Console.WriteLine(String.Format("\t\t\t<{0}>", name));
+          #endif
+          playerNames.Add(name);
+        }
+      }
+
+      return playerNames;
+    }
+
+    private string readName(string line)
+    {
+      return Strings.FindSecondLetterSubstring(line);
+    }
 	}
-	*/
-	// Table reader for raid_roster.txt
+
+  // Table reader for raid_roster.txt
 	public class Reader 
 	{	
 		// Holds the names of all the assignment receivers.
@@ -107,6 +210,8 @@ namespace Translate // utilities
 
 			return Tuple.Create(DRoster, class_a, admins);
 		}
+
+
 		// public Player(string name, Wow_Class class_, Role role_, bool isOT, bool isInt)
     private Player ExtractPlayer(string pl_line)
     {
@@ -190,6 +295,11 @@ namespace Translate // utilities
 			}
 			return priorities;
 		}
+
+    public List<string> getPlayerNames()
+    {
+      return this.roster.Keys.ToList();
+    }
 
     public AssignmentReceivers getReceivers()
     {

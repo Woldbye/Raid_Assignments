@@ -3,10 +3,12 @@ using System;
 using Generics;
 using Translate;
 
-namespace Assignments {
-	class Raid_Assigner
+class Raid_Assigner
 	{
 		// TO:DO - 
+		// Make all dictionaries be:
+		// name.hash -> Player
+
 		// 	Implement class SignUp
 		//			Should read a file which contains copy paste of discord sign up
 		// 		  Constructor receives path to file and look up roster dictionary.
@@ -34,7 +36,6 @@ namespace Assignments {
 		//	After its finished I simply need to copy paste disscord sign up -> run raid_assign.cs -> copy paste each Assignment/Path into exorsus
 		public static int Main() 
 		{	
-			/*
 			Reader reader_test = new Reader();
 			string[] msg = new string[2];
 			msg[0] = "do this";
@@ -53,8 +54,12 @@ namespace Assignments {
 			Console.WriteLine(reader_test.getReceivers().ToExorsus("interrupt", msg));
 			Console.WriteLine("---Mages---");
 			Console.WriteLine(reader_test.getReceivers().ToExorsus("mage", msg));
-			*/
+			Console.WriteLine("---Shamans---");
+			Console.WriteLine(reader_test.getReceivers().ToExorsus("shaman", msg));
+			Console.WriteLine("---Hunters---");
+			Console.WriteLine(reader_test.getReceivers().ToExorsus("hunter", msg));
+			// string path = "discord_signup.txt";
+			// SignUp signup = new SignUp(path);
 			return 0;
 		}
 	}
-}

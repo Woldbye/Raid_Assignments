@@ -10,6 +10,8 @@ namespace Util // utilities
 		public static int ERROR = Int32.MinValue;
 		public const string DISCORD_SIGNUP_PATH = "discord_signup.txt";
 		public const string RAID_ROSTER_PATH = "raid_roster.txt";
+		public const string OUTPUT_PATH = "Assignments/";
+		public const string TEMPLATE_PATH = "Templates/";
 		public static string[] FACTION_TO_STR = {
 			"Tank",
 			"Hunter",
@@ -22,9 +24,55 @@ namespace Util // utilities
 			"Priest"
 		};
 
-		public static string[] DATE_TO_STR = {"CMcalender", "CMclock"}; 
+		public static string[] DATE_TO_STR = {"CMcalendar", "CMclock"}; 
 		public static string[] CLASS_TO_STR = {"Druid", "Hunter", "Mage", "Priest", "Rogue", "Shaman", "Warlock", "Warrior"};
 		public static string[] ROLE_TO_STR = {"Tank", "Healer", "Melee", "Ranged"};
+
+		// Returns the start index 
+		// and total character count of letter substring.
+		public static Tuple<int, int> FindLetterSubstring(string str)
+		{
+			int start = 0;
+			int count = 0;
+
+			if (str.Length > 0)
+			{
+				for (int i=0; i < str.Length; i++)
+				{
+					char c = str[i];
+					int j = i;
+					if (Char.IsLetter(c))
+					{
+						start = j;
+						while (Char.IsLetter(c) && j < str.Length)
+						{
+							count++;
+							c = str[j];
+							j++;
+						}
+					}
+				}
+			} else {
+				Error.ThrowArgumentError("Parameter str length is 0, cannot return indexes");
+			}
+
+			return Tuple.Create(start, count);
+		}
+
+		// TO:DO THROW ERROR IF ONLY ONE LETTER SUB STRING
+		public static string FindSecondLetterSubstring(string str)
+		{
+		  string ret = "";
+      // Table name in format [tableName] so we just trim (also converts to lower-case)
+      // and remove the first and last letter.
+      // Find lettersubstring returns index in regard to its input. So we have to add snd.Item1 with sndSearchStart and +1 to account for 0 indexing
+		  Tuple<int, int> fst = Strings.FindLetterSubstring(str);
+		  int sndSearchStart = fst.Item1+fst.Item2-1;
+		  Tuple<int, int> snd = Strings.FindLetterSubstring(str.Substring(sndSearchStart));
+		  ret = str.Substring(snd.Item1+sndSearchStart+1, snd.Item2);
+
+      return ret; 
+		}
 
 		// Find the first integer in the string
 		// Integer can be maximum two ciphers.
@@ -160,6 +208,11 @@ namespace Util // utilities
 		public static void Exception(string msg) 
 		{
 			throw new Exception(msg);
+		}
+
+		public static void ThrowArgumentError(string msg)
+		{
+			throw new ArgumentException(msg);
 		}
 	}
 

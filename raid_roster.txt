@@ -48,7 +48,8 @@ Info:
   Mangopray       Priest      Healer     No           No      No
   Diazepam        Priest      Healer     No           No      No
   Provst          Priest      Healer     No           No      No  
-  Snodda          Priest      Healer     No           No      No  
+  Snodda          Priest      Healer     No           No      No
+  Jaikyro         Priest      Healer     No           No      No  
   Tazer           Rogue       Melee      Yes          No      No
   Eigilmusen      Rogue       Melee      Yes          No      No
   Daroka          Rogue       Melee      Yes          No      No

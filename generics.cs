@@ -75,7 +75,7 @@ namespace Generics {
 
         public static int MAX_FACTION_COUNT = Faction.GetNames(typeof(Faction)).Length;
         // Use Role lookup to find info
-        public SignUp(string path, Dictionary<string, Player> roster)
+        public SignUp(string path)
         {
             this.rolesCount = new int[Role.GetNames(typeof(Role)).Length];
             this.indexToFaction = new int[SignUp.MAX_FACTION_COUNT];
@@ -85,44 +85,100 @@ namespace Generics {
             Tuple<int[], DateTime, int> roleDateExtract = this.extractRolesCountNDate(this.rawLines, i);
             this.rolesCount = roleDateExtract.Item1;
             this.date = roleDateExtract.Item2;
+            Console.WriteLine(String.Format("Succesfully set date to {0}", date.ToString()));
             i = roleDateExtract.Item3;
 
-            // next step is indexToFaction arr
-            /*
-                loop through line for line
-                for each faction found, it will denote the starting index and 
-                
-                // receives index to the faction line:
-                :Tank: Tank (3) :
-                :Tank: 9 Vogn/Slæde
-                :Tank: 16 Jourbah
-                :Tank: 27 Yrotaris
-                // Here index would correspond to index to the first line.
-                // startIndex is index to ":Tank: 9 Vogn/Slæde"
-                // endIndex is index to ":Tank: 27 Yrotaris"
-                extractIndexToFaction(string lines[], int index)
-                    returns Tuple<startIndex, endIndex>   
-                
-                so main function should:
-                    while (true) 
-                        Extract headline,
-                        search Strings.FACTION_TO_STR.ToLowerCase array for index of headline
-                        if index exists => we found a faction.
-                            Now we can call extractIndexToFaction(this.rawLines, int currentIndex)
-                            this.indexToFaction[indexFromPreviousSearch] = Tuple.Item1 
-                            if (Tuple.Item2 != lines.Length-1)
-                                i = Tuple.item2 + 1
-                            else 
-                                end
-                        else 
-                            i++
-                
-                function increases index till it finds a valid faction. 
-            */
+            this.indexToFaction = this.extractFactionIndexes(this.rawLines, i);
+            #if (DEBUG)
+                Console.WriteLine("----Finished init of SignUp----");
+                Console.WriteLine(String.Format("{0}", this.ToString()));
+            #endif
+        }
+
+        public int[] extractFactionIndexes(string[] lines, int start)
+        {
+            int i = start;  
+            int[] ret = new int[SignUp.MAX_FACTION_COUNT];
+            #if (DEBUG)
+                int counter = 0;
+                Console.WriteLine("----Extract Faction Indexes debug info----");
+                Console.WriteLine(String.Format("\t\tReceived i: <{0}>", start));
+                Console.WriteLine(String.Format("\t\tMaximum i of lines is: <{0}>", lines.Length-1));
+                Console.WriteLine(String.Format("\t\tLine at start index equals:\n\t\t\t{0}", lines[start]));
+            #endif
+
+            while (i < lines.Length-1)
+            {
+                Tuple<int, int, int> factionInfo = this.nextFactionIndex(lines, i);
+                int faction = factionInfo.Item3;
+                i = factionInfo.Item2;
+                int factionStart = factionInfo.Item1;
+                #if (DEBUG)
+                    counter++;
+                    Console.WriteLine(String.Format("\t\tRead new faction: <{0}>", Strings.FACTION_TO_STR[faction]));
+                    Console.WriteLine("\t\t\t\t\t<Indexes>:");
+                    Console.WriteLine(String.Format("\t\t\t\t\t\t<Start>: {0}", factionStart));
+                    Console.WriteLine(String.Format("\t\t\t\t\t\t<End>: {0}", i));
+                #endif
+                ret[faction] = factionStart;
+            }
+
+            return ret;
+        }
+
+        // Here index would correspond to index to the first line.
+        // startIndex is index to ":Tank: 9 Vogn/Slæde"
+        // endIndex is index to ":Tank: 27 Yrotaris"
+        // extractIndexToFaction(string lines[], int index)
+        //     returns Tuple<startIndex, endIndex, faction>   
+        private Tuple<int, int, int> nextFactionIndex(string[] lines, int start)
+        {
+            int startIndex = -1;
+            int endIndex = -1;
+            int faction = -1;
+            int i = start;
+
+            while (true)
+            {
+                if (i >= lines.Length)
+                {
+                    Error.ThrowSignUpError();
+                }
+                string line = lines[i];
+                string headline = this.extractHeadline(line); 
+                // array index
+                int j = Array.FindIndex(Strings.FACTION_TO_STR, 
+                        s => s.ToLower().Equals(headline));
+                if (j != -1)
+                {
+                    faction = j;
+                    startIndex = i+1;
+                    while (true)
+                    {
+                        if (i == lines.Length)
+                        {
+                            endIndex = i-1;
+                            break;
+                        }
+                        line = lines[i];
+                        if (line.Length < 2)
+                        {
+                            endIndex = i;
+                            break;
+                        }
+                        i++;
+                    }
+                    break;
+                } else {
+                    i++;
+                }
+            }
+
+            return Tuple.Create(startIndex, endIndex, faction);
         }
         // for a line containing ":{info}:". "info" will be returned where no c in info is whitespace or upper
         // if empty string is returned something went wrong
-        private string extractHeadline(string line)
+        public string extractHeadline(string line)
         {
             int start = 0;
             int end = 0;
@@ -153,7 +209,7 @@ namespace Generics {
                 }
                 if (count > 1)
                 {
-                    ret = Strings.Trim(line.Substring(start, (end - start)));    
+                    ret = Strings.Trim(line.Substring(start, (end - start)+1));    
                 }
             } 
 
@@ -177,15 +233,16 @@ namespace Generics {
             const int DATE_ARR_SIZE = 4;
             int[] calender = new int[DATE_ARR_SIZE];
             int[] clock = new int[DATE_ARR_SIZE];
-            int role = 0;
-
-            while (role <= 3) 
+            int count = 0;
+            int[] roleOrder = {(int) Role.Tank, (int) Role.Melee, 
+                               (int) Role.Ranged, (int) Role.Healer};
+            
+            while (count <= 3) 
             {
+                int role = roleOrder[count];
                 string line = lines[i];
-                string roleStr = Strings.ROLE_TO_STR[role].ToLower(); 
-
+                string roleStr = Strings.ROLE_TO_STR[role]; 
                 // if line_array find index can find rolestr 
-
                 if (line.Contains(roleStr))
                 {
                     // role is int value of string so we know already based on match what string it is.
@@ -198,17 +255,17 @@ namespace Generics {
                         // Max int size is 2, so we simply do +2 and we will always
                         //  move past first integer.
                         int lineIndex = numNIndex.Item2 + 2;
-                        Console.WriteLine("Diff is " + (line.Length - lineIndex) + " and length is " + line.Length);
                         // Read melee now
                         numNIndex = Strings.FindIntNIndex(line.Substring(lineIndex, line.Length-lineIndex));
                         ret[(int) Role.Melee] = numNIndex.Item1;
+                        count++;
                     } else if (role != (int) Role.Melee)
                     {
                         // Ranged, Healer
                         int num = Strings.FindInt(line);
                         ret[role] = num;  
                     }
-                    role++;  
+                    count++;  
                 } else if (line.Contains(Strings.DATE_TO_STR[(int) Date.Calender])) {
                     calender = this.readDate(line);
                     if (calender[0] == (int) Date.Error) 
@@ -247,11 +304,15 @@ namespace Generics {
                        String.Format("The length of the file is {0} and the index is {1}", lines.Length, i));
                 }
                 string line = lines[i];
-                string headline = this.extractHeadline(lines[i]);
+                string headline = this.extractHeadline(line);
+                /*
                 if (headline.Length <= 0)
                 {
+                    Console.WriteLine("-" + line + "-");
                     Error.ThrowSignUpError();
                 }
+                */
+                // Console.WriteLine("Made it past headline.length check");
                 if (signUpFlag.Equals(headline))
                 {
                     int imCount = Strings.ConvertToInt(line.Substring(line.Length-2, 2));
@@ -311,7 +372,6 @@ namespace Generics {
                 }
                 i++;
             }
-
             // Contains would be safer, but this is much faster :)
             if (Strings.DATE_TO_STR[(int) Date.Calender].Equals(line_cp.Substring(0, Strings.DATE_TO_STR[(int) Date.Calender].Length)))
             {
@@ -321,9 +381,9 @@ namespace Generics {
                 int year = Strings.ConvertToInt(line_cp.Substring(i+6, 4));
                 // Type
                 ret[0] = (int) Date.Calender;
-                ret[1] = day;
+                ret[1] = year;
                 ret[2] = month;
-                ret[3] = year;
+                ret[3] = day;
             } else if (Strings.DATE_TO_STR[(int) Date.Clock].Equals(line_cp.Substring(0, Strings.DATE_TO_STR[(int) Date.Clock].Length)))
             {
                 // handle CMclock: 18:45 GMT +2  
@@ -348,27 +408,9 @@ namespace Generics {
             return ret;
         }
 
-        /*
-         // total count of signed up players.
-        private int count;
-        // count for each role
-        private readonly int[] rolesCount;
-        // the sign up files by lines.
-        private readonly string[] rawLines;
-        // Index to each of the "factions".
-        private readonly int[] indexToFaction;
-        // Any line that terminates with ":", corresponds to a new group that needs to be read.
-        public const char NEW_FLAG = ':';
-        private int GMTOffset;
-        // date of event.
-        private readonly DateTime date;
-        // headline name for each of the info regarding dates.
-        // calender is date, clock is time.
-        public const string[] DATE_NAMES = {"CMcalendar", "CMclock"};
-        */
         public override string ToString()
         {
-            string ret = "<AssignmentReceivers>:";
+            string ret = "<SignUp>:";
             ret += "\n\t<Date>";
             ret += String.Format("\n\t\t{0} GMT {1}{2}", this.date.ToString(), (this.GMTOffset >= 0) ? "+" : "-", this.GMTOffset);
             ret += "\n\t<Total number of signed players>:";
@@ -391,12 +433,23 @@ namespace Generics {
                     ret += String.Format("\n\t\t\t\t{0}", this.rawLines[indexToFaction[i]]);
                 #endif
             }
+         
             return ret;
+        }
+
+        public string[] getRawLines()
+        {
+            return this.rawLines;
         }
 
         public int getCount()
         {
             return this.count;
+        }
+
+        public int getIndexToFaction(int faction) 
+        {
+            return this.indexToFaction[faction];
         }
     }
     // Constructor receives path to raid_roster.txt, and the table object 
