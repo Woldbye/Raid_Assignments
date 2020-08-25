@@ -10,8 +10,8 @@ namespace Util // utilities
 		public static int ERROR = Int32.MinValue;
 		public const string DISCORD_SIGNUP_PATH = "discord_signup.txt";
 		public const string RAID_ROSTER_PATH = "raid_roster.txt";
-		public const string OUTPUT_PATH = "Assignments/";
-		public const string TEMPLATE_PATH = "Templates/";
+		public const string OUTPUT_PATH = "Assignments";
+		public const string TEMPLATE_PATH = "Templates";
 		public static string[] FACTION_TO_STR = {
 			"Tank",
 			"Hunter",
@@ -189,6 +189,21 @@ namespace Util // utilities
 	public static class Error 
 	{
 		public const int UNKNOWN_ERR = -1;
+
+		public static void ThrowAssignmentError(string assignment)
+		{
+			throw new FormatException(String.Format("{0} is not supported as a valid assignment."));
+		}
+
+		public static void ThrowTemplateError(string tmp, string path)
+		{
+			throw new FormatException(String.Format("The line {0} at path: {1} is invalid", tmp, path));
+		}
+
+		public static void ThrowTemplateError(Exception e, string path)
+		{
+			throw new FormatException(String.Format("Reading of path: {0} threw exception {1}", path, e));
+		}
 
 		public static void ThrowRosterError() 
 		{

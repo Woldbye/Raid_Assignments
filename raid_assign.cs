@@ -6,6 +6,10 @@ using Translate;
 class Raid_Assigner
 	{
 		// TO:DO - 
+		// Convert all data_table files to .csv
+		//	implement reading of .csv files
+
+
 		// Make all dictionaries be:
 		// name.hash -> Player
 
