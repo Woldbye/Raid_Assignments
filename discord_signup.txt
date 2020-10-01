@@ -9,7 +9,7 @@
 :CMclock: 18:45 GMT +2
 :empty:
 :Healers: Healers - 9 :Healers:
-‎
+
 :Tank: Tank (3) :
 :Tank: 9 Vogn/Slæde
 :Tank: 16 Jourbah

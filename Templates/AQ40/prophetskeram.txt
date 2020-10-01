@@ -1,0 +1,52 @@
+{horde}{horde}PROPHET SKERAM{horde}{horde}
+
+---Information:---
+Prioritet 
+  CC af MC targets hele fighten.
+  Interruption af Arcane Explosion
+"mirror-image" split - 75%, 50% og 25%. 
+Focus fire mirror-images. DPS den image som er tættest på jeres assigned side.
+{m:Tank}
+{Warrior}{Druid}--Tanks--{Warrior}{Druid}
+Center - {square}: {a:tank:none:1}, {a:tank:none:4}
+Left: {a:tank:none:2}, {a:tank:none:4}
+Right: {a:tank:none:3}, {a:tank:none:5}
+hvis {square} tper til jer taunt og løb ham ind i midten
+{/p}
+{m:Healer}
+{Druid}{Priest}{Shaman}--Healers--{Druid}{Priest}{Shaman}
+Center: 
+  Tanks: {a:healer:none:1}, {a:healer:none:2}
+  }
+  Resten: {a:healer:none:0}, {a:healer:none:0}
+Left: 
+  Tanks: {a:healer:none:3}, {a:healer:none:4}
+  Resten: {a:healer:none:0}, {a:healer:none:0}
+Right: 
+  Tanks: {a:healer:none:5}, {a:healer:none:6}
+  Resten: {a:healer:none:0}, {a:healer:none:0}
+{/p}
+{m:Interrupter}
+{Warrior}{Rogue}{Mage}--Interrupts--{Warrior}{Rogue}{Mage}
+Center:
+  Gr 1 + Gufast + Thallspring 
+Left:
+  Gr 2 + Fumble + Eigil + Iamrarely 
+Right:
+  Gr 3 + Fumblebumble + Redmah + Hectic
+Mages der counterspeller BLIVER på deres assigned side (hjælp med sheep)
+{/p}
+{m:Warlock}
+{Warlock}--Warlocks--{Warlock}
+Curse of Tongues assignment:
+Center: Pneumaa
+Left: Aaniz
+Right: Moses
+{/p}
+{m:Hunter}
+{Hunter}--Hunters--{Hunter}
+Left:
+  Bowjobboy
+Right:
+  Vobi
+{/p}
