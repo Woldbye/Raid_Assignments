@@ -412,7 +412,7 @@ namespace Containers
       j = 0;
       foreach (List<string> class_obj in this.class_a)
       {
-        ret += String.Format("\n\t\t<{0}>", LookUp.CLASS_TO_STR[j]);
+        ret += String.Format("\n\t\t<{0}>", Wow.CLASS_TO_STR[j]);
         int k = 0;
         foreach (string name in class_obj)
         {

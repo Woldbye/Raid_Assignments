@@ -15,7 +15,7 @@ namespace Indexes // utilities
     public int Start
     {
       get { return (int) this._start; }
-      private set { 
+      set { 
         this._start = (ushort) value;
       } 
     }
@@ -23,7 +23,7 @@ namespace Indexes // utilities
     public int End
     {
       get { return (int) this._end; }
-      private set { 
+      set { 
         this._end = (ushort) value;
       } 
     }
@@ -32,8 +32,8 @@ namespace Indexes // utilities
     {
       try 
       {
-        this._start = Convert.ToUint16(start);
-        this.end = Convert.ToUint16(end);
+        this._start = Convert.ToUInt16(start);
+        this._end = Convert.ToUInt16(end);
       } catch (Exception e)
       {
         throw new Exception(String.Format("Input for StringIndex is invalid - assignment threw {0}", e));

@@ -26,6 +26,7 @@ namespace Readers
     Template is used to convert the template assignment into the raw exorsus string
     The exorsus class will then load the exorsus string into the appropriate file.
   */
+  /*
   public class Template
   {
     private TemplateInfo tempInfo;
@@ -46,4 +47,5 @@ namespace Readers
       // 
     }
   }
+  */
 }

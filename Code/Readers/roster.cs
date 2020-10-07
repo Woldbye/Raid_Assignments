@@ -13,17 +13,7 @@ namespace Readers
 {	
 	/*
 		// TO:DO - 
-		// 	Implement class SignUp
-		//		  Should read a file which contains copy paste of discord sign up
-		// 		  Constructor receives path to file and look up roster dictionary.
-		//  	  For each signed member it should look up in dictionary and add the appropriate player.
-		//	
-		//  Lets say we need interrupters. We will now be able to:
-		//		cp interrupt stack
-		//		pop player from stack
-		//		if player in sign up
-		//			assign player to interrupt
-		//	  Same idea for healers
+		FIX SO IT DOESNT READ INTERRUPT OR OT INFO
 	*/
   // Table reader for raid_roster.txt
 	public class Roster : ITextReader<string[]>
@@ -39,9 +29,11 @@ namespace Readers
 		private RosterInfo rosterInfo;
 		private Dictionary<string, Player> roster = new Dictionary<string, Player>();
 		
+    public const string PATH = "raid_roster.txt";
+
 		public Roster() {
 			// table needs init first, as other function depends on it.
-			this.rosterInfo = new RosterInfo(LookUp.RAID_ROSTER_PATH);
+			this.rosterInfo = new RosterInfo();
 			this.read(this.rosterInfo.getRawLines());
 			this.priorities = new Priorities(this.readPriorities());
       Console.WriteLine("****Finished reader init****");
@@ -62,7 +54,7 @@ namespace Readers
 
 			// A few inits :)
 			Dictionary<string, Player> DRoster = new Dictionary<string, Player>(this.rosterInfo.getRosterCount());
-			int arraySize = Wow_Class.GetNames(typeof(Wow_Class)).Length;
+			int arraySize = Wow.Class.GetNames(typeof(Wow.Class)).Length;
 			List<string>[] class_a = new List<string>[arraySize];
 			List<string> admins = new List<string>();
 
@@ -84,10 +76,10 @@ namespace Readers
         }
         Player player = this.ExtractPlayer(aLine);
         // add player to all three lists:
-        string name = player.getName();
+        string name = player.Name;
         DRoster.Add(name, player);
-        class_a[(int) player.getClass()].Add(name);
-        if (player.isAdmin())
+        class_a[(int) player.Class].Add(name);
+        if (player.IsAdmin)
         {
         	admins.Add(name);
         }
@@ -136,12 +128,12 @@ namespace Readers
       // int ot admin
 			// cast info and init player
 			string name = info[0];
-			Wow_Class wow_class = (Wow_Class) Array.IndexOf(LookUp.CLASS_TO_STR, info[1]);
-			Role role = (Role) Array.IndexOf(LookUp.ROLE_TO_STR, info[2]);
+			Wow.Class wow_class = (Wow.Class) Array.IndexOf(Wow.CLASS_TO_STR, info[1]);
+			Wow.Role role = (Wow.Role) Array.IndexOf(Wow.ROLE_TO_STR, info[2]);
 			bool isOT = (info[4].Equals("Yes")) ? true : false;
 			bool isInt = (info[3].Equals("Yes")) ? true : false;
 			bool isAdmin = (info[5].Equals("Yes")) ? true : false;
-			Player retPlayer = new Player(name, wow_class, role, isOT, isInt, isAdmin);
+			Player retPlayer = new Player(name, wow_class, role, isAdmin);
 			return retPlayer;
     }
 

@@ -1,16 +1,6 @@
 using System;
 
 namespace Enumerator {
-	// Assigned Player Type
-	//	The type of the player assignment 
-	public enum Priority
-	{
-		Tank, // 0
-		Heal, // 1
-		Interrupt, // 2
-		Kite // 3
-	};
-
 	public enum MsgType
 	{
 	  Interrupt, // 0 

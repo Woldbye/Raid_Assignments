@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 using Enumerator;
+using Wow_Objects;
 
 namespace Readers
 {
@@ -22,17 +23,15 @@ namespace Readers
     // date of event.
     private DateTime date;
     // headline name for each of the info regarding dates.
-    // calender is date, clock is time.
-    public readonly string[] DATE_NAMES = {"CMcalendar", "CMclock"};
     // Maximum amount of factions
     public static int MAX_FACTION_COUNT = Faction.GetNames(typeof(Faction)).Length;
     // Use Role lookup to find info
-    public SignUpInfo(string path) : base(path)
+    public SignUpInfo() : base(SignUp.PATH)
     {
       #if (DEBUG)
         Console.WriteLine("---Starting SignUp init---");
       #endif
-      this.rawLines = base.readFile(base.getPath()).Split("\n");
+      this.rawLines = base.readFile(SignUp.PATH).Split("\n");
 
       this.rolesCount = new int[Role.GetNames(typeof(Role)).Length];
       this.read(this.getRawLines());
@@ -69,18 +68,18 @@ namespace Readers
       #endif
       while (i < lines.Length-1)
       {
-        Tuple<int, int, int> factionInfo = this.nextFactionIndex(lines, i);
-        int faction = factionInfo.Item3;
-        i = factionInfo.Item2;
-        int factionStart = factionInfo.Item1;
+        Tuple<int, int, int> signUpTypeInfo = this.nextSignUpTypeIndex(lines, i);
+        int signUpType = signUpTypeInfo.Item3;
+        i = signUpTypeInfo.Item2;
+        int startIndex = signUpTypeInfo.Item1;
         #if (DEBUG)
           counter++;
-          Console.WriteLine(String.Format("\t\tRead new faction: <{0}>", LookUp.FACTION_TO_STR[faction]));
+          Console.WriteLine(String.Format("\t\tRead new faction: <{0}>", SignUp.TYPE_TO_STR[signUpType]));
           Console.WriteLine("\t\t\t\t\t<Indexes>:");
-          Console.WriteLine(String.Format("\t\t\t\t\t\t<Start>: {0}", factionStart));
+          Console.WriteLine(String.Format("\t\t\t\t\t\t<Start>: {0}", startIndex));
           Console.WriteLine(String.Format("\t\t\t\t\t\t<End>: {0}", i));
         #endif
-        ret[faction] = factionStart;
+        ret[signUpType] = startIndex;
       }
 
       return ret;
@@ -91,7 +90,7 @@ namespace Readers
     // endIndex is index to ":Tank: 27 Yrotaris"
     // extractIndexToFaction(string lines[], int index)
     //     returns Tuple<startIndex, endIndex, faction>   
-    private Tuple<int, int, int> nextFactionIndex(string[] lines, int start)
+    private Tuple<int, int, int> nextSignUpTypeIndex(string[] lines, int start)
     {
       int startIndex = -1;
       int endIndex = -1;
@@ -107,7 +106,7 @@ namespace Readers
           string line = lines[i];
           string headline = this.extractHeadline(line); 
           // array index
-          int j = Array.FindIndex(LookUp.FACTION_TO_STR, 
+          int j = Array.FindIndex(SignUp.TYPE_TO_STR, 
                   s => s.ToLower().Equals(headline));
           if (j != -1)
           {
@@ -199,7 +198,7 @@ namespace Readers
       {
         int role = roleOrder[count];
         string line = lines[i];
-        string roleStr = LookUp.ROLE_TO_STR[role]; 
+        string roleStr = Wow.ROLE_TO_STR[role]; 
         // if line_array find index can find rolestr 
         if (line.Contains(roleStr))
         {
@@ -224,13 +223,13 @@ namespace Readers
             ret[role] = num;  
           }
           count++;  
-        } else if (line.Contains(LookUp.DATE_TO_STR[(int) Date.Calender])) {
+        } else if (line.Contains(SignUp.DATE_TO_STR[(int) Date.Calender])) {
           calender = this.readDate(line);
           if (calender[0] == (int) Date.Error) 
           {
             Exceptions.ThrowSignUp();
           }
-        } else if (line.Contains(LookUp.DATE_TO_STR[(int) Date.Clock])) {
+        } else if (line.Contains(SignUp.DATE_TO_STR[(int) Date.Clock])) {
           clock = this.readDate(line);
           if (clock[0] == (int) Date.Error) 
           {
@@ -264,7 +263,7 @@ namespace Readers
         if (signUpFlag.Equals(headline))
         {
             int imCount = Strings.ConvertToInt(line.Substring(line.Length-2, 2));
-            if (imCount == Exceptions.ERROR_CODE)
+            if (imCount == Errors.ERROR_CODE)
             {
               Exceptions.ThrowSignUp();
             } else {
@@ -297,7 +296,7 @@ namespace Readers
         line_cp = line_cp.Substring(1, line_cp.Length-1);
       }
       // start at the shortest type i.
-      int i = LookUp.DATE_TO_STR[(int) Date.Clock].Length;
+      int i = SignUp.DATE_TO_STR[(int) Date.Clock].Length;
       // find first number
       while (true)
       {
@@ -314,7 +313,7 @@ namespace Readers
         i++;
       }
       // Contains would be safer, but this is much faster :)
-      if (LookUp.DATE_TO_STR[(int) Date.Calender].Equals(line_cp.Substring(0, LookUp.DATE_TO_STR[(int) Date.Calender].Length)))
+      if (SignUp.DATE_TO_STR[(int) Date.Calender].Equals(line_cp.Substring(0, SignUp.DATE_TO_STR[(int) Date.Calender].Length)))
       {
         // handle CMcalendar: 19-08-2020 type string
         int day = Strings.ConvertToInt(line_cp.Substring(i, 2));
@@ -325,7 +324,7 @@ namespace Readers
         ret[1] = year;
         ret[2] = month;
         ret[3] = day;
-      } else if (LookUp.DATE_TO_STR[(int) Date.Clock].Equals(line_cp.Substring(0, LookUp.DATE_TO_STR[(int) Date.Clock].Length)))
+      } else if (SignUp.DATE_TO_STR[(int) Date.Clock].Equals(line_cp.Substring(0, SignUp.DATE_TO_STR[(int) Date.Clock].Length)))
       {
         // handle CMclock: 18:45 GMT +2  
         ret[0] = (int) Date.Clock;  
@@ -341,7 +340,7 @@ namespace Readers
       } else {
         ret[0] = (int) Date.Error;
       }
-      if (ret[1] == Exceptions.ERROR_CODE | ret[2] == Exceptions.ERROR_CODE | ret[3] == Exceptions.ERROR_CODE)
+      if (ret[1] == Errors.ERROR_CODE | ret[2] == Errors.ERROR_CODE | ret[3] == Errors.ERROR_CODE)
       {
         ret[0] = (int) Date.Error;
       }
@@ -378,11 +377,6 @@ namespace Readers
       return this.indexToFaction[faction];
     }
 
-    public string getPath()
-    {
-      return this.path;
-    }
-
     public override string ToString()
     {
       string ret = "<SignUp>:";
@@ -393,14 +387,14 @@ namespace Readers
       ret += "\n\t<Total number of each role>";
       for (int i=0; i < this.rolesCount.Length; i++)
       {
-        string role = LookUp.ROLE_TO_STR[i];
+        string role = Wow.ROLE_TO_STR[i];
         ret += String.Format("\n\t\t<{0} count>", role);                
         ret += String.Format("\n\t\t\t{0}", this.rolesCount[i]);
       }
       ret += "\n\t<Indexes to sign up groups>";
       for (int i=0; i < this.indexToFaction.Length; i++) 
       {
-        string faction = LookUp.FACTION_TO_STR[i];
+        string faction = SignUp.TYPE_TO_STR[i];
         ret += String.Format("\n\t\t<{0}>", faction);
         ret += String.Format("\n\t\t\t{0}", indexToFaction[i]);
         #if (DEBUG)

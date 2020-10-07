@@ -7,24 +7,47 @@ using Utilities;
 using Wow_Objects;
 using Containers;
 using System.Linq;
+using Assignments;
 
 namespace Readers // utilities
 { 
-  public class Discord : ITextReader<string[]>
+  // types the sign ups are grouped up under. Basicly wow_class + Tank
+  public enum SignUpType
+  {
+    Tank, // 0
+    Hunter, // 1
+    Druid, // 2
+    Warrior, // 3
+    Mage, // 4
+    Shaman, // 5
+    Rogue, // 6
+    Warlock, // 7
+    Priest // 8// 4 bits
+  }
+
+  public class SignUp : ITextReader<string[]>
   { 
     private SignUpInfo signUpInfo;
     private Priorities prios;
     private List<string> playerNames;
+    public const string PATH = "discord_signup.txt";
 
-    public Discord(string path, 
-                   Priorities allPrios, 
-                   List<string> allPlayerNames)
+    // calender is date, clock is time.
+    public static readonly string[] DATE_TO_STR = {"CMcalendar", "CMclock"};
+
+    public static readonly string[] TYPE_TO_STR = {
+      "Tank", "Hunter", "Druid", "Warrior", "Mage", "Shaman", "Rogue", 
+      "Warlock", "Priest"
+    };
+
+    public SignUp(Priorities allPrios, 
+                  List<string> allPlayerNames)
     {
-      Console.WriteLine("---Starting discord init---");
-      this.signUpInfo = new SignUpInfo(path);
+      Console.WriteLine("---Starting SignUp init---");
+      this.signUpInfo = new SignUpInfo();
       this.read(this.signUpInfo.getRawLines());
       this.prios = this.adjustPriorities(allPrios, this.playerNames);
-      Console.WriteLine("****Finished discord init****");
+      Console.WriteLine("****Finished Sign Up init****");
     }
 
     // TO:DO Fix function so it doesnt loop if a class is not present
@@ -37,7 +60,7 @@ namespace Readers // utilities
       for (int i=0; i < factionCount; i++)
       {
         int faction = i;
-        string factionStr = LookUp.FACTION_TO_STR[faction].ToLower();
+        string factionStr = SignUp.TYPE_TO_STR[faction].ToLower();
         int index = this.signUpInfo.getIndex(faction);
         string line = lines[index];
         string headline = this.signUpInfo.extractHeadline(line);
@@ -67,7 +90,7 @@ namespace Readers // utilities
 
     private Priorities adjustPriorities(Priorities allPrios, List<string> names)
     {
-      string[] prios = Priority.GetNames(typeof(Priority));
+      string[] prios = Enum.GetNames(typeof(AssignmentType));
       int stackCount = prios.Length;
       Stack<string>[] adjPrios = new Stack<string>[stackCount];
       for (int i=0; i < stackCount; i++)
@@ -77,9 +100,9 @@ namespace Readers // utilities
 
       for (int i=0; i < stackCount; i++)
       {
-        Priority priority = (Priority) i;
-        Console.WriteLine("Current priority: " + priority);
-        Stack<string> adjPrio = this.adjustPrio(allPrios.getPriority(priority), names); 
+        AssignmentType assType = (AssignmentType) i;
+        Console.WriteLine("Current priority: " + assType);
+        Stack<string> adjPrio = this.adjustPrio(allPrios.getPriority(assType), names); 
         adjPrios[i] = adjPrio;
       }
 
@@ -88,10 +111,10 @@ namespace Readers // utilities
 
     public Stack<string> getPriority(int priority)
     {
-      return this.prios.getPriority((Priority) priority);
+      return this.prios.getPriority((AssignmentType) priority);
     }
 
-    public Stack<string> getPriority(Priority priority)
+    public Stack<string> getPriority(AssignmentType priority)
     {
       return this.prios.getPriority(priority);
     }
@@ -154,7 +177,7 @@ namespace Readers // utilities
 
     public override string ToString()
     {
-      string ret = "<Discord>:";
+      string ret = "<Sign Up>:";
       ret += "\n  <Signed Players:>";
       foreach (string name in this.playerNames)
       {

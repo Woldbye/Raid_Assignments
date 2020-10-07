@@ -1,61 +1,56 @@
+using System;
+
 namespace Template
 {
-	public abstract class TemplateTask
-	{	
-		// Variable
-		protected readonly TemplateTask.Type _type;
-		
-		//Enums
-		// Type of task
-		public enum Type
-		{
-			Message, // 0
- 		  Assignment // 1
-		}
+  // Type of task
+  public enum TaskType
+  {
+    Message, // 0
+    Assignment // 1
+  }
 
-		// works for indexing Assignment.Seperators
-  	public enum Seperator : char
-  	{
-  	  Start = '{', // indicates start of assignment
-  	  Mid = ':',
-  	  End = '}' // indicates end of assignment
-  	}
+  public abstract class TemplateTask
+  {	
+		// Variable
+		protected readonly TaskType _task;
+
+    // small class to hold text seperator characters
+    public static class Seperator 
+    {
+      public const char Start = '{', Mid = ':', End = '}';   
+    }
+
   	// Const and static methods
-		public const string[] TYPE_TO_STR = {
+		public static readonly string[] TASK_TO_STR = {
         "Message", "Assignment"
     };
-    public const char[] TYPE_TO_RAW = {
+    public static readonly char[] TASK_TO_RAW = {
     	'm', 'a'
     };
 
-    public static char GetSeperator(Seperator seperator)
-    {
-      return Assignment.Seperators[(int) seperator];
-    }
-
   	// constructor with Enum
-		public TemplateTask(TemplateTask.Type type)
+		public TemplateTask(TaskType task)
 		{
-			this._type = type;
+			this._task = task;
 		}
 
-		public TemplateTask.Type getTaskType()
+		public TaskType getTaskType()
 		{
-			return this._type;
+			return this._task;
 		}
 
 		// should return the raw string representation in the template of the task.
-		public virtual string getRaw()
+		public virtual string ToRaw()
 		{
 			return String.Format("{0}{1}{2}", 
 													 ((char) TemplateTask.Seperator.Start).ToString(), 
-													 TemplateTask.TYPE_TO_RAW[(int) this._type].ToString(),
+													 TemplateTask.TASK_TO_RAW[(int) this._task].ToString(),
 													 ((char) TemplateTask.Seperator.End).ToString());
 		}
 
 		public override string ToString()
 		{
-			return String.Format("<Template Task>\n\t<Type>\n\t\t{0}", TemplateTask.TYPE_TO_STR[(int) this._type]);
+			return String.Format("<Template Task>\n\t<Type>\n\t\t{0}", TemplateTask.TASK_TO_STR[(int) this._task]);
 		}
 	}
 }

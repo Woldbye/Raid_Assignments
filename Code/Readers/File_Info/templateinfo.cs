@@ -38,6 +38,7 @@ namespace Readers
     IMPLEMENT SORTING OF ASSIGNMENT[] SO APLAYER IS AT TOP, THEN WE CAN SIMPLY LOOP ASSIGNMENT[] IN
     TEMPLATE AND CALL .HandleAssignment(assignment)
   */
+  /*
   public class TemplateInfo : FileReader, ITextReader<string>, ITextInfo<Assignment>
   {
     private static char[] Seperators = {'{', ':', '}'};
@@ -261,4 +262,5 @@ namespace Readers
       return sb.ToString();
     }
   }
+  */
 }

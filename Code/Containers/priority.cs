@@ -9,17 +9,17 @@ namespace Containers // utilities
 { // TO:DO Implement Priority with reverse sorting: 1>2>3>..>16>0 min 0 should be higher than number 15 etc. 
   public struct Priority
   {
-    public readonly byte _number;
+    private byte _number;
     public const int MAX = 16;
 
     public int Number
     {
       get { return (int) this._number; }
-      set 
+      private set 
       { 
         if (value > Priority.MAX)
         {
-          throw new Exception(String.Format("Tried to set Priority to a number above its Max - Exception {0}", e));
+          throw new Exception("Tried to set Priority to a number above its Max");
         }
         this._number = Convert.ToByte(value);
       }
@@ -27,7 +27,18 @@ namespace Containers // utilities
 
     public Priority(int number)
     {
-      this.Number = number;   
+      try 
+      {
+        this._number = (byte) number; 
+      } catch (Exception e)
+      {
+        throw new Exception("Tried to set Priority to a number above its Max - threw exception {0}", e);
+      }  
+    }
+
+    public override string ToString()
+    {
+      return this._number.ToString();
     }
   }
 }

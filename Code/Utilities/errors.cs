@@ -3,13 +3,17 @@ using Wow_Objects;
 using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
+using Readers;
 
 namespace Utilities // utilities
 { 
-  public static class Exceptions 
+  public static class Errors
   {
     public const int ERROR_CODE = Int32.MinValue;
+  }
 
+  public static class Exceptions 
+  {
     public static void ThrowPlayerAssignment(int lineNum, int lineIndex, Player player, int type, int num)
     {
       string msg = String.Format("Invalid assignment of:\n\t{0}\n\t<int type>\n\t\t{1}\n\t<type number>\n\t\t{2}",
@@ -39,12 +43,12 @@ namespace Utilities // utilities
 
     public static void ThrowRoster() 
     {
-      throw new FormatException(String.Format("Invalid format of {0}", LookUp.RAID_ROSTER_PATH));  
+      throw new FormatException(String.Format("Invalid format of {0}", Roster.PATH));  
     }
 
     public static void ThrowSignUp() 
     {
-      throw new FormatException(String.Format("Invalid format of {0}", LookUp.DISCORD_SIGNUP_PATH)); 
+      throw new FormatException(String.Format("Invalid format of {0}", SignUp.PATH)); 
     }
 
     public static void ThrowNotImplemented(string funcName) 

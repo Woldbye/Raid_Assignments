@@ -7,6 +7,9 @@ using Writers;
 using Enumerator;
 using Indexes;
 using Wow_Objects;
+using Template;
+using Assignments;
+using Assignments.Decorator;
 
 class Raid_Assigner
 {
@@ -23,9 +26,16 @@ class Raid_Assigner
 		// All ToString() methods use StringBuilder.
 	public static int Main() 
 	{
-		string skeramTempPath = LookUp.TEMPLATE_PATH + "/" + "AQ40" + "/" + "prophetskeram.txt";
-		Console.WriteLine(skeramTempPath);
-		Template template = new Template(skeramTempPath);
+		byte assContent = Assignment.CreateContent(Assignment.Content.Class, 
+																							 Assignment.Content.Priority, 
+																							 Assignment.Content.Index);
+		object[] values = AssignmentFactory.CreateAssignmentInput();
+		values[(int) Factory.AssignmentType] = AssignmentType.Heal;
+		values[(int) Factory.Class] = Wow_Class.Warlock;
+		values[(int) Factory.Index] = new StringIndex(1, 2);
+		values[(int) Factory.Priority] = new Priority(1);
+		Assignment assignment = AssignmentFactory.CreateAssignment(assContent, values);
+		// Console.WriteLine(assignment.ToRaw());
 		/*
 		List<Assignment> assList = new List<Assignment>();
 		assList.Add(new AssMessage((int) MsgType.Admin));

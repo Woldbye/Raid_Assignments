@@ -2,19 +2,26 @@ using Template;
 using Enumerator;
 using Utilities.LookUp;
 using Indexes;
+using Assignments;
 
-namespace Template.Assignment 
+namespace Assignments.Decorator
 {
 	// StringIndex decorator for assignment
 	// index doesnt change the raw in template, so 
 	public class WithIndex : AssignmentDecorator
 	{
-		public readonly StringIndex _index;
+		private StringIndex _index;
+
+		public StringIndex Index
+		{
+			get { return this._index; }
+			private set { this._index = value; }
+		}
 
 		public WithIndex(Assignment assignment, StringIndex index) : base(assignment)
 		{
-			this._index = index;
-			base._assignment.set(Assignment.Ammendment.Index);
+			this.Index = index;
+			base.addContent(Assignment.Content.Index);
 		}
 
 		public StringIndex getIndex()

@@ -169,7 +169,7 @@ namespace Utilities // utilities
 
       if (!Int32.TryParse(str, out ret))
       {
-        ret = LookUp.ERROR;
+        ret = Errors.ERROR_CODE;
       } 
       
       return ret;

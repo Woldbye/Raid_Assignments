@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Collections.Generic;
 using Enumerator;
 using Containers;
+using Assignments;
 
 namespace Readers {
   // Constructor receives path to raid_roster.txt, and the table object 
@@ -39,7 +40,7 @@ namespace Readers {
     public const string END_FLAG = "#END";
     private int rosterCount;
 
-    public RosterInfo(string path) : base(path) 
+    public RosterInfo() : base(Roster.PATH) 
     {
       this.playerInfoIndexes = new List<int>();
       this.tableNames = new List<string>();
@@ -120,7 +121,7 @@ namespace Readers {
         i++; // next table or end.
       }
       // small check
-      if (this.indexToPrios.Count != Priority.GetNames(typeof(Priority)).Length)
+      if (this.indexToPrios.Count != AssignmentType.GetNames(typeof(AssignmentType)).Length)
       {
         Exceptions.ThrowRoster();
       }

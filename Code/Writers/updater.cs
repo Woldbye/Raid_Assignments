@@ -24,42 +24,33 @@ namespace Writers
   //      Further, it will replace the receiver strings {healers}, {rogue} etc. by calling AssignmentReceivers.ToExorsus()
   public class Updater
   { 
-    private Discord discord;
+    private SignUp signUp;
     private Roster roster;
-    private List<string> raids;
 
+    public Roster Roster
+    {
+      get { return this.roster; }
+      private set { this.roster = value; }
+    }
+
+    public SignUp SignUp
+    {
+      get { return this.signUp; }
+      private set { this.signUp = value; }
+    }
 
     public Updater()
     {
-      this.roster = new Roster();
-      this.raids = new List<string>()
-                    {
-                        "AQ20",
-                        "AQ40",
-                        "BWL",
-                        "MC",
-                        "ZG"                    
-                    };
+      this.Roster = new Roster();
       /*
-      Discord constuctor
+      SignUp constuctor
                    string path, 
                    Priorities allPrios, 
                    List<string> allPlayerNames
       */
-      this.discord = new Discord(LookUp.DISCORD_SIGNUP_PATH, 
-                                 this.roster.getPriorities(), 
-                                 this.roster.getPlayerNames());
+      this.SignUp = new SignUp(this.Roster.getPriorities(), 
+                               this.Roster.getPlayerNames());
       // FOR EACH FILE @TEMPLATE_PATH
-    }
-
-    public Roster getRoster()
-    {
-      return this.roster;
-    }
-
-    public Discord getDiscord()
-    {
-      return this.discord;
     }
 
     public void UpdateAllAssignments()

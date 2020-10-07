@@ -4,7 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 using Enumerator;
+using Assignments;
 
+// TO:DO IMPLEMENT WITH NEW NAME ASSIGNMENTTYPE instead of PRIO
+// RENAME CLASS TO AssignmentPriorities
 namespace Containers {
     // Object to hold all order stacks.
     // constructor receives Stack<string>[] priorities
@@ -25,7 +28,7 @@ namespace Containers {
         #endif
       }
 
-      public Stack<string> getNewPriority(Priority priority)
+      public Stack<string> getNewPriority(AssignmentType priority)
       {
         return new Stack<string>(this.priorities[(int) priority]);
       }
@@ -35,7 +38,7 @@ namespace Containers {
         return new Stack<string>(this.priorities[priority]);
       }
 
-      public Stack<string> getPriority(Priority priority) 
+      public Stack<string> getPriority(AssignmentType priority) 
       {
         return this.priorities[(int) priority];
       }
@@ -66,7 +69,7 @@ namespace Containers {
         return ret; 
       }
 
-      public string popFromPriority(Priority priority)
+      public string popFromPriority(AssignmentType priority)
       {
         string name = this.getPriority(priority).Pop();
         Console.WriteLine(
@@ -82,7 +85,7 @@ namespace Containers {
         Console.WriteLine(
             String.Format("Popped name {0} from priority {1}: ",
               name,
-              (Priority) priority));
+              (AssignmentType) priority));
         return name;
       }
 

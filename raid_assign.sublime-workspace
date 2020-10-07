@@ -1,0 +1,1882 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"CSHARP",
+				"CSHARP_SOURCE_FILES"
+			],
+			[
+				"Assignmen",
+				"AssignmentFactory"
+			],
+			[
+				"ammend",
+				"ammendment"
+			],
+			[
+				"AssPlayerInfo",
+				"AssPlayerInfoTest"
+			],
+			[
+				"msgTypes",
+				"msgTypesToStr"
+			],
+			[
+				"Message",
+				"MessageType"
+			],
+			[
+				"Index",
+				"IndexOfIgnoreCase"
+			],
+			[
+				"enum",
+				"enumInstanceInt"
+			],
+			[
+				"Throw",
+				"ThrowArgument"
+			],
+			[
+				"ASS_TYPE",
+				"ASS_TYPE_TO_CHAR"
+			],
+			[
+				"BitsNeeded",
+				"BitsNeededForPriorityNum"
+			],
+			[
+				"number",
+				"numberAdded"
+			],
+			[
+				"getInfo",
+				"getInfoArr"
+			],
+			[
+				"Bits",
+				"BitsNeededForNum"
+			],
+			[
+				"BitsN",
+				"BitsNeededForType"
+			],
+			[
+				"BitsNeededFor",
+				"BitsNeededForAssType"
+			],
+			[
+				"AssType",
+				"AssPlType"
+			],
+			[
+				"Assign",
+				"AssignmentReceivers"
+			],
+			[
+				"t",
+				"t"
+			],
+			[
+				"Type",
+				"type"
+			],
+			[
+				"Assignment",
+				"Assignment"
+			],
+			[
+				"lineNum",
+				"lineNum"
+			],
+			[
+				"rawLines",
+				"rawLines"
+			],
+			[
+				"pla",
+				"playerNames"
+			],
+			[
+				"ERROR",
+				"ERROR_CODE"
+			],
+			[
+				"ErrorCode",
+				"ERROR_CODE"
+			],
+			[
+				"msgFlag",
+				"msgEndFlag"
+			],
+			[
+				"flag",
+				"flag"
+			],
+			[
+				"Argment",
+				"ThrowArgumentError"
+			],
+			[
+				"Argument",
+				"ArgumentException"
+			],
+			[
+				"getLine",
+				"getLineNum"
+			],
+			[
+				"getNew",
+				"getNewPriority"
+			],
+			[
+				"Count",
+				"Count"
+			],
+			[
+				"Healer",
+				"Healer"
+			],
+			[
+				"i",
+				"i"
+			],
+			[
+				"Begin",
+				"BEGIN_FLAG"
+			],
+			[
+				"END",
+				"END_FLAG"
+			],
+			[
+				"START",
+				"START_FLAG"
+			],
+			[
+				"int",
+				"int"
+			],
+			[
+				"INIT",
+				"INIT_TABLE_NAME"
+			],
+			[
+				"indexTo",
+				"indexToTable"
+			],
+			[
+				"index",
+				"index"
+			],
+			[
+				"throw",
+				"throwRosterError"
+			],
+			[
+				"interrupt",
+				"interrupt_o"
+			],
+			[
+				"raid",
+				"RAID_ROSTER_PATH"
+			],
+			[
+				"name",
+				"name"
+			],
+			[
+				"class_a",
+				"class_a"
+			],
+			[
+				"role",
+				"role"
+			],
+			[
+				"is",
+				"isInterrupter"
+			],
+			[
+				"byte",
+				"byte"
+			],
+			[
+				"mod",
+				"modifyBit"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "Code/raid_assign.cs",
+			"settings":
+			{
+				"buffer_size": 2258,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Code/Template/templatetask.cs",
+			"settings":
+			{
+				"buffer_size": 1226,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Code/Template/Assignment/assignment.cs",
+			"settings":
+			{
+				"buffer_size": 2070,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Code/Containers/assignmentreceivers.cs",
+			"settings":
+			{
+				"buffer_size": 12610,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Makefile",
+			"settings":
+			{
+				"buffer_size": 1005,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Code/Template/Assignment/assignmentdecorator.cs",
+			"settings":
+			{
+				"buffer_size": 629,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Code/Template/Assignment/withclass.cs",
+			"settings":
+			{
+				"buffer_size": 1102,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Code/Indexes/stringindex.cs",
+			"settings":
+			{
+				"buffer_size": 843,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Code/Indexes/fileindex.cs",
+			"settings":
+			{
+				"buffer_size": 1763,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Code/Writers/updater.cs",
+			"settings":
+			{
+				"buffer_size": 3037,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Code/Readers/discord.cs",
+			"settings":
+			{
+				"buffer_size": 4688,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Code/Containers/priorities.cs",
+			"settings":
+			{
+				"buffer_size": 3060,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Code/Template/Assignment/plainassignment.cs",
+			"settings":
+			{
+				"buffer_size": 178,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Code/Readers/File_Info/templateinfo.cs",
+			"settings":
+			{
+				"buffer_size": 9340,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "using System;\nusing System.IO;\nusing System.Collections.Generic;\nusing System.Collections;\nusing Utilities;\nusing Wow_Objects;\nusing System.Linq;\nusing Enumerator;\nusing Readers;\nusing Indexes;\n\nnamespace Containers\n{\n  public enum AssPlayerInfo {\n    Type,\n    PlayerType,\n    Class,\n    PriorityNumber\n  };\n\n  // Assigned Player Type\n  //  The type of the player assignment \n  public enum AssPlayerType \n  {\n    Tank, // 0\n    Heal, // 1\n    Interrupt, // 2\n    Kite // 3\n  };\n\n  // TO:DO REVERSE NUM SUCH THAT 1 WILL MAP TO 15 AND 15 TO 1\n  // Represents a player assignment\n  public class AssPlayer : Assignment\n  { \n    protected override uint Info { get; set; }\n    public static readonly int BitsNeededForAssType = AssPlayerType.Interrupt.Max().GetBitsNeeded();\n    // If not a specific class assignment\n    public static readonly int BitsNeededForClass = AssClass.Druid.Max().GetBitsNeeded();\n    public static readonly int MaxPriorityNumber = 15;\n    public static readonly int BitsNeededForPriorityNum = AssPlayer.MaxPriorityNumber.GetBitsNeeded();\n\n    // assType is an AssType Enum:\n    //      Message or Player\n    // AssPlayerType is an AssPlType Enum\n    //    Tank,\n    //    Heal\n    //    Kite\n    //    Interrupt\n    // num is the players number in the priority list to assign\n    public AssPlayer(int AssPlayerType, int assClass, int priorityNumber)\n    {\n      if ((Assignment.BitsNeededForType + AssPlayer.BitsNeededForAssType +\n           AssPlayer.BitsNeededForClass + AssPlayer.BitsNeededForPriorityNum) > 32)\n      {\n        Exceptions.ThrowArgument(\"The size of the arguments is too big, you might to use a long instead.\");\n      }\n      this.setType((int) AssType.Player);\n      this.setAssPlayerType(AssPlayerType);\n      this.setClass(assClass);\n      this.setPriorityNumber(priorityNumber);\n    }\n\n    // Returns the bin index to the last element\n    public void setAssPlayerType(int type)\n    {\n      if (!AssPlayerType.IsDefined(typeof(AssPlayerType), type))\n      {\n        Exceptions.ThrowArgument(\"Invalid type of player assignment=\" + type);\n      }\n\n      int end = 32 - Assignment.BitsNeededForType;\n      int start = end-AssPlayer.BitsNeededForAssType;\n      this.Info = (uint) Bytes.setBitsToNum((int) this.Info, type, start, end-1);\n    }\n\n    public void setClass(int classType)\n    {\n      if (!AssClass.IsDefined(typeof(AssClass), classType))\n      {\n        Exceptions.ThrowArgument(\"Invalid type of asssignment class=\" + classType);\n      }\n      int end = 32 - Assignment.BitsNeededForType-AssPlayer.BitsNeededForAssType;\n      int start = end - AssPlayer.BitsNeededForClass;\n      this.Info = ((uint) Bytes.setBitsToNum((int) this.Info, classType, start, end-1));\n    }\n\n    // We transform big PriorityNumberbers to small to get the right sort order\n    // PriorityNumber15 will transform to PriorityNumber1 and PriorityNumber1 to PriorityNumber15 etc.\n    public void setPriorityNumber(int priorityNumber)\n    {\n      if (priorityNumber > AssPlayer.MaxPriorityNumber | priorityNumber < 0)\n      {\n        Exceptions.ThrowArgument(\"Invalid num argument=\" + priorityNumber);\n      } else if (priorityNumber > 0)\n      {\n        Console.WriteLine(priorityNumber);\n        int end = 32 - Assignment.BitsNeededForType - AssPlayer.BitsNeededForAssType -\n                  AssPlayer.BitsNeededForClass;\n        int start = end - AssPlayer.BitsNeededForPriorityNum;\n        int transformedPriorityNumber = AssPlayer.MaxPriorityNumber - priorityNumber + 1;\n        this.Info = (uint) Bytes.setBitsToNum((int) this.Info, transformedPriorityNumber, start, end-1);\n      }\n    }\n\n    public int getAssPlayerType()\n    {\n      int start = 32 - Assignment.BitsNeededForType - AssPlayer.BitsNeededForAssType + 1;\n      int ret = Bytes.bitExtracted((int) this.Info,\n                                    AssPlayer.BitsNeededForAssType,\n                                    start);\n      return ret;\n    }\n\n    public int getClass()\n    {\n      int start = 32 - Assignment.BitsNeededForType - AssPlayer.BitsNeededForAssType - AssPlayer.BitsNeededForClass + 1;\n      int ret = Bytes.bitExtracted((int) this.Info,\n                                    AssPlayer.BitsNeededForClass,\n                                    start);\n      return ret;\n    }\n\n    public int getPriorityNumber()\n    {\n      int start = 32 - Assignment.BitsNeededForType - \n                       AssPlayer.BitsNeededForAssType - \n                       AssPlayer.BitsNeededForClass - \n                       AssPlayer.BitsNeededForPriorityNum + 1;\n      int transformedNum = Bytes.bitExtracted((int) this.Info,\n                                               AssPlayer.BitsNeededForPriorityNum,\n                                               start);\n      return (transformedNum == 0) ? 0 : (Math.Abs(transformedNum - AssPlayer.MaxPriorityNumber) + 1);\n    }\n\n    public override string DebugString()\n    {\n      string ret = \"<AssPlayer>\";\n      #if (DEBUG)\n        int info = (int) this.Info;\n        ret += \"\\n\\t<Binary Representation>\\n\\t\\t\" + info.ToBinString();\n        ret += \"\\n\\t<Integer Representation>\\n\\t\\t\" + this.Info;\n      #endif\n      return ret;\n    }\n\n    public override string ToString()\n    {\n      string mid = TemplateInfo.GetSeperator(Seperator.Mid).ToString();\n      string ret = TemplateInfo.GetSeperator(Seperator.Start).ToString();\n      ret += LookUp.ASS_TYPE_TO_CHAR[(int) AssType.Player].ToString();\n      ret += mid + LookUp.ASS_PL_TYPE_TO_STR[this.getAssPlayerType()].ToLower();\n      //ret += \n      ret += mid + LookUp.ASS_CL_TO_STR[this.getClass()].ToLower();\n      ret += mid + this.getPriorityNumber();\n      ret += TemplateInfo.GetSeperator(Seperator.End).ToString();\n      return ret;\n    }\n  }\n}  ",
+			"file": "Code/Containers/assplayer.cs",
+			"file_size": 5738,
+			"file_write_time": 132456009781616098,
+			"settings":
+			{
+				"buffer_size": 5740,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "using System;\nusing System.IO;\nusing System.Collections.Generic;\nusing System.Collections;\nusing Utilities;\nusing Wow_Objects;\nusing System.Linq;\nusing Enumerator;\nusing Indexes;\n\n\nnamespace Containers\n{\n  // Assignment Type\n  public enum AssType\n  {\n    Message, // 0\n    Player // 1\n  };\n  \n  // can either be message 0 or player 1\n  // next bits decide type \n  public abstract class Assignment : IEquatable<Assignment>, IComparable<Assignment>\n  {\n    protected abstract uint Info { get; set; }\n    public static int BitsNeededForType = AssType.Message.Max().GetBitsNeeded();\n\n    public abstract string DebugString();\n\n    public static int StringToAssType(string value)\n    {\n      int typeAsInt = LookUp.ASS_TYPE_TO_CHAR.IndexOfIgnoreCase(value);\n      if (typeAsInt < 0)\n      {\n        Exceptions.ThrowAssignment(value);\n      }  \n      return typeAsInt;\n    }\n\n    public static int StringToType(int enumInstanceInt, string value, string[][] typesToStr)\n    {\n      if (enumInstanceInt < 0 | enumInstanceInt >= typesToStr.Length)\n      {\n        Exceptions.ThrowArgument(String.Format(\"[{0}] isn't a valid index into the typeLookUpArrays\", enumInstanceInt));\n      }\n      string[] testSample = typesToStr[enumInstanceInt];\n      int typeAsInt = testSample.IndexOfIgnoreCase(value);\n      Console.WriteLine(enumInstanceInt);\n      Console.WriteLine(typesToStr.Length);\n      Console.WriteLine(value);\n      Console.WriteLine(typeAsInt);\n      if (typeAsInt < 0)\n      {\n        Exceptions.ThrowAssignment(value);\n      }  \n      return typeAsInt;\n    }\n\n    protected void setType(int type)\n    {\n      if (!AssType.IsDefined(typeof(AssType), type))\n      {\n        Exceptions.ThrowArgument(\"Invalid argument type=\"+type);\n      }\n      int end = 32;\n      int start = end-Assignment.BitsNeededForType;\n      this.Info = (uint) Bytes.setBitsToNum((int) this.Info, type, start, end);\n    }\n\n    public int getAssignmentType()\n    {\n      return Bytes.bitExtracted((int) this.Info, \n                                Assignment.BitsNeededForType,\n                                32-Assignment.BitsNeededForType);\n    }\n\n    public override int GetHashCode()\n    {\n      return (int) this.Info;\n    }\n\n    public bool Equals(Assignment other)\n    {\n      if (other == null) \n      {\n        return false;\n      }\n      return (this.Info.Equals(other.Info));\n    }\n\n    public int CompareTo(Assignment other)\n    {\n      if (other == null)\n      {\n        return 1;\n      } else {\n        return other.Info.CompareTo(this.Info); \n      }\n    }\n\n    public override bool Equals(object obj)\n    {\n        if (obj == null) \n        {\n          return false;\n        }\n        Assignment objAsAss = obj as Assignment;\n        if (objAsAss == null)\n        {\n          return false;\n        } else {\n          return Equals(objAsAss);\n        } \n    }\n  }\n}",
+			"file": "Code/Containers/assignment.cs",
+			"file_size": 2855,
+			"file_write_time": 132456031945577150,
+			"settings":
+			{
+				"buffer_size": 2855,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Code/Readers/Interfaces/filereader.cs",
+			"settings":
+			{
+				"buffer_size": 806,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "using System.Collections.Generic;\n\nnamespace Readers \n{\n  interface ITextInfo<T>\n  {\n    IList<T> getAllInfo();\n\n    T getInfo(int i);\n  } \n}",
+			"file": "Code/Readers/Interfaces/itextinfo.cs",
+			"file_size": 175,
+			"file_write_time": 132455949362453230,
+			"settings":
+			{
+				"buffer_size": 141,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Code/Readers/template.cs",
+			"settings":
+			{
+				"buffer_size": 1391,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Code/Utilities/lookup.cs",
+			"settings":
+			{
+				"buffer_size": 2225,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "using System;\nusing System.Numerics;\nusing System.Collections.Generic;\nusing System.Collections;\nusing System.Linq;\n\n// This file holds extensions for C# built-in classes. \nnamespace Utilities \n{ \n  // TO:DO SUBNAMESPACE EXTENSIONS:\n  public static class ValueTypeExtension\n  {\n    public static bool IsInteger(this ValueType value)\n    {\n      return (value is SByte ||\n              value is Int16 || \n              value is Int32 || \n              value is Int64 || \n              value is Byte || \n              value is UInt16 || \n              value is UInt32 || \n              value is UInt64);\n       // detained: value is BigInteger \n    }\n\n    public static bool IsNumeric(this ValueType value)\n    {\n      return (value is Byte ||\n              value is Int16 ||\n              value is Int32 ||\n              value is Int64 ||\n              value is SByte ||\n              value is UInt16 ||\n              value is UInt32 ||\n              value is UInt64 ||\n              value is Decimal ||\n              value is Double ||\n              value is Single);\n      //  detained: value is BigInteger\n    }\n  }\n\n  public static class CharExtension\n  {\n    public static bool IsAscii(this char c)\n    {\n      return ((int) c < 128) ? true : false;\n    }\n\n    public static string Multiply(this char c, int n)\n    {\n      string ret = \"\";\n      for (int i=0; i < n; i++)\n      {\n        ret += c.ToString();\n      }\n      return ret;\n    }\n  }\n\n  public static class UintExtension\n  {\n    public static string ToBinString(this uint i)\n    {\n      return IntExtension.ToBinString((int) i);\n    }\n\n  }\n\n  public static class IntExtension\n  {\n    public static string ToBinString(this int i)\n    {\n      return Convert.ToString(i, 2).PadLeft(32, '0');\n    }\n\n    // Returns the amount of bits needed to represent the number\n    public static int GetBitsNeeded(this int i)\n    {\n      int iCp = i;\n      int count = 0;\n      while (iCp > 0)\n      {\n        count++;\n        iCp = (iCp >> 1);\n      }\n\n      return count;\n    }\n  }\n\n  public static class ByteExtension\n  {\n    public static string ToBinString(this byte b)\n    {\n      return Convert.ToString(b, 2).PadLeft(8, '0');\n    }\n  }\n\n  public static class EnumExtension\n  { \n    // Returns the maximum integer value of the input enumerator.\n    public static int Max(this Enum eType)\n    {\n      return Enum.GetValues(eType.GetType()).Cast<int>().Max();\n    }\n\n    // Returns the maximum integer value of the input enumerator.\n    public static int Min(this Enum eType)\n    {\n      return Enum.GetValues(eType.GetType()).Cast<int>().Min();\n    }\n  }\n\n  public static class CharArrayExtension\n  {\n    public static int IndexOfIgnoreCase(this char[] charArr, char value)\n    {\n      int j = -1;\n      for (int i=0; i < charArr.Length; i++)\n      {\n        bool same = char.ToUpper(charArr[i]).Equals(char.ToUpper(value));\n        if (same) \n        {\n          j = i;\n          return j;\n        }\n      }\n      return j;\n    }\n\n    public static int IndexOfIgnoreCase(this char[] charArr, string value)\n    {\n      int j = -1;\n      for (int i=0; i < charArr.Length; i++)\n      {\n        string charAsStr = charArr[i].ToString();\n        bool same = String.Equals(value, charAsStr, StringComparison.OrdinalIgnoreCase);\n        if (same) \n        {\n          j = i;\n          return j;\n        }\n      }\n      return j;\n    }\n  }\n\n  public static class StringArrayExtension\n  {\n    // Case insentitive indexOf method\n    // String array extension\n    public static int IndexOfIgnoreCase(this string[] strArr, string value)\n    {\n      int j = -1;\n      for (int i=0; i < strArr.Length; i++)\n      {\n        bool same = String.Equals(value, strArr[i], StringComparison.OrdinalIgnoreCase);\n        if (same)\n        {\n          j = i;\n          return j;\n        }\n      }\n      return j;\n    }\n  }\n}",
+			"file": "Code/Utilities/extensions.cs",
+			"file_size": 3855,
+			"file_write_time": 132455855862344605,
+			"settings":
+			{
+				"buffer_size": 3855,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Code/Readers/File_Info/rosterinfo.cs",
+			"settings":
+			{
+				"buffer_size": 11957,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Code/Readers/roster.cs",
+			"settings":
+			{
+				"buffer_size": 6357,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Code/Template/Assignment/assignmentfactory.cs",
+			"settings":
+			{
+				"buffer_size": 2106,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Code/Template/Assignment/withindex.cs",
+			"settings":
+			{
+				"buffer_size": 602,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Code/Template/Assignment/withpriority.cs",
+			"settings":
+			{
+				"buffer_size": 913,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Code/Containers/priority.cs",
+			"settings":
+			{
+				"buffer_size": 856,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "using Utilities;\nusing System;\nusing System.IO;\nusing System.Linq;\nusing System.Collections.Generic;\nusing Enumerator;\n\nnamespace Readers\n{ \n  public class SignUpInfo : FileReader, ITextReader<string[]>, ITextInfo<int>\n  {\n    private string[] rawLines;\n    // total count of signed up players.\n    private int count;\n    // count for each role\n    private int[] rolesCount;\n    // Index to each of the \"factions\".\n    private int[] indexToFaction;\n    // Any line that terminates with \":\", corresponds to a new group that needs to be read.\n    public const char NEW_FLAG = ':';\n    private int GMTOffset;\n    // date of event.\n    private DateTime date;\n    // headline name for each of the info regarding dates.\n    // calender is date, clock is time.\n    public readonly string[] DATE_NAMES = {\"CMcalendar\", \"CMclock\"};\n    // Maximum amount of factions\n    public static int MAX_FACTION_COUNT = Faction.GetNames(typeof(Faction)).Length;\n    // Use Role lookup to find info\n    public SignUpInfo(string path) : base(path)\n    {\n      #if (DEBUG)\n        Console.WriteLine(\"---Starting SignUp init---\");\n      #endif\n      this.rawLines = base.readFile(base.getPath()).Split(\"\\n\");\n\n      this.rolesCount = new int[Role.GetNames(typeof(Role)).Length];\n      this.read(this.getRawLines());\n      #if (DEBUG)\n        Console.WriteLine(\"----Finished init of SignUp----\");\n        Console.WriteLine(String.Format(\"{0}\", this.ToString()));\n      #endif\n    }\n\n    // set rolesCount, date, indexToFaction\n    public void read(string[] lines)\n    {\n      int i = this.setCount(lines);\n      Tuple<int[], DateTime, int> roleDateExtract = this.extractRolesCountNDate(this.getRawLines(), i);\n      this.rolesCount = roleDateExtract.Item1;\n      this.date = roleDateExtract.Item2;\n      #if (DEBUG)\n        Console.WriteLine(String.Format(\"Succesfully set date to {0}\", date.ToString()));\n      #endif\n      i = roleDateExtract.Item3;\n      this.indexToFaction = this.extractFactionIndexes(this.getRawLines(), i);\n    }\n\n    public int[] extractFactionIndexes(string[] lines, int start)\n    {\n      int i = start;  \n      int[] ret = new int[SignUpInfo.MAX_FACTION_COUNT];\n      #if (DEBUG)\n        int counter = 0;\n        Console.WriteLine(\"----Extract Faction Indexes debug info----\");\n        Console.WriteLine(String.Format(\"\\t\\tReceived i: <{0}>\", start));\n        Console.WriteLine(String.Format(\"\\t\\tMaximum i of lines is: <{0}>\", lines.Length-1));\n        Console.WriteLine(String.Format(\"\\t\\tLine at start index equals:\\n\\t\\t\\t{0}\", lines[start]));\n      #endif\n      while (i < lines.Length-1)\n      {\n        Tuple<int, int, int> factionInfo = this.nextFactionIndex(lines, i);\n        int faction = factionInfo.Item3;\n        i = factionInfo.Item2;\n        int factionStart = factionInfo.Item1;\n        #if (DEBUG)\n          counter++;\n          Console.WriteLine(String.Format(\"\\t\\tRead new faction: <{0}>\", LookUp.FACTION_TO_STR[faction]));\n          Console.WriteLine(\"\\t\\t\\t\\t\\t<Indexes>:\");\n          Console.WriteLine(String.Format(\"\\t\\t\\t\\t\\t\\t<Start>: {0}\", factionStart));\n          Console.WriteLine(String.Format(\"\\t\\t\\t\\t\\t\\t<End>: {0}\", i));\n        #endif\n        ret[faction] = factionStart;\n      }\n\n      return ret;\n    }\n\n    // Here index would correspond to index to the first line.\n    // startIndex is index to \":Tank: 9 Vogn/Slæde\"\n    // endIndex is index to \":Tank: 27 Yrotaris\"\n    // extractIndexToFaction(string lines[], int index)\n    //     returns Tuple<startIndex, endIndex, faction>   \n    private Tuple<int, int, int> nextFactionIndex(string[] lines, int start)\n    {\n      int startIndex = -1;\n      int endIndex = -1;\n      int faction = -1;\n      int i = start;\n\n      while (true)\n      {\n          if (i >= lines.Length)\n          {\n              Exceptions.ThrowSignUp();\n          }\n          string line = lines[i];\n          string headline = this.extractHeadline(line); \n          // array index\n          int j = Array.FindIndex(LookUp.FACTION_TO_STR, \n                  s => s.ToLower().Equals(headline));\n          if (j != -1)\n          {\n              faction = j;\n              startIndex = i+1;\n              while (true)\n              {\n                  if (i == lines.Length)\n                  {\n                      endIndex = i-1;\n                      break;\n                  }\n                  line = lines[i];\n                  if (line.Length < 2)\n                  {\n                      endIndex = i;\n                      break;\n                  }\n                  i++;\n              }\n              break;\n          } else {\n              i++;\n          }\n      }\n\n      return Tuple.Create(startIndex, endIndex, faction);\n    }\n\n    // Extracts the first word in a line\n    // for a line containing \":{info}:\". \"info\" will be returned where no c in info is whitespace or upper\n    // if empty string is returned something went wrong\n    public string extractHeadline(string line)\n    {\n      int start = 0;\n      int end = 0;\n      string ret = \"\";\n      // Table name in format [tableName] so we just trim (also converts to lower-case)\n      // and remove the first and last letter.\n      if (line.Length > 0)\n      {\n        int count = 0;\n        for (int i=0; i < line.Length; i++)\n        {\n          char c = line[i];\n          if (c == NEW_FLAG)\n          {\n            count++;\n            // if start we increase, if end we decrease\n            if (count <= 1)\n            {\n              // if line is \":\" return empty or we set start index.\n              start = i+1;\n            } else {\n              end = i-1;\n              break;\n            }\n          }\n        }\n        if (count > 1)\n        {\n          ret = Strings.Trim(line.Substring(start, (end - start)+1));    \n        }\n      } \n      return ret;\n    }\n\n        // Input: \n        //      string[]: the discord_signup file in a string[]\n        //      int: startIndex of the search.\n        // Output:\n        //      int[]: RolesCount array\n        //      DateTime: the set time of the event\n        //      int: End index of search\n        // rolesCount arr\n        // Will return index to last line + 1, \n    private Tuple<int[], DateTime, int> extractRolesCountNDate(string[] lines, int startIndex)\n    {  \n      int ROLE_COUNT = Role.GetNames(typeof(Role)).Length;\n      int i = startIndex;\n      int[] ret = new int[ROLE_COUNT];\n      const int DATE_ARR_SIZE = 4;\n      int[] calender = new int[DATE_ARR_SIZE];\n      int[] clock = new int[DATE_ARR_SIZE];\n      int count = 0;\n      int[] roleOrder = {(int) Role.Tank, (int) Role.Melee, \n                         (int) Role.Ranged, (int) Role.Healer};        \n      while (count <= 3) \n      {\n        int role = roleOrder[count];\n        string line = lines[i];\n        string roleStr = LookUp.ROLE_TO_STR[role]; \n        // if line_array find index can find rolestr \n        if (line.Contains(roleStr))\n        {\n          // role is int value of string so we know already based on match what string it is.\n          // it can be tanks, ranged or healers. Ranged and healers should be handled the same,\n          // tanks and melees together\n          if (role == (int) Role.Tank) \n          {\n            Tuple<int, int> numNIndex = Strings.FindIntNIndex(line);\n            ret[(int) Role.Tank] = numNIndex.Item1;\n            // Max int size is 2, so we simply do +2 and we will always\n            //  move past first integer.\n            int lineIndex = numNIndex.Item2 + 2;\n            // Read melee now\n            numNIndex = Strings.FindIntNIndex(line.Substring(lineIndex, line.Length-lineIndex));\n            ret[(int) Role.Melee] = numNIndex.Item1;\n            count++;\n          } else if (role != (int) Role.Melee)\n          {\n            // Ranged, Healer\n            int num = Strings.FindInt(line);\n            ret[role] = num;  \n          }\n          count++;  \n        } else if (line.Contains(LookUp.DATE_TO_STR[(int) Date.Calender])) {\n          calender = this.readDate(line);\n          if (calender[0] == (int) Date.Error) \n          {\n            Exceptions.ThrowSignUp();\n          }\n        } else if (line.Contains(LookUp.DATE_TO_STR[(int) Date.Clock])) {\n          clock = this.readDate(line);\n          if (clock[0] == (int) Date.Error) \n          {\n            Exceptions.ThrowSignUp();\n          }\n        }\n        i++;\n      }\n      // year, month, day, hour, minute, second);\n      DateTime date = new DateTime(calender[1], calender[2], calender[3],\n                                   clock[1], clock[2], 0);\n      this.GMTOffset = clock[3];\n      return Tuple.Create(ret, date, i);\n    }\n\n    // Reads the lines and sets this.count accordingly. if Error it thwos an exception\n    // Will return the index to the :signups: line.\n    private int setCount(string[] lines)\n    {\n      int i = 0;\n      string signUpFlag = \"signups\";\n      while (true)\n      {\n        if (i >= lines.Length)\n        {\n          throw new ArgumentOutOfRangeException(\n            String.Format(\"The length of the file is {0} and the index is {1}\", lines.Length, i));\n        }\n        string line = lines[i];\n        string headline = this.extractHeadline(line);\n        if (signUpFlag.Equals(headline))\n        {\n            int imCount = Strings.ConvertToInt(line.Substring(line.Length-2, 2));\n            if (imCount == Exceptions.ERROR_CODE)\n            {\n              Exceptions.ThrowSignUp();\n            } else {\n              #if (DEBUG)\n                Console.WriteLine(\"Succesfully set count to \" + imCount);\n              #endif \n              this.count = imCount;\n            }\n            break;\n        }\n        i++;\n      }\n      return i;\n    }\n\n\n    // Returns int[] containing info about the read date\n    // int[0] is ternary value, \n    //      if (int[0] == -1) -> error\n    //      if (int[0] == 0) -> calender\n    //      if (int[0] == 1) -> clock\n    private int[] readDate(string line)\n    {\n      // Either its [type, day, month, year] or [type, hour, min, gmt+]\n      const int MAX_INFO_SIZE = 4;        \n      int[] ret = new int[MAX_INFO_SIZE];\n      string line_cp = line;\n      if (line[0].Equals(NEW_FLAG))\n      {\n        line_cp = line_cp.Substring(1, line_cp.Length-1);\n      }\n      // start at the shortest type i.\n      int i = LookUp.DATE_TO_STR[(int) Date.Clock].Length;\n      // find first number\n      while (true)\n      {\n        if (line_cp.Length <= i)\n        {\n          throw new ArgumentOutOfRangeException(\n              String.Format(\"The length of the line is {0} and the index is {1}\", line_cp.Length, i));\n        }\n        char c = line_cp[i];\n        if (Char.IsNumber(c)) \n        {\n          break;\n        }\n        i++;\n      }\n      // Contains would be safer, but this is much faster :)\n      if (LookUp.DATE_TO_STR[(int) Date.Calender].Equals(line_cp.Substring(0, LookUp.DATE_TO_STR[(int) Date.Calender].Length)))\n      {\n        // handle CMcalendar: 19-08-2020 type string\n        int day = Strings.ConvertToInt(line_cp.Substring(i, 2));\n        int month = Strings.ConvertToInt(line_cp.Substring(i+3, 2));\n        int year = Strings.ConvertToInt(line_cp.Substring(i+6, 4));\n        // Type\n        ret[0] = (int) Date.Calender;\n        ret[1] = year;\n        ret[2] = month;\n        ret[3] = day;\n      } else if (LookUp.DATE_TO_STR[(int) Date.Clock].Equals(line_cp.Substring(0, LookUp.DATE_TO_STR[(int) Date.Clock].Length)))\n      {\n        // handle CMclock: 18:45 GMT +2  \n        ret[0] = (int) Date.Clock;  \n        int hour = Strings.ConvertToInt(line_cp.Substring(i, 2));\n        int min = Strings.ConvertToInt(line_cp.Substring(i+3, 2));\n        // last 3 symbols cause GMT can be two cipher\n        int GMToffset = Strings.ConvertToInt(line_cp.Substring(line_cp.Length-3, 3));\n        // Type\n        ret[0] = (int) Date.Clock;\n        ret[1] = hour;\n        ret[2] = min;\n        ret[3] = GMToffset;\n      } else {\n        ret[0] = (int) Date.Error;\n      }\n      if (ret[1] == Exceptions.ERROR_CODE | ret[2] == Exceptions.ERROR_CODE | ret[3] == Exceptions.ERROR_CODE)\n      {\n        ret[0] = (int) Date.Error;\n      }\n      return ret;\n    }\n\n    public string[] getRawLines()\n    {\n      return this.rawLines;\n    }\n\n    public int getCount()\n    {\n      return this.count;\n    }\n\n    public int[] getIndexes()\n    {\n      return this.indexToFaction;\n    }\n\n    public IList<int> getAllInfo()\n    {\n      return this.indexToFaction;\n    }\n\n    public int getInfo(int index)\n    {\n      return this.indexToFaction[index];\n    }\n\n    public int getIndex(int faction) \n    {\n      return this.indexToFaction[faction];\n    }\n\n    public override string ToString()\n    {\n      string ret = \"<SignUp>:\";\n      ret += \"\\n\\t<Date>\";\n      ret += String.Format(\"\\n\\t\\t{0} GMT {1}{2}\", this.date.ToString(), (this.GMTOffset >= 0) ? \"+\" : \"-\", this.GMTOffset);\n      ret += \"\\n\\t<Total number of signed players>:\";\n      ret += String.Format(\"\\n\\t\\t{0}\", this.count);\n      ret += \"\\n\\t<Total number of each role>\";\n      for (int i=0; i < this.rolesCount.Length; i++)\n      {\n        string role = LookUp.ROLE_TO_STR[i];\n        ret += String.Format(\"\\n\\t\\t<{0} count>\", role);                \n        ret += String.Format(\"\\n\\t\\t\\t{0}\", this.rolesCount[i]);\n      }\n      ret += \"\\n\\t<Indexes to sign up groups>\";\n      for (int i=0; i < this.indexToFaction.Length; i++) \n      {\n        string faction = LookUp.FACTION_TO_STR[i];\n        ret += String.Format(\"\\n\\t\\t<{0}>\", faction);\n        ret += String.Format(\"\\n\\t\\t\\t{0}\", indexToFaction[i]);\n        #if (DEBUG)\n          ret += String.Format(\"\\n\\t\\t\\tLine at index:\");\n          ret += String.Format(\"\\n\\t\\t\\t\\t{0}\", this.getRawLines()[indexToFaction[i]]);\n        #endif\n      }\n      return ret;\n    }\n  }\n}",
+			"file": "Code/Readers/File_Info/signupinfo.cs",
+			"file_size": 13763,
+			"file_write_time": 132462719540180338,
+			"settings":
+			{
+				"buffer_size": 13763,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "raid_roster.txt",
+			"settings":
+			{
+				"buffer_size": 7341,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Code/Enumerator/enumerators.cs",
+			"settings":
+			{
+				"buffer_size": 1004,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"ctags",
+				"CTags: Rebuild Tags"
+			],
+			[
+				"",
+				"CTags: Rebuild Tags"
+			],
+			[
+				"package control: Install",
+				"Package Control: Install Package"
+			],
+			[
+				"package control: Enable",
+				"Package Control: Enable Package"
+			],
+			[
+				"install ctag",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Containers",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Enumerator",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Indexes",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Readers",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Readers/File_Info",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Readers/Interfaces",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Template",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Template/Assignment",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Utilities",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Wow_Objects",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Writers"
+	],
+	"file_history":
+	[
+		"/Raid_Assignments",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Makefile",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Containers/assmessage.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Template/assignmentfactory.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Readers/File_Info/signupinfo.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Readers/File_Info/templateinfo.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Containers/assplayerclass.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Templates/AQ40/ProphetSkeram.txt",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Indexes/Interfaces/ienumeratorint32.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Indexes/stringindex.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Utilities/lookup.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Containers/assplayer.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Readers/Interfaces/textreader.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Utilities/Compressors/integer32compressor.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Utilities/Compressors/genericnumbercompressor.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Utilities/Compressors/compresstester.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Containers/numberlimit.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Containers/numberconstraint.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Utilities/Compressors/numbercompressor32.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Utilities/Compressors/32numcompressor.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Containers/assignment.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Readers/Interfaces/textinfo.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Readers/Interfaces/filereader.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Containers/amessage.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Containers/aplayer.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Readers/File_Info/rosterinfo.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Utilities/errors.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/raid_assign.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Utilities/bytes.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Enumerator/enumerators.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Readers/template.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Readers/discord.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Readers/roster.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Indexes/fileindex.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Containers/assignmentreceivers.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Wow_Objects/player.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Utilities/strings.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Utilities/extensions.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Containers/assignment",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Readers/Interfaces/filereadertest.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Readers/rosterinfo.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Containers/areceiver.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Indexes/index.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Containers/fileindex.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Containers/index.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/makefile",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Containers/assignedplayer.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Writers/exorsus.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Containers/receivermsg.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Containers/priorities.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Containors/assignmentreceivers.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Containors/receivermsg.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Containors/priorities.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Writers/output.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/assignments.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Utilities/printer.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Readers/signup.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Receivers/assignmentreceivers.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Receivers/receivermsg.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Priorities/priorities.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/Readers/File_Info/signup.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/output.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Code/output",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/assignments.cs",
+		"/home/jourbah/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Text_Readers/discord.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Text_Readers/File_Info/textinfo.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/generics.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/output.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/discord_signup.txt",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/raid_assign.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Readers/filereader.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Utilities/printer.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Player/player.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Enumerator/enumerators.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Utilities/extensions.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Utilities/errors.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/Utilities/strings.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/bytes.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/printer.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/raid_roster.txt",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/discord.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/reader.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/player.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/enumerators.cs",
+		"/home/jourbah/Documents/WOW/Raid_Assignments/util.cs",
+		"/home/jourbah/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap",
+		"/home/jourbah/Documents/WOW/raid_assign.cs",
+		"/home/jourbah/Documents/WOW/Makefile",
+		"/home/jourbah/Documents/WOW/reader.cs",
+		"/home/jourbah/Documents/WOW/util.cs",
+		"/home/jourbah/Documents/WOW/raid_roster.txt",
+		"/home/jourbah/Documents/testing/Makefile"
+	],
+	"find":
+	{
+		"height": 24.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"Content",
+			"const",
+			"getPath",
+			"Assignment.TYPE",
+			"Assignment.Type",
+			"getRaw",
+			"TYPE_TO_RAW",
+			"TYPE",
+			"Type",
+			"Seperator",
+			"getRaw",
+			"GetRaw",
+			"getRaw",
+			"}\n",
+			"getRaw",
+			"type",
+			"Type",
+			"type",
+			"Type",
+			"TYPE",
+			"Type",
+			"ammendment",
+			"Ammendment",
+			"ammendments",
+			"ammendment",
+			"Ammendment",
+			"ammendment",
+			"Ammendment",
+			"TemplateInfo",
+			"m:",
+			"Console.WriteLine",
+			"rawLines",
+			"MaxPriorityNum",
+			"MAX_PRIORITYNUM",
+			"IndexOf",
+			"Exception",
+			"MAX",
+			"ret",
+			"this",
+			"flag",
+			"Enum",
+			"Array",
+			"Console.WriteLine",
+			"AssPlType",
+			"BitsNeededForNum",
+			"max_priorityNum",
+			"AssPlayerType",
+			"seperator",
+			"split_str",
+			"type_str",
+			"getNum",
+			"setBitsToPriorityNumber",
+			"num",
+			"NUM",
+			"Num",
+			"num",
+			"Num",
+			"num",
+			"Num",
+			"num",
+			"Num",
+			"num",
+			"Num",
+			"NUM",
+			"Num",
+			"NUM",
+			"Num",
+			"num",
+			"AssPlType",
+			"assPlType",
+			"AssPlType",
+			"assPlType",
+			"GetFlag",
+			"AssFlag",
+			"seperator",
+			"Seperator",
+			"seperator",
+			"AssFlag",
+			"GetFlag",
+			"Seperator",
+			"AssFlag",
+			"endFl",
+			"startFl",
+			"TempFlag",
+			"Exorsus",
+			"Template",
+			"set",
+			"helper",
+			"base.info",
+			"info",
+			"valAsUInt",
+			"ERROR",
+			"iCp",
+			"getType",
+			"base",
+			"this",
+			"base",
+			"base.getRawLines",
+			"rawLines",
+			"Kite",
+			"Priori",
+			"Prio",
+			"kite",
+			"getNames",
+			"Priority",
+			"priority",
+			"Priority",
+			"AMessage",
+			"objAsAssignment",
+			"getType",
+			"path",
+			"rawLines",
+			"getRawLines",
+			"rawLines",
+			"}\n",
+			"read",
+			"path",
+			"rawLines",
+			"RawLines",
+			"rawLines",
+			"this",
+			"path",
+			"StrIndex",
+			"getIndex",
+			"MsgType",
+			"assign",
+			"AssignedPlayer",
+			"Strings"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"folders":
+	[
+		{
+			"path": "/home/jourbah/Documents/WOW/Raid_Assignments/Code"
+		}
+	],
+	"groups":
+	[
+		{
+			"selected": 4,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "Code/raid_assign.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2258,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								209,
+								209
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 16,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "Code/Template/templatetask.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1226,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								103,
+								103
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 12,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "Code/Template/Assignment/assignment.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2070,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1696,
+								1696
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "Code/Containers/assignmentreceivers.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 12610,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								908,
+								901
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 30.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "Makefile",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1005,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								632,
+								632
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Makefile/Makefile.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "Code/Template/Assignment/assignmentdecorator.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 629,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								166,
+								166
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "Code/Template/Assignment/withclass.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1102,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 31,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "Code/Indexes/stringindex.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 843,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								570,
+								570
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 26,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "Code/Indexes/fileindex.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1763,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								13,
+								13
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 27,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "Code/Writers/updater.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3037,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								233,
+								233
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 28,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "Code/Readers/discord.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4688,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								600,
+								600
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 29,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "Code/Containers/priorities.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3060,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1081,
+								1081
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 30,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 12,
+					"file": "Code/Template/Assignment/plainassignment.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 178,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								169,
+								169
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 13,
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "Code/Readers/File_Info/templateinfo.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9340,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1068,
+								1068
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 14,
+					"file": "Code/Containers/assplayer.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5740,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5740,
+								5740
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1267.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 21,
+					"type": "text"
+				},
+				{
+					"buffer": 15,
+					"file": "Code/Containers/assignment.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2855,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2547,
+								2547
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 22,
+					"type": "text"
+				},
+				{
+					"buffer": 16,
+					"file": "Code/Readers/Interfaces/filereader.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 806,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								43,
+								43
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 24,
+					"type": "text"
+				},
+				{
+					"buffer": 17,
+					"file": "Code/Readers/Interfaces/itextinfo.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 141,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								55,
+								55
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 19,
+					"type": "text"
+				},
+				{
+					"buffer": 18,
+					"file": "Code/Readers/template.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1391,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								13,
+								13
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 17,
+					"type": "text"
+				},
+				{
+					"buffer": 19,
+					"file": "Code/Utilities/lookup.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2225,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								439,
+								439
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 14,
+					"type": "text"
+				},
+				{
+					"buffer": 20,
+					"file": "Code/Utilities/extensions.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3855,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								116,
+								116
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 25,
+					"type": "text"
+				},
+				{
+					"buffer": 21,
+					"file": "Code/Readers/File_Info/rosterinfo.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 11957,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4426,
+								4426
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1218.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 22,
+					"file": "Code/Readers/roster.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6357,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								689,
+								689
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 20,
+					"type": "text"
+				},
+				{
+					"buffer": 23,
+					"file": "Code/Template/Assignment/assignmentfactory.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2106,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1133,
+								1133
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 24,
+					"file": "Code/Template/Assignment/withindex.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 602,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								533,
+								533
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "Code/Template/Assignment/assignment.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2070,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								119,
+								119
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "Code/Template/Assignment/withclass.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1102,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								898,
+								898
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 25,
+					"file": "Code/Template/Assignment/withpriority.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 913,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								837,
+								837
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 28.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 26,
+					"file": "Code/Containers/priority.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 856,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								686,
+								686
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 27,
+					"file": "Code/Readers/File_Info/signupinfo.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 13763,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								222,
+								222
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 15,
+					"type": "text"
+				},
+				{
+					"buffer": 28,
+					"file": "raid_roster.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7341,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4706,
+								4706
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 985.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 23,
+					"type": "text"
+				},
+				{
+					"buffer": 29,
+					"file": "Code/Enumerator/enumerators.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1004,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								37,
+								37
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 18,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 24.0
+	},
+	"input":
+	{
+		"height": 61.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.474014236212,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "",
+	"replace":
+	{
+		"height": 44.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"template.cs",
+				"Template/Assignment/withclass.cs"
+			],
+			[
+				"with",
+				"Template/Assignment/withclass.cs"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 392.0,
+		"last_filter": "Assignm",
+		"selected_items":
+		[
+			[
+				"Assignm",
+				"Assignment"
+			],
+			[
+				"TaskType",
+				"TaskType"
+			],
+			[
+				"",
+				"AssignmentDecorator"
+			]
+		],
+		"width": 592.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 473.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
