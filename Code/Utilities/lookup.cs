@@ -7,6 +7,13 @@ namespace Utilities // utilities
 { 
   namespace LookUp
   {
+    public enum SortOrder
+    {
+      Precede = -1,
+      Same = 0,
+      Follow = 1,
+    }
+
     // holds lookup values arrays
     public static class StringLookUp
     {

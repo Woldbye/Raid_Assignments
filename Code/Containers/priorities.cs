@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 using Enumerator;
-using Assignments;
+using Templates.Tasks.Assignments;
 
 // TO:DO IMPLEMENT WITH NEW NAME ASSIGNMENTTYPE instead of PRIO
 // RENAME CLASS TO AssignmentPriorities

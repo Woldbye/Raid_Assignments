@@ -3,7 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Collections;
 using Utilities;
-using Wow_Objects;
+using Utilities.WorldOfWarcraft;
 using System.Linq;
 using Containers;
 using Enumerator;

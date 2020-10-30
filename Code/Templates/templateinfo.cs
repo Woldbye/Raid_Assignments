@@ -3,8 +3,9 @@ using System.IO;
 using System.Text;
 using System.Collections.Generic;   
 using System.Collections;
+using Templates.Tasks.Assignments;
 using Utilities;
-using Wow_Objects;
+using Utilities.WorldOfWarcraft;
 using System.Linq;
 using Containers;
 using Enumerator;
@@ -14,42 +15,21 @@ using Indexes;
 // IMPLEMENT TEMPLATE AS TWO CLASSES:
 //    one in Readers/File_info/templateinfo.cs
 //    another that utilizes templateinfo called Readers/template.cs
-namespace Readers
+namespace Templates.Tasks
 {   
-  internal enum Search
-  {
-    None = -1, // if search unsuccesful
-    Success = 1 // if success
-  };
-
-  // works for indexing templateinfo flags
-  public enum Seperator
-  {
-    Start, // indicates start of assignment
-    Mid,
-    End, // indicates end of assignment
-  };
-
   /*
     Receives path to template
     Templateinfo is an auxilliary class used to read information regarding assignments
-    It will keep track of each Assignment, and init an Assignment object (AMessage or APlayer). 
-    TO:DO
-    IMPLEMENT SORTING OF ASSIGNMENT[] SO APLAYER IS AT TOP, THEN WE CAN SIMPLY LOOP ASSIGNMENT[] IN
-    TEMPLATE AND CALL .HandleAssignment(assignment)
+    It will keep track each Assignment, and init an Assignment object
+    Idea is that the Template class, will compose a TemplateInfo object and a TemplateHandler
+    The handler will have the function HandleAssignments, which will handle assignments accordingly.
   */
-  /*
+    /*
   public class TemplateInfo : FileReader, ITextReader<string>, ITextInfo<Assignment>
   {
-    private static char[] Seperators = {'{', ':', '}'};
     private static string MsgEndFlag = "{/p}";
     private List<Assignment> assignments;
     private string rawLines;
-
-    public static char GetSeperator(Seperator seperator)
-    {
-      return TemplateInfo.Seperators[(int) seperator];
-    }
 
     // Validates whether a given string is an assignment
     // An assignment string must:
@@ -75,8 +55,8 @@ namespace Readers
       {
         return false;
       }
-      // we dont use Assignment.StringToAssType method as it would throw error in case of false.
-      int type = LookUp.ASS_TYPE_TO_CHAR.IndexOfIgnoreCase(str[1]);
+      
+      int type = TemplateTask.TASK_TO_RAW.IndexOfIgnoreCase(str[1]);
       if (type < 0)
       {
         return false;
@@ -127,7 +107,7 @@ namespace Readers
 
     // Receives a string and returns the appropriate assignment the string represents
     // Should only be called on objects deemed to be an assignment by IsAssignment
-    public Assignment extractAssignment(StringIndex strIndex)
+    public Assignment interpretAssignment(StringIndex strIndex)
     {
       int start = strIndex.getStart();
       int end = strIndex.getEnd();

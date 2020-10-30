@@ -3,6 +3,7 @@ using System.Numerics;
 using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
+using Templates.Tasks.Assignments;
 
 // This file holds extensions for C# built-in classes. 
 namespace Utilities 
@@ -89,6 +90,19 @@ namespace Utilities
     }
   }
 
+  public static class GenericQueueExtension
+  {
+    public static bool IsEmpty<T>(this Queue<T> genericQ)
+    {
+      if (genericQ.Count != 0)
+      {
+        return false;
+      }
+
+      return true;
+    }
+  }
+
   public static class ByteExtension
   {
     public static string ToBinString(this byte b)
@@ -143,6 +157,51 @@ namespace Utilities
         }
       }
       return j;
+    }
+  }
+
+  public static class TypeExtension
+  {
+    public static int IndexOf(this Type[] types, Type type)
+    {
+      int j = -1;
+      for (int i=0; i < types.Length; i++)
+      {
+        if (types[i].Equals(type))
+        {
+          j = i;
+        }
+      }
+      return j;
+    }
+
+    public static bool TryCast<T>(this object obj, out T result)
+    {
+      if (obj is T)
+      {
+          result = (T)obj;
+          return true;
+      }
+    
+      result = default(T);
+      return false;
+    }
+
+    public static bool IsAssignmentDecoration(this object obj)
+    {
+      if (obj != null)
+      {
+        Type objType = obj.GetType();
+        for (int i=0; i < DecoratedAssignment.ValueTypes.Count; i++)
+        {
+          AssignmentDecoration decoration = (AssignmentDecoration) i;
+          if (objType.Equals(DecoratedAssignment.ValueTypes[decoration]))
+          {
+            return true;
+          }
+        }
+      }
+      return false;
     }
   }
 

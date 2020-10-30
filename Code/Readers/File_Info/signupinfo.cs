@@ -4,10 +4,11 @@ using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 using Enumerator;
-using Wow_Objects;
+using Utilities.WorldOfWarcraft;
 
 namespace Readers
 {
+  // TO:DO Rewrite thsi class.. its a fucking mess
   public class SignUpInfo : FileReader, ITextReader<string[]>, ITextInfo<int>
   {
     private string[] rawLines;
@@ -24,7 +25,7 @@ namespace Readers
     private DateTime date;
     // headline name for each of the info regarding dates.
     // Maximum amount of factions
-    public static int MAX_FACTION_COUNT = Faction.GetNames(typeof(Faction)).Length;
+    public static int MAX_FACTION_COUNT = SignUpType.GetNames(typeof(SignUpType)).Length;
     // Use Role lookup to find info
     public SignUpInfo() : base(SignUp.PATH)
     {
@@ -32,8 +33,7 @@ namespace Readers
         Console.WriteLine("---Starting SignUp init---");
       #endif
       this.rawLines = base.readFile(SignUp.PATH).Split("\n");
-
-      this.rolesCount = new int[Role.GetNames(typeof(Role)).Length];
+      this.rolesCount = new int[Wow.Role.GetNames(typeof(Wow.Role)).Length];
       this.read(this.getRawLines());
       #if (DEBUG)
         Console.WriteLine("----Finished init of SignUp----");
@@ -185,15 +185,15 @@ namespace Readers
         // Will return index to last line + 1, 
     private Tuple<int[], DateTime, int> extractRolesCountNDate(string[] lines, int startIndex)
     {  
-      int ROLE_COUNT = Role.GetNames(typeof(Role)).Length;
+      int ROLE_COUNT = Wow.Role.GetNames(typeof(Wow.Role)).Length;
       int i = startIndex;
       int[] ret = new int[ROLE_COUNT];
       const int DATE_ARR_SIZE = 4;
       int[] calender = new int[DATE_ARR_SIZE];
       int[] clock = new int[DATE_ARR_SIZE];
       int count = 0;
-      int[] roleOrder = {(int) Role.Tank, (int) Role.Melee, 
-                         (int) Role.Ranged, (int) Role.Healer};        
+      int[] roleOrder = {(int) Wow.Role.Tank, (int) Wow.Role.Melee, 
+                         (int) Wow.Role.Ranged, (int) Wow.Role.Healer};        
       while (count <= 3) 
       {
         int role = roleOrder[count];
@@ -205,18 +205,18 @@ namespace Readers
           // role is int value of string so we know already based on match what string it is.
           // it can be tanks, ranged or healers. Ranged and healers should be handled the same,
           // tanks and melees together
-          if (role == (int) Role.Tank) 
+          if (role == (int) Wow.Role.Tank) 
           {
             Tuple<int, int> numNIndex = Strings.FindIntNIndex(line);
-            ret[(int) Role.Tank] = numNIndex.Item1;
+            ret[(int) Wow.Role.Tank] = numNIndex.Item1;
             // Max int size is 2, so we simply do +2 and we will always
             //  move past first integer.
             int lineIndex = numNIndex.Item2 + 2;
             // Read melee now
             numNIndex = Strings.FindIntNIndex(line.Substring(lineIndex, line.Length-lineIndex));
-            ret[(int) Role.Melee] = numNIndex.Item1;
+            ret[(int) Wow.Role.Melee] = numNIndex.Item1;
             count++;
-          } else if (role != (int) Role.Melee)
+          } else if (role != (int) Wow.Role.Melee)
           {
             // Ranged, Healer
             int num = Strings.FindInt(line);

@@ -1,4 +1,4 @@
-namespace Assignments
+namespace Templates.Tasks.Assignments
 {
 	public class PlainAssignment : Assignment
 	{

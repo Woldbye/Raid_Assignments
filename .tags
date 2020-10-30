@@ -4,6 +4,8 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+AQ20	Code/Wow_Objects/wow.cs	/^      AQ20,$/;"	e	enum:Wow_Objects.Wow.Raid	file:
+AQ40	Code/Wow_Objects/wow.cs	/^      AQ40,$/;"	e	enum:Wow_Objects.Wow.Raid	file:
 ASS_CLASS_TO_STR	Code/Utilities/lookup.cs	/^      public static readonly string[] ASS_CLASS_TO_STR = {$/;"	f	class:Utilities.LookUp.StringLookUp
 ASS_CL_TO_STR	Code/Utilities/lookup.cs	/^      public static readonly string[] ASS_CL_TO_STR = {"None", "Druid", "Hunter",$/;"	f	class:Utilities.LookUp.StringLookUp
 ASS_PL_TYPE_TO_STR	Code/Utilities/lookup.cs	/^      public static readonly string[] ASS_PL_TYPE_TO_STR = {$/;"	f	class:Utilities.LookUp.StringLookUp
@@ -12,73 +14,87 @@ ASS_TYPE_TO_CHARSTR	Code/Utilities/lookup.cs	/^      public static readonly stri
 ASS_TYPE_TO_STR	Code/Utilities/lookup.cs	/^      public static readonly string[] ASS_TYPE_TO_STR = {$/;"	f	class:Utilities.LookUp.StringLookUp
 Admin	Code/Enumerator/enumerators.cs	/^	  Admin \/\/ 14$/;"	e	enum:Enumerator.MsgType	file:
 AssClass	Code/Enumerator/enumerators.cs	/^	public enum AssClass$/;"	g	namespace:Enumerator
-Assignment	Code/Template/Assignment/assignment.cs	/^		public Assignment(AssignmentType type) : base(TaskType.Assignment)$/;"	m	class:Template.Assignment.Assignment
-Assignment	Code/Template/Assignment/assignment.cs	/^	public class Assignment : TemplateTask$/;"	c	namespace:Template.Assignment
+Assignment	Code/Assignment/assignment.cs	/^		public Assignment(AssignmentType type) : base(TaskType.Assignment)$/;"	m	class:Assignments.Assignment
+Assignment	Code/Assignment/assignment.cs	/^	public class Assignment : TemplateTask, IEquatable<Assignment>, IComparable<Assignment>$/;"	c	namespace:Assignments
 Assignment	Code/Template/templatetask.cs	/^    Assignment \/\/ 1$/;"	e	enum:Template.TaskType	file:
-AssignmentDecorator	Code/Template/Assignment/assignmentdecorator.cs	/^		public AssignmentDecorator(Assignment assignment) : base(assignment.AssignmentType)$/;"	m	class:Template.Assignment.AssignmentDecorator
-AssignmentDecorator	Code/Template/Assignment/assignmentdecorator.cs	/^	public abstract class AssignmentDecorator : Assignment$/;"	c	namespace:Template.Assignment
-AssignmentFactory	Code/Template/Assignment/assignmentfactory.cs	/^	public static class AssignmentFactory$/;"	c	namespace:Template.Assignment
+AssignmentDecorator	Code/Assignment/Decorator/assignmentdecorator.cs	/^		public AssignmentDecorator(Assignment assignment) : base(assignment.AssignmentType)$/;"	m	class:Assignments.Decorator.AssignmentDecorator
+AssignmentDecorator	Code/Assignment/Decorator/assignmentdecorator.cs	/^	public abstract class AssignmentDecorator : Assignment, IEquatable<AssignmentDecorator>, IComparable<AssignmentDecorator>$/;"	c	namespace:Assignments.Decorator
+AssignmentFactory	Code/Assignment/assignmentfactory.cs	/^	public static class AssignmentFactory$/;"	c	namespace:Assignments
 AssignmentReceivers	Code/Containers/assignmentreceivers.cs	/^    public AssignmentReceivers(List<string>[] namesByClass, List<string> admins) $/;"	m	class:Containers.AssignmentReceivers
 AssignmentReceivers	Code/Containers/assignmentreceivers.cs	/^  public class AssignmentReceivers$/;"	c	namespace:Containers
-AssignmentType	Code/Template/Assignment/assignment.cs	/^		public AssignmentType AssignmentType$/;"	p	class:Template.Assignment.Assignment
-AssignmentType	Code/Template/Assignment/assignment.cs	/^	public enum AssignmentType$/;"	g	namespace:Template.Assignment
-AssignmentType	Code/Template/Assignment/assignmentfactory.cs	/^		AssignmentType = 0,$/;"	e	enum:Template.Assignment.Factory	file:
+AssignmentType	Code/Assignment/assignment.cs	/^		public AssignmentType AssignmentType$/;"	p	class:Assignments.Assignment
+AssignmentType	Code/Assignment/assignment.cs	/^	public enum AssignmentType$/;"	g	namespace:Assignments
+Assignments	Code/Assignment/assignment.cs	/^namespace Assignments$/;"	n
+Assignments	Code/Assignment/assignmentfactory.cs	/^namespace Assignments {$/;"	n
+Assignments	Code/Assignment/plainassignment.cs	/^namespace Assignments$/;"	n
+Assignments.Decorator	Code/Assignment/Decorator/assignmentdecorator.cs	/^namespace Assignments.Decorator $/;"	n
+Assignments.Decorator	Code/Assignment/Decorator/withclass.cs	/^namespace Assignments.Decorator$/;"	n
+Assignments.Decorator	Code/Assignment/Decorator/withindex.cs	/^namespace Assignments.Decorator$/;"	n
+Assignments.Decorator	Code/Assignment/Decorator/withpriority.cs	/^namespace Assignments.Decorator$/;"	n
 BEGIN_FLAG	Code/Readers/File_Info/rosterinfo.cs	/^    public const char BEGIN_FLAG = '{';$/;"	f	class:Readers.RosterInfo
+BWL	Code/Wow_Objects/wow.cs	/^      BWL,$/;"	e	enum:Wow_Objects.Wow.Raid	file:
 ByteArrCompare	Code/Utilities/bytes.cs	/^		public static bool ByteArrCompare(byte[] b1, byte[] b2)$/;"	m	class:Utilities.Bytes
 ByteAsBin	Code/Utilities/printer.cs	/^    public static void ByteAsBin(byte byte_to_print) {$/;"	m	class:Utilities.Print
 ByteExtension	Code/Utilities/extensions.cs	/^  public static class ByteExtension$/;"	c	namespace:Utilities
 ByteToStr	Code/Utilities/strings.cs	/^    public static string ByteToStr(byte byte_to_print) {$/;"	m	class:Utilities.Strings
 Bytes	Code/Utilities/bytes.cs	/^	public static class Bytes$/;"	c	namespace:Utilities
-CLASS_TO_RAW	Code/Template/Assignment/withclass.cs	/^    public static readonly string[] CLASS_TO_RAW = {$/;"	f	class:Template.Assignment.WithClass
-CLASS_TO_STR	Code/Utilities/lookup.cs	/^      public static readonly string[] CLASS_TO_STR = {$/;"	f	class:Utilities.LookUp.StringLookUp
+CLASS_TO_RAW	Code/Assignment/Decorator/withclass.cs	/^    public static readonly string[] CLASS_TO_RAW = {$/;"	f	class:Assignments.Decorator.WithClass
+CLASS_TO_STR	Code/Wow_Objects/wow.cs	/^    public static readonly string[] CLASS_TO_STR = {$/;"	f	class:Wow_Objects.Wow
 CSHARP_COMPILER	Makefile	/^CSHARP_COMPILER = mcs$/;"	m
 CSHARP_FLAGS	Makefile	/^CSHARP_FLAGS = -out:$(EXECUTABLE)$/;"	m
-CSHARP_SOURCE_FILES	Makefile	/^CSHARP_SOURCE_FILES = $(wildcard *\/*\/*\/*.cs *\/*\/*.cs *\/*.cs *.cs)$/;"	m
+CSHARP_SOURCE_FILES	Makefile	/^CSHARP_SOURCE_FILES = $(wildcard *\/*\/*\/*\/*.cs *\/*\/*\/*.cs *\/*\/*.cs *\/*.cs *.cs)$/;"	m
 Calender	Code/Enumerator/enumerators.cs	/^		Calender = 0,$/;"	e	enum:Enumerator.Date	file:
 CharArrayExtension	Code/Utilities/extensions.cs	/^  public static class CharArrayExtension$/;"	c	namespace:Utilities
 CharExtension	Code/Utilities/extensions.cs	/^  public static class CharExtension$/;"	c	namespace:Utilities
-Class	Code/Template/Assignment/assignment.cs	/^			Class = 0x80,$/;"	e	enum:Template.Assignment.Assignment.Content	file:
-Class	Code/Template/Assignment/assignmentfactory.cs	/^		Class,$/;"	e	enum:Template.Assignment.Factory	file:
-Class	Code/Template/Assignment/withclass.cs	/^		public Wow_Class Class $/;"	p	class:Template.Assignment.WithClass
+Class	Code/Assignment/Decorator/withclass.cs	/^		public Wow.Class Class $/;"	p	class:Assignments.Decorator.WithClass
+Class	Code/Wow_Objects/player.cs	/^    public Wow.Class Class$/;"	p	class:Wow_Objects.Player
+Class	Code/Wow_Objects/wow.cs	/^    public enum Class $/;"	g	class:Wow_Objects.Wow
 Clock	Code/Enumerator/enumerators.cs	/^		Clock = 1$/;"	e	enum:Enumerator.Date	file:
+CompareTo	Code/Assignment/Decorator/assignmentdecorator.cs	/^    public int CompareTo(AssignmentDecorator other)$/;"	m	class:Assignments.Decorator.AssignmentDecorator
+CompareTo	Code/Assignment/Decorator/withclass.cs	/^		public int CompareTo(WithClass other)$/;"	m	class:Assignments.Decorator.WithClass
+CompareTo	Code/Assignment/assignment.cs	/^    public int CompareTo(Assignment other)$/;"	m	class:Assignments.Assignment
+Construct	Code/Assignment/assignmentfactory.cs	/^		public static Assignment Construct(AssignmentType assType, params object[] values)$/;"	m	class:Assignments.AssignmentFactory
 Containers	Code/Containers/assignmentreceivers.cs	/^namespace Containers $/;"	n
 Containers	Code/Containers/priorities.cs	/^namespace Containers {$/;"	n
 Containers	Code/Containers/priority.cs	/^namespace Containers \/\/ utilities$/;"	n
-Content	Code/Template/Assignment/assignment.cs	/^		public enum Content : byte$/;"	g	class:Template.Assignment.Assignment
+Contains	Code/Assignment/Decorator/assignmentdecorator.cs	/^		public override bool Contains(params Type[] types)$/;"	m	class:Assignments.Decorator.AssignmentDecorator
+Contains	Code/Assignment/assignment.cs	/^		public virtual bool Contains(params Type[] types)$/;"	m	class:Assignments.Assignment
 ConvertToInt	Code/Utilities/strings.cs	/^    public static int ConvertToInt(string str)$/;"	m	class:Utilities.Strings
-CreateAssignment	Code/Template/Assignment/assignmentfactory.cs	/^		public static Assignment CreateAssignment(byte assignmentContent, object[] values)$/;"	m	class:Template.Assignment.AssignmentFactory
-CreateAssignmentInput	Code/Template/Assignment/assignmentfactory.cs	/^		public static object[] CreateAssignmentInput()$/;"	m	class:Template.Assignment.AssignmentFactory
-CreateContent	Code/Template/Assignment/assignment.cs	/^    public static byte CreateContent(params Assignment.Content[] assignmentContent)$/;"	m	class:Template.Assignment.Assignment
-DATE_NAMES	Code/Readers/File_Info/signupinfo.cs	/^    public readonly string[] DATE_NAMES = {"CMcalendar", "CMclock"};$/;"	f	class:Readers.SignUpInfo
-DATE_TO_STR	Code/Utilities/lookup.cs	/^      public static readonly string[] DATE_TO_STR = {"CMcalendar", "CMclock"}; $/;"	f	class:Utilities.LookUp.StringLookUp
+DATE_TO_STR	Code/Readers/signup.cs	/^    public static readonly string[] DATE_TO_STR = {"CMcalendar", "CMclock"};$/;"	f	class:Readers.SignUp
 DEBUG_FLAG	Makefile	/^DEBUG_FLAG = ""$/;"	m
 DEBUG_FLAG	Makefile	/^debug: DEBUG_FLAG = -define:DEBUG$/;"	m
-DISCORD_SIGNUP_PATH	Code/Utilities/lookup.cs	/^      public const string DISCORD_SIGNUP_PATH = "discord_signup.txt";$/;"	f	class:Utilities.LookUp.StringLookUp
 Date	Code/Enumerator/enumerators.cs	/^	public enum Date$/;"	g	namespace:Enumerator
-Discord	Code/Readers/discord.cs	/^    public Discord(string path, $/;"	m	class:Readers.Discord
-Discord	Code/Readers/discord.cs	/^  public class Discord : ITextReader<string[]>$/;"	c	namespace:Readers
 Druid	Code/Enumerator/enumerators.cs	/^		Druid, \/\/ 0$/;"	e	enum:Enumerator.Wow_Class	file:
 Druid	Code/Enumerator/enumerators.cs	/^		Druid, \/\/ 2$/;"	e	enum:Enumerator.Faction	file:
 Druid	Code/Enumerator/enumerators.cs	/^		Druid, \/\/1$/;"	e	enum:Enumerator.AssClass	file:
 Druid	Code/Enumerator/enumerators.cs	/^	  Druid, \/\/ 5$/;"	e	enum:Enumerator.MsgType	file:
+Druid	Code/Readers/signup.cs	/^    Druid, \/\/ 2$/;"	e	enum:Readers.SignUpType	file:
+Druid	Code/Wow_Objects/wow.cs	/^      Druid, \/\/ 0$/;"	e	enum:Wow_Objects.Wow.Class	file:
 END_FLAG	Code/Readers/File_Info/rosterinfo.cs	/^    public const string END_FLAG = "#END";$/;"	f	class:Readers.RosterInfo
 ERROR	Code/Utilities/lookup.cs	/^      public const int ERROR = Int32.MinValue;$/;"	f	class:Utilities.LookUp.StringLookUp
-ERROR_CODE	Code/Utilities/errors.cs	/^    public const int ERROR_CODE = Int32.MinValue;$/;"	f	class:Utilities.Exceptions
+ERROR_CODE	Code/Utilities/errors.cs	/^    public const int ERROR_CODE = Int32.MinValue;$/;"	f	class:Utilities.Errors
 EXECUTABLE	Makefile	/^EXECUTABLE = $(MAIN_FILE).exe$/;"	m
 End	Code/Indexes/stringindex.cs	/^    public int End$/;"	p	struct:Indexes.StringIndex
 End	Code/Readers/File_Info/templateinfo.cs	/^    End, \/\/ indicates end of assignment$/;"	e	enum:Readers.Seperator	file:
 End	Code/Template/templatetask.cs	/^      public const char Start = '{', Mid = ':', End = '}';   $/;"	f	class:Template.TemplateTask.Seperator
 EnumExtension	Code/Utilities/extensions.cs	/^  public static class EnumExtension$/;"	c	namespace:Utilities
 Enumerator	Code/Enumerator/enumerators.cs	/^namespace Enumerator {$/;"	n
+Equals	Code/Assignment/Decorator/assignmentdecorator.cs	/^    public bool Equals(AssignmentDecorator other)$/;"	m	class:Assignments.Decorator.AssignmentDecorator
+Equals	Code/Assignment/Decorator/assignmentdecorator.cs	/^    public override bool Equals(object obj)$/;"	m	class:Assignments.Decorator.AssignmentDecorator
+Equals	Code/Assignment/Decorator/withclass.cs	/^		public bool Equals(WithClass other)$/;"	m	class:Assignments.Decorator.WithClass
+Equals	Code/Assignment/assignment.cs	/^    public bool Equals(Assignment other)$/;"	m	class:Assignments.Assignment
+Equals	Code/Assignment/assignment.cs	/^    public override bool Equals(object obj)$/;"	m	class:Assignments.Assignment
 Equals	Code/Wow_Objects/player.cs	/^    public bool Equals(string str) {$/;"	m	class:Wow_Objects.Player
 Equals	Code/Wow_Objects/player.cs	/^    public override bool Equals(Object obj)$/;"	m	class:Wow_Objects.Player
 Error	Code/Enumerator/enumerators.cs	/^		Error = -1,$/;"	e	enum:Enumerator.Date	file:
+Errors	Code/Utilities/errors.cs	/^  public static class Errors$/;"	c	namespace:Utilities
 Exceptions	Code/Utilities/errors.cs	/^  public static class Exceptions $/;"	c	namespace:Utilities
+Extension	Code/Assignment/assignment.cs	/^		public enum Extension$/;"	g	class:Assignments.Assignment
+ExtensionFlags	Code/Assignment/assignment.cs	/^		private static byte[] ExtensionFlags = {0x80, 0x40, 0x20};$/;"	f	class:Assignments.Assignment	file:
+Extensions	Code/Assignment/assignment.cs	/^    public static Extensions Extensions => _Extensions;$/;"	f	class:Assignments.Assignment
 ExtractPlayer	Code/Readers/roster.cs	/^    private Player ExtractPlayer(string pl_line)$/;"	m	class:Readers.Roster	file:
-FACTION_TO_STR	Code/Utilities/lookup.cs	/^      public static readonly string[] FACTION_TO_STR = {$/;"	f	class:Utilities.LookUp.StringLookUp
 FINISH_FLAG	Code/Readers/File_Info/rosterinfo.cs	/^    public const char FINISH_FLAG = '}'; $/;"	f	class:Readers.RosterInfo
 Faction	Code/Enumerator/enumerators.cs	/^	public enum Faction$/;"	g	namespace:Enumerator
-Factory	Code/Template/Assignment/assignmentfactory.cs	/^	public enum Factory$/;"	g	namespace:Template.Assignment
 FileReader	Code/Readers/Interfaces/filereader.cs	/^    protected FileReader(string path)$/;"	m	class:Readers.FileReader
 FileReader	Code/Readers/Interfaces/filereader.cs	/^  public abstract class FileReader$/;"	c	namespace:Readers
 FindInt	Code/Utilities/strings.cs	/^    public static int FindInt(string str)$/;"	m	class:Utilities.Strings
@@ -87,22 +103,27 @@ FindLetterSubstring	Code/Utilities/strings.cs	/^    public static Tuple<int, int
 FindSecondLetterSubstring	Code/Utilities/strings.cs	/^    public static string FindSecondLetterSubstring(string str)$/;"	m	class:Utilities.Strings
 GMTOffset	Code/Readers/File_Info/signupinfo.cs	/^    private int GMTOffset;$/;"	f	class:Readers.SignUpInfo	file:
 GetBitsNeeded	Code/Utilities/extensions.cs	/^    public static int GetBitsNeeded(this int i)$/;"	m	class:Utilities.IntExtension
-Has	Code/Template/Assignment/assignmentfactory.cs	/^		private static bool Has(this byte _byte, Assignment.Content content)$/;"	m	class:Template.Assignment.AssignmentFactory	file:
+GetContainedExtensionTypes	Code/Assignment/assignment.cs	/^		public virtual Type[] GetContainedExtensionTypes()$/;"	m	class:Assignments.Assignment
+GetHashCode	Code/Assignment/Decorator/assignmentdecorator.cs	/^		public override int GetHashCode()$/;"	m	class:Assignments.Decorator.AssignmentDecorator
+GetHashCode	Code/Assignment/assignment.cs	/^		public override int GetHashCode()$/;"	m	class:Assignments.Assignment
+GetHashCode	Code/Wow_Objects/player.cs	/^    public override int GetHashCode()$/;"	m	class:Wow_Objects.Player
 Hash	Code/Utilities/strings.cs	/^    public static Byte[] Hash(string str) {$/;"	m	class:Utilities.Strings
 HashToString	Code/Utilities/strings.cs	/^    public static string HashToString(Byte[] str_id) {$/;"	m	class:Utilities.Strings
-Heal	Code/Template/Assignment/assignment.cs	/^   	Heal, \/\/ 1$/;"	e	enum:Template.Assignment.AssignmentType	file:
+Heal	Code/Assignment/assignment.cs	/^   	Heal, \/\/ 1$/;"	e	enum:Assignments.AssignmentType	file:
 Healer	Code/Enumerator/enumerators.cs	/^		Healer, \/\/ 1$/;"	e	enum:Enumerator.Role	file:
 Healer	Code/Enumerator/enumerators.cs	/^	  Healer, \/\/ 2$/;"	e	enum:Enumerator.MsgType	file:
+Healer	Code/Wow_Objects/wow.cs	/^      Healer, \/\/ 1$/;"	e	enum:Wow_Objects.Wow.Role	file:
 Hunter	Code/Enumerator/enumerators.cs	/^		Hunter, \/\/ 1$/;"	e	enum:Enumerator.Faction	file:
 Hunter	Code/Enumerator/enumerators.cs	/^		Hunter, \/\/ 1$/;"	e	enum:Enumerator.Wow_Class	file:
 Hunter	Code/Enumerator/enumerators.cs	/^		Hunter, \/\/ 2$/;"	e	enum:Enumerator.AssClass	file:
 Hunter	Code/Enumerator/enumerators.cs	/^	  Hunter, \/\/ 6$/;"	e	enum:Enumerator.MsgType	file:
+Hunter	Code/Readers/signup.cs	/^    Hunter, \/\/ 1$/;"	e	enum:Readers.SignUpType	file:
+Hunter	Code/Wow_Objects/wow.cs	/^      Hunter, \/\/ 1$/;"	e	enum:Wow_Objects.Wow.Class	file:
 INIT_TABLE_NAME	Code/Readers/File_Info/rosterinfo.cs	/^    private const string INIT_TABLE_NAME = "tables_list";$/;"	f	class:Readers.RosterInfo	file:
 ITextInfo	Code/Readers/Interfaces/itextinfo.cs	/^  interface ITextInfo<T>$/;"	i	namespace:Readers
 ITextReader	Code/Readers/Interfaces/itextreader.cs	/^  interface ITextReader<T>$/;"	i	namespace:Readers
-Index	Code/Template/Assignment/assignment.cs	/^			Index = 0x20,$/;"	e	enum:Template.Assignment.Assignment.Content	file:
-Index	Code/Template/Assignment/assignmentfactory.cs	/^		Index,$/;"	e	enum:Template.Assignment.Factory	file:
-Index	Code/Template/Assignment/withindex.cs	/^		public StringIndex Index$/;"	p	class:Template.Assignment.WithIndex
+Index	Code/Assignment/Decorator/withindex.cs	/^		public StringIndex Index$/;"	p	class:Assignments.Decorator.WithIndex
+IndexOf	Code/Utilities/extensions.cs	/^    public static int IndexOf(this Type[] types, Type type)$/;"	m	class:Utilities.TypeExtension
 IndexOfIgnoreCase	Code/Utilities/extensions.cs	/^    public static int IndexOfIgnoreCase(this char[] charArr, char value)$/;"	m	class:Utilities.CharArrayExtension
 IndexOfIgnoreCase	Code/Utilities/extensions.cs	/^    public static int IndexOfIgnoreCase(this char[] charArr, string value)$/;"	m	class:Utilities.CharArrayExtension
 IndexOfIgnoreCase	Code/Utilities/extensions.cs	/^    public static int IndexOfIgnoreCase(this string[] strArr, string value)$/;"	m	class:Utilities.StringArrayExtension
@@ -110,26 +131,33 @@ Indexes	Code/Indexes/fileindex.cs	/^namespace Indexes \/\/ utilities$/;"	n
 Indexes	Code/Indexes/stringindex.cs	/^namespace Indexes \/\/ utilities$/;"	n
 IntAsBin	Code/Utilities/printer.cs	/^    public static void IntAsBin(int int_to_print) {$/;"	m	class:Utilities.Print
 IntExtension	Code/Utilities/extensions.cs	/^  public static class IntExtension$/;"	c	namespace:Utilities
+Interrupt	Code/Assignment/assignment.cs	/^   	Interrupt, \/\/ 2$/;"	e	enum:Assignments.AssignmentType	file:
 Interrupt	Code/Enumerator/enumerators.cs	/^	  Interrupt, \/\/ 0 $/;"	e	enum:Enumerator.MsgType	file:
-Interrupt	Code/Template/Assignment/assignment.cs	/^   	Interrupt, \/\/ 2$/;"	e	enum:Template.Assignment.AssignmentType	file:
+InvalidTypeError	Code/Assignment/assignment.cs	/^		public static void InvalidTypeError()$/;"	m	class:Assignments.Assignment
+IsAdmin	Code/Wow_Objects/player.cs	/^    public bool IsAdmin$/;"	p	class:Wow_Objects.Player
 IsAscii	Code/Utilities/extensions.cs	/^    public static bool IsAscii(this char c)$/;"	m	class:Utilities.CharExtension
+IsAssigned	Code/Wow_Objects/player.cs	/^    public bool IsAssigned$/;"	p	class:Wow_Objects.Player
 IsInteger	Code/Utilities/extensions.cs	/^    public static bool IsInteger(this ValueType value)$/;"	m	class:Utilities.ValueTypeExtension
 IsNumeric	Code/Utilities/extensions.cs	/^    public static bool IsNumeric(this ValueType value)$/;"	m	class:Utilities.ValueTypeExtension
-Kite	Code/Template/Assignment/assignment.cs	/^   	Kite \/\/ 3$/;"	e	enum:Template.Assignment.AssignmentType	file:
+Kite	Code/Assignment/assignment.cs	/^   	Kite \/\/ 3$/;"	e	enum:Assignments.AssignmentType	file:
 Kiter	Code/Enumerator/enumerators.cs	/^	  Kiter, \/\/ 13$/;"	e	enum:Enumerator.MsgType	file:
 LookUp	Code/Utilities/lookup.cs	/^  namespace LookUp$/;"	n	namespace:Utilities
 MAIN_FILE	Makefile	/^MAIN_FILE = raid_assign$/;"	m
 MAX	Code/Containers/priority.cs	/^    public const int MAX = 16;$/;"	f	struct:Containers.Priority
 MAX_FACTION_COUNT	Code/Readers/File_Info/signupinfo.cs	/^    public static int MAX_FACTION_COUNT = Faction.GetNames(typeof(Faction)).Length;$/;"	f	class:Readers.SignUpInfo
+MC	Code/Wow_Objects/wow.cs	/^      MC,$/;"	e	enum:Wow_Objects.Wow.Raid	file:
 MSG_TYPE_TO_STR	Code/Utilities/lookup.cs	/^      public static readonly string[] MSG_TYPE_TO_STR = {$/;"	f	class:Utilities.LookUp.StringLookUp
 Mage	Code/Enumerator/enumerators.cs	/^		Mage, \/\/ 2$/;"	e	enum:Enumerator.Wow_Class	file:
 Mage	Code/Enumerator/enumerators.cs	/^		Mage, \/\/ 3$/;"	e	enum:Enumerator.AssClass	file:
 Mage	Code/Enumerator/enumerators.cs	/^		Mage, \/\/ 4$/;"	e	enum:Enumerator.Faction	file:
 Mage	Code/Enumerator/enumerators.cs	/^	  Mage, \/\/ 7$/;"	e	enum:Enumerator.MsgType	file:
+Mage	Code/Readers/signup.cs	/^    Mage, \/\/ 4$/;"	e	enum:Readers.SignUpType	file:
+Mage	Code/Wow_Objects/wow.cs	/^      Mage, \/\/ 2$/;"	e	enum:Wow_Objects.Wow.Class	file:
 Main	Code/raid_assign.cs	/^	public static int Main() $/;"	m	class:Raid_Assigner
 Max	Code/Utilities/extensions.cs	/^    public static int Max(this Enum eType)$/;"	m	class:Utilities.EnumExtension
 Melee	Code/Enumerator/enumerators.cs	/^		Melee, \/\/ 2$/;"	e	enum:Enumerator.Role	file:
 Melee	Code/Enumerator/enumerators.cs	/^	  Melee, \/\/ 3$/;"	e	enum:Enumerator.MsgType	file:
+Melee	Code/Wow_Objects/wow.cs	/^      Melee, \/\/ 2$/;"	e	enum:Wow_Objects.Wow.Role	file:
 Message	Code/Template/templatetask.cs	/^    Message, \/\/ 0$/;"	e	enum:Template.TaskType	file:
 Mid	Code/Readers/File_Info/templateinfo.cs	/^    Mid,$/;"	e	enum:Readers.Seperator	file:
 Mid	Code/Template/templatetask.cs	/^      public const char Start = '{', Mid = ':', End = '}';   $/;"	f	class:Template.TemplateTask.Seperator
@@ -140,51 +168,63 @@ NAME_END_FLAG	Code/Readers/File_Info/rosterinfo.cs	/^    public const char NAME_
 NAME_FLAG	Code/Readers/File_Info/rosterinfo.cs	/^    public const char NAME_FLAG = '[';$/;"	f	class:Readers.RosterInfo
 NEW_FLAG	Code/Readers/File_Info/signupinfo.cs	/^    public const char NEW_FLAG = ':';$/;"	f	class:Readers.SignUpInfo
 NUM_TO_STR	Code/Utilities/lookup.cs	/^      public static readonly string[] NUM_TO_STR = {$/;"	f	class:Utilities.LookUp.StringLookUp
+Name	Code/Wow_Objects/player.cs	/^    public string Name$/;"	p	class:Wow_Objects.Player
 None	Code/Enumerator/enumerators.cs	/^		None, \/\/0$/;"	e	enum:Enumerator.AssClass	file:
 None	Code/Readers/File_Info/templateinfo.cs	/^    None = -1, \/\/ if search unsuccesful$/;"	e	enum:Readers.Search	file:
 Number	Code/Containers/priority.cs	/^    public int Number$/;"	p	struct:Containers.Priority
 OUTPUT_PATH	Code/Utilities/lookup.cs	/^      public static readonly string OUTPUT_PATH = "Assignments";$/;"	f	class:Utilities.LookUp.StringLookUp
+PATH	Code/Readers/roster.cs	/^    public const string PATH = "raid_roster.txt";$/;"	f	class:Readers.Roster
+PATH	Code/Readers/signup.cs	/^    public const string PATH = "discord_signup.txt";$/;"	f	class:Readers.SignUp
 PRIO_FLAG	Code/Containers/priorities.cs	/^      public static string PRIO_FLAG = "prio";$/;"	f	class:Containers.Priorities
 PRIO_STR	Code/Containers/priorities.cs	/^      public static string[] PRIO_STR = { "tank_" + PRIO_FLAG, "healer_" + PRIO_FLAG, "interrupt_" + PRIO_FLAG, "kiter_" + PRIO_FLAG};$/;"	f	class:Containers.Priorities
-PlainAssignment	Code/Template/Assignment/plainassignment.cs	/^		public PlainAssignment(AssignmentType type) : base(type)$/;"	m	class:Template.Assignment.PlainAssignment
-PlainAssignment	Code/Template/Assignment/plainassignment.cs	/^	public class PlainAssignment : Assignment$/;"	c	namespace:Template.Assignment
-Player	Code/Wow_Objects/player.cs	/^    public Player(string name, Wow_Class class_, Role role_,$/;"	m	class:Wow_Objects.Player
+PlainAssignment	Code/Assignment/plainassignment.cs	/^		public PlainAssignment(AssignmentType type) : base(type)$/;"	m	class:Assignments.PlainAssignment
+PlainAssignment	Code/Assignment/plainassignment.cs	/^	public class PlainAssignment : Assignment$/;"	c	namespace:Assignments
+Player	Code/Wow_Objects/player.cs	/^    public Player(string name, Wow.Class class_, Wow.Role role, bool isAdmin) $/;"	m	class:Wow_Objects.Player
 Player	Code/Wow_Objects/player.cs	/^  public class Player$/;"	c	namespace:Wow_Objects
 Priest	Code/Enumerator/enumerators.cs	/^		Priest \/\/ 8$/;"	e	enum:Enumerator.Faction	file:
 Priest	Code/Enumerator/enumerators.cs	/^		Priest, \/\/ 3$/;"	e	enum:Enumerator.Wow_Class	file:
 Priest	Code/Enumerator/enumerators.cs	/^		Priest, \/\/ 4 11$/;"	e	enum:Enumerator.AssClass	file:
 Priest	Code/Enumerator/enumerators.cs	/^	  Priest, \/\/ 8$/;"	e	enum:Enumerator.MsgType	file:
+Priest	Code/Readers/signup.cs	/^    Priest \/\/ 8\/\/ 4 bits$/;"	e	enum:Readers.SignUpType	file:
+Priest	Code/Wow_Objects/wow.cs	/^      Priest, \/\/ 3$/;"	e	enum:Wow_Objects.Wow.Class	file:
 Print	Code/Utilities/printer.cs	/^  public static class Print$/;"	c	namespace:Utilities
 Priorities	Code/Containers/priorities.cs	/^      public Priorities(Stack<string>[] priorities)  $/;"	m	class:Containers.Priorities
 Priorities	Code/Containers/priorities.cs	/^    public class Priorities $/;"	c	namespace:Containers
+Priority	Code/Assignment/assignment.cs	/^			Priority,$/;"	e	enum:Assignments.Assignment.Extension	file:
 Priority	Code/Containers/priority.cs	/^    public Priority(int number)$/;"	m	struct:Containers.Priority
 Priority	Code/Containers/priority.cs	/^  public struct Priority$/;"	s	namespace:Containers
-Priority	Code/Template/Assignment/assignment.cs	/^			Priority = 0x40,$/;"	e	enum:Template.Assignment.Assignment.Content	file:
-Priority	Code/Template/Assignment/assignmentfactory.cs	/^		Priority$/;"	e	enum:Template.Assignment.Factory	file:
+RAIDS_TO_STR	Code/Wow_Objects/wow.cs	/^    public static readonly string[] RAIDS_TO_STR = {"AQ20", "AQ40", "BWL", "MC", "ZG"};$/;"	f	class:Wow_Objects.Wow
 RAID_ROSTER_PATH	Code/Utilities/lookup.cs	/^      public const string RAID_ROSTER_PATH = "raid_roster.txt";$/;"	f	class:Utilities.LookUp.StringLookUp
 RM_CMD	Makefile	/^RM_CMD = -rm -f $(EXECUTABLE)$/;"	m
-ROLE_TO_STR	Code/Utilities/lookup.cs	/^      public static readonly string[] ROLE_TO_STR = {"Tank", "Healer", "Melee", "Ranged"};$/;"	f	class:Utilities.LookUp.StringLookUp
+ROLE_TO_STR	Code/Wow_Objects/wow.cs	/^    public static readonly string[] ROLE_TO_STR = {"Tank", "Healer", "Melee", "Ranged"};$/;"	f	class:Wow_Objects.Wow
 ROSTER_TABLE_NAME	Code/Readers/File_Info/rosterinfo.cs	/^    private const string ROSTER_TABLE_NAME = "roster";$/;"	f	class:Readers.RosterInfo	file:
+Raid	Code/Wow_Objects/wow.cs	/^    public enum Raid$/;"	g	class:Wow_Objects.Wow
 Raid_Assigner	Code/raid_assign.cs	/^class Raid_Assigner$/;"	c
 Ranged	Code/Enumerator/enumerators.cs	/^		Ranged \/\/ 3$/;"	e	enum:Enumerator.Role	file:
 Ranged	Code/Enumerator/enumerators.cs	/^	  Ranged, \/\/ 4$/;"	e	enum:Enumerator.MsgType	file:
+Ranged	Code/Wow_Objects/wow.cs	/^      Ranged \/\/ 3$/;"	e	enum:Wow_Objects.Wow.Role	file:
 Readers	Code/Readers/File_Info/rosterinfo.cs	/^namespace Readers {$/;"	n
 Readers	Code/Readers/File_Info/signupinfo.cs	/^namespace Readers$/;"	n
 Readers	Code/Readers/File_Info/templateinfo.cs	/^namespace Readers$/;"	n
 Readers	Code/Readers/Interfaces/filereader.cs	/^namespace Readers $/;"	n
 Readers	Code/Readers/Interfaces/itextinfo.cs	/^namespace Readers $/;"	n
 Readers	Code/Readers/Interfaces/itextreader.cs	/^namespace Readers $/;"	n
-Readers	Code/Readers/discord.cs	/^namespace Readers \/\/ utilities$/;"	n
 Readers	Code/Readers/roster.cs	/^namespace Readers $/;"	n
+Readers	Code/Readers/signup.cs	/^namespace Readers \/\/ utilities$/;"	n
 Readers	Code/Readers/template.cs	/^namespace Readers$/;"	n
 Rogue	Code/Enumerator/enumerators.cs	/^		Rogue, \/\/ 4$/;"	e	enum:Enumerator.Wow_Class	file:
 Rogue	Code/Enumerator/enumerators.cs	/^		Rogue, \/\/ 5$/;"	e	enum:Enumerator.AssClass	file:
 Rogue	Code/Enumerator/enumerators.cs	/^		Rogue, \/\/ 6$/;"	e	enum:Enumerator.Faction	file:
 Rogue	Code/Enumerator/enumerators.cs	/^	  Rogue, \/\/ 9$/;"	e	enum:Enumerator.MsgType	file:
+Rogue	Code/Readers/signup.cs	/^    Rogue, \/\/ 6$/;"	e	enum:Readers.SignUpType	file:
+Rogue	Code/Wow_Objects/wow.cs	/^      Rogue, \/\/ 4$/;"	e	enum:Wow_Objects.Wow.Class	file:
 Role	Code/Enumerator/enumerators.cs	/^	public enum Role $/;"	g	namespace:Enumerator
+Role	Code/Wow_Objects/player.cs	/^    public Wow.Role Role$/;"	p	class:Wow_Objects.Player
+Role	Code/Wow_Objects/wow.cs	/^    public enum Role $/;"	g	class:Wow_Objects.Wow
 Roster	Code/Readers/roster.cs	/^		public Roster() {$/;"	m	class:Readers.Roster
 Roster	Code/Readers/roster.cs	/^	public class Roster : ITextReader<string[]>$/;"	c	namespace:Readers
-RosterInfo	Code/Readers/File_Info/rosterinfo.cs	/^    public RosterInfo(string path) : base(path) $/;"	m	class:Readers.RosterInfo
+Roster	Code/Writers/updater.cs	/^    public Roster Roster$/;"	p	class:Writers.Updater
+RosterInfo	Code/Readers/File_Info/rosterinfo.cs	/^    public RosterInfo() : base(Roster.PATH) $/;"	m	class:Readers.RosterInfo
 RosterInfo	Code/Readers/File_Info/rosterinfo.cs	/^  public class RosterInfo : FileReader, ITextReader<string[]>, ITextInfo<int>$/;"	c	namespace:Readers
 START_FLAG	Code/Readers/File_Info/rosterinfo.cs	/^    public const string START_FLAG = "#START";$/;"	f	class:Readers.RosterInfo
 Search	Code/Readers/File_Info/templateinfo.cs	/^  internal enum Search$/;"	g	namespace:Readers
@@ -194,13 +234,20 @@ Shaman	Code/Enumerator/enumerators.cs	/^		Shaman, \/\/ 5$/;"	e	enum:Enumerator.F
 Shaman	Code/Enumerator/enumerators.cs	/^		Shaman, \/\/ 5$/;"	e	enum:Enumerator.Wow_Class	file:
 Shaman	Code/Enumerator/enumerators.cs	/^		Shaman, \/\/ 6$/;"	e	enum:Enumerator.AssClass	file:
 Shaman	Code/Enumerator/enumerators.cs	/^	  Shaman, \/\/ 10$/;"	e	enum:Enumerator.MsgType	file:
-SignUpInfo	Code/Readers/File_Info/signupinfo.cs	/^    public SignUpInfo(string path) : base(path)$/;"	m	class:Readers.SignUpInfo
+Shaman	Code/Readers/signup.cs	/^    Shaman, \/\/ 5$/;"	e	enum:Readers.SignUpType	file:
+Shaman	Code/Wow_Objects/wow.cs	/^      Shaman, \/\/ 5$/;"	e	enum:Wow_Objects.Wow.Class	file:
+SignUp	Code/Readers/signup.cs	/^    public SignUp(Priorities allPrios, $/;"	m	class:Readers.SignUp
+SignUp	Code/Readers/signup.cs	/^  public class SignUp : ITextReader<string[]>$/;"	c	namespace:Readers
+SignUp	Code/Writers/updater.cs	/^    public SignUp SignUp$/;"	p	class:Writers.Updater
+SignUpInfo	Code/Readers/File_Info/signupinfo.cs	/^    public SignUpInfo() : base(SignUp.PATH)$/;"	m	class:Readers.SignUpInfo
 SignUpInfo	Code/Readers/File_Info/signupinfo.cs	/^  public class SignUpInfo : FileReader, ITextReader<string[]>, ITextInfo<int>$/;"	c	namespace:Readers
+SignUpType	Code/Readers/signup.cs	/^  public enum SignUpType$/;"	g	namespace:Readers
 StackArr	Code/Utilities/printer.cs	/^    public static void StackArr(Stack<string>[] stackArr)$/;"	m	class:Utilities.Print
 Start	Code/Indexes/stringindex.cs	/^    public int Start$/;"	p	struct:Indexes.StringIndex
 Start	Code/Readers/File_Info/templateinfo.cs	/^    Start, \/\/ indicates start of assignment$/;"	e	enum:Readers.Seperator	file:
 Start	Code/Template/templatetask.cs	/^      public const char Start = '{', Mid = ':', End = '}';   $/;"	f	class:Template.TemplateTask.Seperator
 StringArrayExtension	Code/Utilities/extensions.cs	/^  public static class StringArrayExtension$/;"	c	namespace:Utilities
+StringIndex	Code/Assignment/assignment.cs	/^			StringIndex$/;"	e	enum:Assignments.Assignment.Extension	file:
 StringIndex	Code/Indexes/stringindex.cs	/^    public StringIndex(int start, int end)$/;"	m	struct:Indexes.StringIndex
 StringIndex	Code/Indexes/stringindex.cs	/^  public struct StringIndex$/;"	s	namespace:Indexes
 StringLookUp	Code/Utilities/lookup.cs	/^    public static class StringLookUp$/;"	c	namespace:Utilities.LookUp
@@ -209,21 +256,17 @@ Success	Code/Readers/File_Info/templateinfo.cs	/^    Success = 1 \/\/ if success
 TASK_TO_RAW	Code/Template/templatetask.cs	/^    public static readonly char[] TASK_TO_RAW = {$/;"	f	class:Template.TemplateTask
 TASK_TO_STR	Code/Template/templatetask.cs	/^		public static readonly string[] TASK_TO_STR = {$/;"	f	class:Template.TemplateTask
 TEMPLATE_PATH	Code/Utilities/lookup.cs	/^      public static readonly string TEMPLATE_PATH = "Templates";$/;"	f	class:Utilities.LookUp.StringLookUp
-TYPE_TO_RAW	Code/Template/Assignment/assignment.cs	/^    public static readonly string[] TYPE_TO_RAW = {"tank", "heal", "interrupt", "kite"};$/;"	f	class:Template.Assignment.Assignment
-TYPE_TO_STR	Code/Template/Assignment/assignment.cs	/^ 		public static readonly string[] TYPE_TO_STR = {"Tank", "Heal", "Interrupt", "Kite"};$/;"	f	class:Template.Assignment.Assignment
+TYPE_TO_RAW	Code/Assignment/assignment.cs	/^    public static readonly string[] TYPE_TO_RAW = {"tank", "heal", "interrupt", "kite"};$/;"	f	class:Assignments.Assignment
+TYPE_TO_STR	Code/Assignment/assignment.cs	/^ 		public static readonly string[] TYPE_TO_STR = {"Tank", "Heal", "Interrupt", "Kite"};$/;"	f	class:Assignments.Assignment
+TYPE_TO_STR	Code/Readers/signup.cs	/^    public static readonly string[] TYPE_TO_STR = {$/;"	f	class:Readers.SignUp
+Tank	Code/Assignment/assignment.cs	/^ 	  Tank, \/\/ 0$/;"	e	enum:Assignments.AssignmentType	file:
 Tank	Code/Enumerator/enumerators.cs	/^		Tank, \/\/ 0$/;"	e	enum:Enumerator.Faction	file:
 Tank	Code/Enumerator/enumerators.cs	/^		Tank, \/\/ 0$/;"	e	enum:Enumerator.Role	file:
 Tank	Code/Enumerator/enumerators.cs	/^	  Tank, \/\/ 1$/;"	e	enum:Enumerator.MsgType	file:
-Tank	Code/Template/Assignment/assignment.cs	/^ 	  Tank, \/\/ 0$/;"	e	enum:Template.Assignment.AssignmentType	file:
+Tank	Code/Readers/signup.cs	/^    Tank, \/\/ 0$/;"	e	enum:Readers.SignUpType	file:
+Tank	Code/Wow_Objects/wow.cs	/^      Tank, \/\/ 0$/;"	e	enum:Wow_Objects.Wow.Role	file:
 TaskType	Code/Template/templatetask.cs	/^  public enum TaskType$/;"	g	namespace:Template
 Template	Code/Template/templatetask.cs	/^namespace Template$/;"	n
-Template.Assignment	Code/Template/Assignment/assignment.cs	/^namespace Template.Assignment $/;"	n
-Template.Assignment	Code/Template/Assignment/assignmentdecorator.cs	/^namespace Template.Assignment $/;"	n
-Template.Assignment	Code/Template/Assignment/assignmentfactory.cs	/^namespace Template.Assignment {$/;"	n
-Template.Assignment	Code/Template/Assignment/plainassignment.cs	/^namespace Template.Assignment $/;"	n
-Template.Assignment	Code/Template/Assignment/withclass.cs	/^namespace Template.Assignment $/;"	n
-Template.Assignment	Code/Template/Assignment/withindex.cs	/^namespace Template.Assignment $/;"	n
-Template.Assignment	Code/Template/Assignment/withpriority.cs	/^namespace Template.Assignment $/;"	n
 TemplateTask	Code/Template/templatetask.cs	/^		public TemplateTask(TaskType task)$/;"	m	class:Template.TemplateTask
 TemplateTask	Code/Template/templatetask.cs	/^  public abstract class TemplateTask$/;"	c	namespace:Template
 ThrowArgument	Code/Utilities/errors.cs	/^    public static void ThrowArgument(string msg)$/;"	m	class:Utilities.Exceptions
@@ -240,23 +283,25 @@ ToBinString	Code/Utilities/extensions.cs	/^    public static string ToBinString(
 ToBinString	Code/Utilities/extensions.cs	/^    public static string ToBinString(this uint i)$/;"	m	class:Utilities.UintExtension
 ToExorsus	Code/Containers/assignmentreceivers.cs	/^    public string ToExorsus(MsgType msgType, string[] msg)$/;"	m	class:Containers.AssignmentReceivers
 ToExorsus	Code/Containers/assignmentreceivers.cs	/^    public string ToExorsus(int type, string[] msg)$/;"	m	class:Containers.AssignmentReceivers
-ToRaw	Code/Template/Assignment/assignment.cs	/^		public override string ToRaw()$/;"	m	class:Template.Assignment.Assignment
-ToRaw	Code/Template/Assignment/assignmentdecorator.cs	/^		public override string ToRaw()$/;"	m	class:Template.Assignment.AssignmentDecorator
-ToRaw	Code/Template/Assignment/withclass.cs	/^		public override string ToRaw()$/;"	m	class:Template.Assignment.WithClass
-ToRaw	Code/Template/Assignment/withpriority.cs	/^		public override string ToRaw()$/;"	m	class:Template.Assignment.WithPriority
+ToRaw	Code/Assignment/Decorator/assignmentdecorator.cs	/^		public override string ToRaw()$/;"	m	class:Assignments.Decorator.AssignmentDecorator
+ToRaw	Code/Assignment/Decorator/withclass.cs	/^		public override string ToRaw()$/;"	m	class:Assignments.Decorator.WithClass
+ToRaw	Code/Assignment/Decorator/withpriority.cs	/^		public override string ToRaw()$/;"	m	class:Assignments.Decorator.WithPriority
+ToRaw	Code/Assignment/assignment.cs	/^		public override string ToRaw()$/;"	m	class:Assignments.Assignment
 ToRaw	Code/Template/templatetask.cs	/^		public virtual string ToRaw()$/;"	m	class:Template.TemplateTask
+ToString	Code/Assignment/Decorator/assignmentdecorator.cs	/^		public override string ToString()$/;"	m	class:Assignments.Decorator.AssignmentDecorator
+ToString	Code/Assignment/Decorator/withclass.cs	/^		public override string ToString()$/;"	m	class:Assignments.Decorator.WithClass
+ToString	Code/Assignment/assignment.cs	/^		public override string ToString()$/;"	m	class:Assignments.Assignment
 ToString	Code/Containers/assignmentreceivers.cs	/^    public override string ToString()$/;"	m	class:Containers.AssignmentReceivers
 ToString	Code/Containers/priorities.cs	/^      public override string ToString()$/;"	m	class:Containers.Priorities
 ToString	Code/Containers/priority.cs	/^    public override string ToString()$/;"	m	struct:Containers.Priority
+ToString	Code/Indexes/stringindex.cs	/^    public override string ToString()$/;"	m	struct:Indexes.StringIndex
 ToString	Code/Readers/File_Info/rosterinfo.cs	/^    public override string ToString() $/;"	m	class:Readers.RosterInfo
 ToString	Code/Readers/File_Info/signupinfo.cs	/^    public override string ToString()$/;"	m	class:Readers.SignUpInfo
-ToString	Code/Readers/discord.cs	/^    public override string ToString()$/;"	m	class:Readers.Discord
-ToString	Code/Template/Assignment/assignment.cs	/^		public override string ToString()$/;"	m	class:Template.Assignment.Assignment
-ToString	Code/Template/Assignment/assignmentdecorator.cs	/^		public override string ToString()$/;"	m	class:Template.Assignment.AssignmentDecorator
-ToString	Code/Template/Assignment/withclass.cs	/^		public override string ToString()$/;"	m	class:Template.Assignment.WithClass
+ToString	Code/Readers/signup.cs	/^    public override string ToString()$/;"	m	class:Readers.SignUp
 ToString	Code/Template/templatetask.cs	/^		public override string ToString()$/;"	m	class:Template.TemplateTask
 ToString	Code/Wow_Objects/player.cs	/^    public override string ToString() $/;"	m	class:Wow_Objects.Player
 Trim	Code/Utilities/strings.cs	/^    public static string Trim(this string input)$/;"	m	class:Utilities.Strings
+TypeExtension	Code/Utilities/extensions.cs	/^  public static class TypeExtension$/;"	c	namespace:Utilities
 UintExtension	Code/Utilities/extensions.cs	/^  public static class UintExtension$/;"	c	namespace:Utilities
 UpdateAllAssignments	Code/Writers/updater.cs	/^    public void UpdateAllAssignments()$/;"	m	class:Writers.Updater
 UpdateAssignment	Code/Writers/updater.cs	/^    private void UpdateAssignment(string[] lines)$/;"	m	class:Writers.Updater	file:
@@ -273,31 +318,42 @@ Warlock	Code/Enumerator/enumerators.cs	/^		Warlock, \/\/ 6$/;"	e	enum:Enumerator
 Warlock	Code/Enumerator/enumerators.cs	/^		Warlock, \/\/ 7$/;"	e	enum:Enumerator.AssClass	file:
 Warlock	Code/Enumerator/enumerators.cs	/^		Warlock, \/\/ 7$/;"	e	enum:Enumerator.Faction	file:
 Warlock	Code/Enumerator/enumerators.cs	/^	  Warlock, \/\/ 11$/;"	e	enum:Enumerator.MsgType	file:
+Warlock	Code/Readers/signup.cs	/^    Warlock, \/\/ 7$/;"	e	enum:Readers.SignUpType	file:
+Warlock	Code/Wow_Objects/wow.cs	/^      Warlock, \/\/ 6$/;"	e	enum:Wow_Objects.Wow.Class	file:
 Warrior	Code/Enumerator/enumerators.cs	/^		Warrior \/\/ 7$/;"	e	enum:Enumerator.Wow_Class	file:
 Warrior	Code/Enumerator/enumerators.cs	/^		Warrior \/\/ 8 111$/;"	e	enum:Enumerator.AssClass	file:
 Warrior	Code/Enumerator/enumerators.cs	/^		Warrior, \/\/ 3$/;"	e	enum:Enumerator.Faction	file:
 Warrior	Code/Enumerator/enumerators.cs	/^	  Warrior, \/\/ 12$/;"	e	enum:Enumerator.MsgType	file:
-WithClass	Code/Template/Assignment/withclass.cs	/^		public WithClass(Assignment assignment, Wow_Class wow_class) : base(assignment)$/;"	m	class:Template.Assignment.WithClass
-WithClass	Code/Template/Assignment/withclass.cs	/^	public class WithClass : AssignmentDecorator$/;"	c	namespace:Template.Assignment
-WithIndex	Code/Template/Assignment/withindex.cs	/^		public WithIndex(Assignment assignment, StringIndex index) : base(assignment)$/;"	m	class:Template.Assignment.WithIndex
-WithIndex	Code/Template/Assignment/withindex.cs	/^	public class WithIndex : AssignmentDecorator$/;"	c	namespace:Template.Assignment
-WithPriority	Code/Template/Assignment/withpriority.cs	/^		public WithPriority(Assignment assignment, Priority priority) : base(assignment)$/;"	m	class:Template.Assignment.WithPriority
-WithPriority	Code/Template/Assignment/withpriority.cs	/^	public class WithPriority : AssignmentDecorator$/;"	c	namespace:Template.Assignment
+Warrior	Code/Readers/signup.cs	/^    Warrior, \/\/ 3$/;"	e	enum:Readers.SignUpType	file:
+Warrior	Code/Wow_Objects/wow.cs	/^      Warrior \/\/ 7$/;"	e	enum:Wow_Objects.Wow.Class	file:
+WithClass	Code/Assignment/Decorator/withclass.cs	/^		public WithClass(Assignment assignment, Wow.Class wow_class) : base(assignment)$/;"	m	class:Assignments.Decorator.WithClass
+WithClass	Code/Assignment/Decorator/withclass.cs	/^	public class WithClass : AssignmentDecorator, IEquatable<WithClass>, IComparable<WithClass>$/;"	c	namespace:Assignments.Decorator
+WithIndex	Code/Assignment/Decorator/withindex.cs	/^		public WithIndex(Assignment assignment, StringIndex index) : base(assignment)$/;"	m	class:Assignments.Decorator.WithIndex
+WithIndex	Code/Assignment/Decorator/withindex.cs	/^	public class WithIndex : AssignmentDecorator$/;"	c	namespace:Assignments.Decorator
+WithPriority	Code/Assignment/Decorator/withpriority.cs	/^		public WithPriority(Assignment assignment, Priority priority) : base(assignment)$/;"	m	class:Assignments.Decorator.WithPriority
+WithPriority	Code/Assignment/Decorator/withpriority.cs	/^	public class WithPriority : AssignmentDecorator$/;"	c	namespace:Assignments.Decorator
+Wow	Code/Wow_Objects/wow.cs	/^  public static class Wow$/;"	c	namespace:Wow_Objects
+WowClass	Code/Assignment/assignment.cs	/^			WowClass = 0,$/;"	e	enum:Assignments.Assignment.Extension	file:
 Wow_Class	Code/Enumerator/enumerators.cs	/^	public enum Wow_Class $/;"	g	namespace:Enumerator
 Wow_Objects	Code/Wow_Objects/player.cs	/^namespace Wow_Objects$/;"	n
+Wow_Objects	Code/Wow_Objects/wow.cs	/^namespace Wow_Objects$/;"	n
 Writers	Code/Writers/updater.cs	/^namespace Writers$/;"	n
-_assignment	Code/Template/Assignment/assignmentdecorator.cs	/^		private Assignment _assignment;$/;"	f	class:Template.Assignment.AssignmentDecorator	file:
-_class	Code/Template/Assignment/withclass.cs	/^		private Wow_Class _class;$/;"	f	class:Template.Assignment.WithClass	file:
+ZG	Code/Wow_Objects/wow.cs	/^      ZG$/;"	e	enum:Wow_Objects.Wow.Raid	file:
+_Extensions	Code/Assignment/assignment.cs	/^		private static Extensions _Extensions = new Extensions();$/;"	f	class:Assignments.Assignment	file:
+_assignment	Code/Assignment/Decorator/assignmentdecorator.cs	/^		public Assignment _assignment;$/;"	f	class:Assignments.Decorator.AssignmentDecorator
+_class	Code/Assignment/Decorator/withclass.cs	/^		private Wow.Class _class;$/;"	f	class:Assignments.Decorator.WithClass	file:
 _end	Code/Indexes/stringindex.cs	/^    private ushort _end;$/;"	f	struct:Indexes.StringIndex	file:
-_index	Code/Template/Assignment/withindex.cs	/^		private StringIndex _index;$/;"	f	class:Template.Assignment.WithIndex	file:
-_info	Code/Template/Assignment/assignment.cs	/^		protected byte _info;$/;"	f	class:Template.Assignment.Assignment
-_number	Code/Containers/priority.cs	/^    public readonly byte _number;$/;"	f	struct:Containers.Priority
-_priority	Code/Template/Assignment/withpriority.cs	/^		public readonly Priority _priority;$/;"	f	class:Template.Assignment.WithPriority
+_index	Code/Assignment/Decorator/withindex.cs	/^		private StringIndex _index;$/;"	f	class:Assignments.Decorator.WithIndex	file:
+_info	Code/Assignment/assignment.cs	/^		protected byte _info;$/;"	f	class:Assignments.Assignment
+_number	Code/Containers/priority.cs	/^    private byte _number;$/;"	f	struct:Containers.Priority	file:
+_priority	Code/Assignment/Decorator/withpriority.cs	/^		public readonly Priority _priority;$/;"	f	class:Assignments.Decorator.WithPriority
 _start	Code/Indexes/stringindex.cs	/^    private ushort _start;$/;"	f	struct:Indexes.StringIndex	file:
 _task	Code/Template/templatetask.cs	/^		protected readonly TaskType _task;$/;"	f	class:Template.TemplateTask
-_type	Code/Template/Assignment/assignment.cs	/^		private AssignmentType _type; \/\/ Assignment Type$/;"	f	class:Template.Assignment.Assignment	file:
-adjustPrio	Code/Readers/discord.cs	/^    private Stack<string> adjustPrio(Stack<string> prio, List<string> names)$/;"	m	class:Readers.Discord	file:
-adjustPriorities	Code/Readers/discord.cs	/^    private Priorities adjustPriorities(Priorities allPrios, List<string> names)$/;"	m	class:Readers.Discord	file:
+_type	Code/Assignment/assignment.cs	/^		private AssignmentType _type; \/\/ Assignment Type$/;"	f	class:Assignments.Assignment	file:
+addContent	Code/Assignment/Decorator/assignmentdecorator.cs	/^		public override void addContent(params Type[] types)$/;"	m	class:Assignments.Decorator.AssignmentDecorator
+addContent	Code/Assignment/assignment.cs	/^		public virtual void addContent(params Type[] types)$/;"	m	class:Assignments.Assignment
+adjustPrio	Code/Readers/signup.cs	/^    private Stack<string> adjustPrio(Stack<string> prio, List<string> names)$/;"	m	class:Readers.SignUp	file:
+adjustPriorities	Code/Readers/signup.cs	/^    private Priorities adjustPriorities(Priorities allPrios, List<string> names)$/;"	m	class:Readers.SignUp	file:
 admin_a	Code/Containers/assignmentreceivers.cs	/^    private List<string> admin_a; \/\/ hold name for admins whom should receive all assignments$/;"	f	class:Containers.AssignmentReceivers	file:
 assignmentToString	Code/Containers/assignmentreceivers.cs	/^    private string assignmentToString(MsgType msgType)$/;"	m	class:Containers.AssignmentReceivers	file:
 bitExtracted	Code/Utilities/bytes.cs	/^		public static byte bitExtracted(byte number, int k, int p) $/;"	m	class:Utilities.Bytes
@@ -306,8 +362,8 @@ checkTableStartFormat	Code/Readers/File_Info/rosterinfo.cs	/^    public bool che
 class_a	Code/Containers/assignmentreceivers.cs	/^    private List<string>[] class_a; \/\/ class_A[(int) Wow_Class.Class] will output list of all players of that class$/;"	f	class:Containers.AssignmentReceivers	file:
 count	Code/Readers/File_Info/signupinfo.cs	/^    private int count;$/;"	f	class:Readers.SignUpInfo	file:
 date	Code/Readers/File_Info/signupinfo.cs	/^    private DateTime date;$/;"	f	class:Readers.SignUpInfo	file:
-discord	Code/Writers/updater.cs	/^    private Discord discord;$/;"	f	class:Writers.Updater	file:
 endIndex	Code/Readers/File_Info/rosterinfo.cs	/^    private int endIndex;$/;"	f	class:Readers.RosterInfo	file:
+extensionTypes	Code/Assignment/assignment.cs	/^		private static object[] extensionTypes = {Wow.Class.Warrior, new StringIndex(0,1), new Priority(0)};$/;"	f	class:Assignments.Assignment	file:
 extractFactionIndexes	Code/Readers/File_Info/signupinfo.cs	/^    public int[] extractFactionIndexes(string[] lines, int start)$/;"	m	class:Readers.SignUpInfo
 extractHeadline	Code/Readers/File_Info/signupinfo.cs	/^    public string extractHeadline(string line)$/;"	m	class:Readers.SignUpInfo
 extractRolesCountNDate	Code/Readers/File_Info/signupinfo.cs	/^    private Tuple<int[], DateTime, int> extractRolesCountNDate(string[] lines, int startIndex)$/;"	m	class:Readers.SignUpInfo	file:
@@ -315,14 +371,12 @@ findStartIndex	Code/Readers/File_Info/rosterinfo.cs	/^    private int findStartI
 getAllInfo	Code/Readers/File_Info/rosterinfo.cs	/^    public IList<int> getAllInfo()$/;"	m	class:Readers.RosterInfo
 getAllInfo	Code/Readers/File_Info/signupinfo.cs	/^    public IList<int> getAllInfo()$/;"	m	class:Readers.SignUpInfo
 getAllInfo	Code/Readers/Interfaces/itextinfo.cs	/^    IList<T> getAllInfo();$/;"	m	interface:Readers.ITextInfo
-getClass	Code/Wow_Objects/player.cs	/^    public Wow_Class getClass() $/;"	m	class:Wow_Objects.Player
 getCount	Code/Readers/File_Info/signupinfo.cs	/^    public int getCount()$/;"	m	class:Readers.SignUpInfo
-getDiscord	Code/Writers/updater.cs	/^    public Discord getDiscord()$/;"	m	class:Writers.Updater
 getEndIndex	Code/Readers/File_Info/rosterinfo.cs	/^    public int getEndIndex() $/;"	m	class:Readers.RosterInfo
 getHealers	Code/Containers/assignmentreceivers.cs	/^    public List<string> getHealers() $/;"	m	class:Containers.AssignmentReceivers
+getIndex	Code/Assignment/Decorator/withindex.cs	/^		public StringIndex getIndex()$/;"	m	class:Assignments.Decorator.WithIndex
 getIndex	Code/Readers/File_Info/rosterinfo.cs	/^    public int getIndex(int i)$/;"	m	class:Readers.RosterInfo
 getIndex	Code/Readers/File_Info/signupinfo.cs	/^    public int getIndex(int faction) $/;"	m	class:Readers.SignUpInfo
-getIndex	Code/Template/Assignment/withindex.cs	/^		public StringIndex getIndex()$/;"	m	class:Template.Assignment.WithIndex
 getIndexes	Code/Readers/File_Info/rosterinfo.cs	/^    public int[] getIndexes()$/;"	m	class:Readers.RosterInfo
 getIndexes	Code/Readers/File_Info/signupinfo.cs	/^    public int[] getIndexes()$/;"	m	class:Readers.SignUpInfo
 getInfo	Code/Readers/File_Info/rosterinfo.cs	/^    public int getInfo(int i)$/;"	m	class:Readers.RosterInfo
@@ -330,11 +384,10 @@ getInfo	Code/Readers/File_Info/signupinfo.cs	/^    public int getInfo(int index)
 getInfo	Code/Readers/Interfaces/itextinfo.cs	/^    T getInfo(int i);$/;"	m	interface:Readers.ITextInfo
 getInterrupters	Code/Containers/assignmentreceivers.cs	/^    public List<string> getInterrupters() $/;"	m	class:Containers.AssignmentReceivers
 getMelees	Code/Containers/assignmentreceivers.cs	/^    public List<string> getMelees()$/;"	m	class:Containers.AssignmentReceivers
-getName	Code/Wow_Objects/player.cs	/^    public string getName()$/;"	m	class:Wow_Objects.Player
 getNamesOfClass	Code/Containers/assignmentreceivers.cs	/^    public List<string> getNamesOfClass(Wow_Class wow_class)  $/;"	m	class:Containers.AssignmentReceivers
 getNamesOfClass	Code/Containers/assignmentreceivers.cs	/^    public List<string> getNamesOfClass(int wow_class)  $/;"	m	class:Containers.AssignmentReceivers
 getNewPriorities	Code/Containers/priorities.cs	/^      public Stack<string>[] getNewPriorities()$/;"	m	class:Containers.Priorities
-getNewPriority	Code/Containers/priorities.cs	/^      public Stack<string> getNewPriority(Priority priority)$/;"	m	class:Containers.Priorities
+getNewPriority	Code/Containers/priorities.cs	/^      public Stack<string> getNewPriority(AssignmentType priority)$/;"	m	class:Containers.Priorities
 getNewPriority	Code/Containers/priorities.cs	/^      public Stack<string> getNewPriority(int priority)$/;"	m	class:Containers.Priorities
 getPath	Code/Readers/Interfaces/filereader.cs	/^    public string getPath()$/;"	m	class:Readers.FileReader
 getPlayerInRoster	Code/Readers/roster.cs	/^		public Player getPlayerInRoster(string name) {$/;"	m	class:Readers.Roster
@@ -342,19 +395,17 @@ getPlayerInfoIndexes	Code/Readers/File_Info/rosterinfo.cs	/^    public List<int>
 getPlayerNames	Code/Readers/roster.cs	/^    public List<string> getPlayerNames()$/;"	m	class:Readers.Roster
 getPrioIndexes	Code/Readers/File_Info/rosterinfo.cs	/^    public List<int> getPrioIndexes()$/;"	m	class:Readers.RosterInfo
 getPriorities	Code/Containers/priorities.cs	/^      public Stack<string>[] getPriorities()$/;"	m	class:Containers.Priorities
-getPriorities	Code/Readers/discord.cs	/^    public Priorities getPriorities()$/;"	m	class:Readers.Discord
 getPriorities	Code/Readers/roster.cs	/^    public Priorities getPriorities()$/;"	m	class:Readers.Roster
-getPriority	Code/Containers/priorities.cs	/^      public Stack<string> getPriority(Priority priority) $/;"	m	class:Containers.Priorities
+getPriorities	Code/Readers/signup.cs	/^    public Priorities getPriorities()$/;"	m	class:Readers.SignUp
+getPriority	Code/Assignment/Decorator/withpriority.cs	/^		public Priority getPriority()$/;"	m	class:Assignments.Decorator.WithPriority
+getPriority	Code/Containers/priorities.cs	/^      public Stack<string> getPriority(AssignmentType priority) $/;"	m	class:Containers.Priorities
 getPriority	Code/Containers/priorities.cs	/^      public Stack<string> getPriority(int priority) $/;"	m	class:Containers.Priorities
-getPriority	Code/Readers/discord.cs	/^    public Stack<string> getPriority(Priority priority)$/;"	m	class:Readers.Discord
-getPriority	Code/Readers/discord.cs	/^    public Stack<string> getPriority(int priority)$/;"	m	class:Readers.Discord
-getPriority	Code/Template/Assignment/withpriority.cs	/^		public Priority getPriority()$/;"	m	class:Template.Assignment.WithPriority
+getPriority	Code/Readers/signup.cs	/^    public Stack<string> getPriority(AssignmentType priority)$/;"	m	class:Readers.SignUp
+getPriority	Code/Readers/signup.cs	/^    public Stack<string> getPriority(int priority)$/;"	m	class:Readers.SignUp
 getRanged	Code/Containers/assignmentreceivers.cs	/^    public List<string> getRanged() $/;"	m	class:Containers.AssignmentReceivers
 getRawLines	Code/Readers/File_Info/rosterinfo.cs	/^    public string[] getRawLines()$/;"	m	class:Readers.RosterInfo
 getRawLines	Code/Readers/File_Info/signupinfo.cs	/^    public string[] getRawLines()$/;"	m	class:Readers.SignUpInfo
 getReceivers	Code/Readers/roster.cs	/^    public AssignmentReceivers getReceivers()$/;"	m	class:Readers.Roster
-getRole	Code/Wow_Objects/player.cs	/^    public Role getRole() {$/;"	m	class:Wow_Objects.Player
-getRoster	Code/Writers/updater.cs	/^    public Roster getRoster()$/;"	m	class:Writers.Updater
 getRosterCount	Code/Readers/File_Info/rosterinfo.cs	/^    public int getRosterCount()$/;"	m	class:Readers.RosterInfo
 getStartIndex	Code/Readers/File_Info/rosterinfo.cs	/^    public int getStartIndex() $/;"	m	class:Readers.RosterInfo
 getTableIndexByName	Code/Readers/File_Info/rosterinfo.cs	/^    public int getTableIndexByName(string name)$/;"	m	class:Readers.RosterInfo
@@ -362,8 +413,6 @@ getTableName	Code/Readers/File_Info/rosterinfo.cs	/^    public string getTableNa
 getTableNames	Code/Readers/File_Info/rosterinfo.cs	/^    public List<string> getTableNames()$/;"	m	class:Readers.RosterInfo
 getTanks	Code/Containers/assignmentreceivers.cs	/^    public List<string> getTanks() $/;"	m	class:Containers.AssignmentReceivers
 getTaskType	Code/Template/templatetask.cs	/^		public TaskType getTaskType()$/;"	m	class:Template.TemplateTask
-has	Code/Template/Assignment/assignment.cs	/^		public bool has(params Assignment.Content[] contentArr)$/;"	m	class:Template.Assignment.Assignment
-has	Code/Template/Assignment/assignmentdecorator.cs	/^		public bool has(params Assignment.Content[] content)$/;"	m	class:Template.Assignment.AssignmentDecorator
 healer_a	Code/Containers/assignmentreceivers.cs	/^    private List<string> healer_a; \/\/ hold name of healers whom should receive healer assignments$/;"	f	class:Containers.AssignmentReceivers	file:
 indexToFaction	Code/Readers/File_Info/signupinfo.cs	/^    private int[] indexToFaction;$/;"	f	class:Readers.SignUpInfo	file:
 indexToPrios	Code/Readers/File_Info/rosterinfo.cs	/^    private readonly List<int> indexToPrios;$/;"	f	class:Readers.RosterInfo	file:
@@ -375,34 +424,30 @@ initMelee	Code/Containers/assignmentreceivers.cs	/^    private List<string> init
 initRanged	Code/Containers/assignmentreceivers.cs	/^    private List<string> initRanged() $/;"	m	class:Containers.AssignmentReceivers	file:
 initTank	Code/Containers/assignmentreceivers.cs	/^    private List<string> initTank() $/;"	m	class:Containers.AssignmentReceivers	file:
 interrupt_a	Code/Containers/assignmentreceivers.cs	/^    private List<string> interrupt_a; \/\/ hold name of interrupters whom should receive interrupt assignments$/;"	f	class:Containers.AssignmentReceivers	file:
-isAdmin	Code/Wow_Objects/player.cs	/^    public bool isAdmin()$/;"	m	class:Wow_Objects.Player
-isInterrupter	Code/Wow_Objects/player.cs	/^    public bool isInterrupter() $/;"	m	class:Wow_Objects.Player
-isOT	Code/Wow_Objects/player.cs	/^    public bool isOT() $/;"	m	class:Wow_Objects.Player
 melee_a	Code/Containers/assignmentreceivers.cs	/^    private List<string> melee_a; \/\/ hold name of melees whom should  receive melee assignments$/;"	f	class:Containers.AssignmentReceivers	file:
 memcmp	Code/Utilities/bytes.cs	/^		static extern int memcmp(byte[] b1, byte[] b2, long count);$/;"	m	class:Utilities.Bytes	file:
 modifyBit	Code/Utilities/bytes.cs	/^		public static byte modifyBit(byte n, int p, bool b) $/;"	m	class:Utilities.Bytes
 nameID	Code/Wow_Objects/player.cs	/^    private Byte[] nameID;$/;"	f	class:Wow_Objects.Player	file:
-nextFactionIndex	Code/Readers/File_Info/signupinfo.cs	/^    private Tuple<int, int, int> nextFactionIndex(string[] lines, int start)$/;"	m	class:Readers.SignUpInfo	file:
+nextSignUpTypeIndex	Code/Readers/File_Info/signupinfo.cs	/^    private Tuple<int, int, int> nextSignUpTypeIndex(string[] lines, int start)$/;"	m	class:Readers.SignUpInfo	file:
 path	Code/Readers/Interfaces/filereader.cs	/^    protected string path;$/;"	f	class:Readers.FileReader
 playerInfoIndexes	Code/Readers/File_Info/rosterinfo.cs	/^    private readonly List<int> playerInfoIndexes;$/;"	f	class:Readers.RosterInfo	file:
-playerNames	Code/Readers/discord.cs	/^    private List<string> playerNames;$/;"	f	class:Readers.Discord	file:
-popFromPriority	Code/Containers/priorities.cs	/^      public string popFromPriority(Priority priority)$/;"	m	class:Containers.Priorities
+playerNames	Code/Readers/signup.cs	/^    private List<string> playerNames;$/;"	f	class:Readers.SignUp	file:
+popFromPriority	Code/Containers/priorities.cs	/^      public string popFromPriority(AssignmentType priority)$/;"	m	class:Containers.Priorities
 popFromPriority	Code/Containers/priorities.cs	/^      public string popFromPriority(int priority)$/;"	m	class:Containers.Priorities
 priorities	Code/Containers/priorities.cs	/^      private Stack<string>[] priorities;$/;"	f	class:Containers.Priorities	file:
 priorities	Code/Readers/roster.cs	/^		private Priorities priorities;$/;"	f	class:Readers.Roster	file:
-prios	Code/Readers/discord.cs	/^    private Priorities prios;$/;"	f	class:Readers.Discord	file:
-raids	Code/Writers/updater.cs	/^    private List<string> raids;$/;"	f	class:Writers.Updater	file:
+prios	Code/Readers/signup.cs	/^    private Priorities prios;$/;"	f	class:Readers.SignUp	file:
 ranged_a	Code/Containers/assignmentreceivers.cs	/^    private List<string> ranged_a; \/\/ hold name of ranged whom should receive ranged assignments$/;"	f	class:Containers.AssignmentReceivers	file:
 rawLines	Code/Readers/File_Info/rosterinfo.cs	/^    private string[] rawLines;$/;"	f	class:Readers.RosterInfo	file:
 rawLines	Code/Readers/File_Info/signupinfo.cs	/^    private string[] rawLines;$/;"	f	class:Readers.SignUpInfo	file:
 read	Code/Readers/File_Info/rosterinfo.cs	/^    public void read(string[] lines)$/;"	m	class:Readers.RosterInfo
 read	Code/Readers/File_Info/signupinfo.cs	/^    public void read(string[] lines)$/;"	m	class:Readers.SignUpInfo
 read	Code/Readers/Interfaces/itextreader.cs	/^    void read(T lines);$/;"	m	interface:Readers.ITextReader
-read	Code/Readers/discord.cs	/^    public void read(string[] lines)$/;"	m	class:Readers.Discord
 read	Code/Readers/roster.cs	/^		public void read(string[] lines) $/;"	m	class:Readers.Roster
+read	Code/Readers/signup.cs	/^    public void read(string[] lines)$/;"	m	class:Readers.SignUp
 readDate	Code/Readers/File_Info/signupinfo.cs	/^    private int[] readDate(string line)$/;"	m	class:Readers.SignUpInfo	file:
 readFile	Code/Readers/Interfaces/filereader.cs	/^    protected virtual string readFile(string path)$/;"	m	class:Readers.FileReader
-readName	Code/Readers/discord.cs	/^    private string readName(string line)$/;"	m	class:Readers.Discord	file:
+readName	Code/Readers/signup.cs	/^    private string readName(string line)$/;"	m	class:Readers.SignUp	file:
 readPriorities	Code/Readers/roster.cs	/^		private Stack<string>[] readPriorities()$/;"	m	class:Readers.Roster	file:
 readTable	Code/Readers/File_Info/rosterinfo.cs	/^    private Tuple<bool, int, int> readTable(int i, string[] lines, string name) $/;"	m	class:Readers.RosterInfo	file:
 readTableName	Code/Readers/File_Info/rosterinfo.cs	/^    private string readTableName(string line) $/;"	m	class:Readers.RosterInfo	file:
@@ -412,17 +457,14 @@ roster	Code/Readers/roster.cs	/^		private Dictionary<string, Player> roster = ne
 roster	Code/Writers/updater.cs	/^    private Roster roster;$/;"	f	class:Writers.Updater	file:
 rosterCount	Code/Readers/File_Info/rosterinfo.cs	/^    private int rosterCount;$/;"	f	class:Readers.RosterInfo	file:
 rosterInfo	Code/Readers/roster.cs	/^		private RosterInfo rosterInfo;$/;"	f	class:Readers.Roster	file:
-set	Code/Template/Assignment/assignment.cs	/^		protected void set(Assignment.Content content)$/;"	m	class:Template.Assignment.Assignment
-set	Code/Template/Assignment/assignmentdecorator.cs	/^		public void set(Assignment.Content content)$/;"	m	class:Template.Assignment.AssignmentDecorator
-setAdmin	Code/Wow_Objects/player.cs	/^    public void setAdmin(bool admin) $/;"	m	class:Wow_Objects.Player
 setBitsToNum	Code/Utilities/bytes.cs	/^		public static byte setBitsToNum(byte n, byte m, int i, int j)	$/;"	m	class:Utilities.Bytes
 setBitsToNum	Code/Utilities/bytes.cs	/^		public static int setBitsToNum(int n, int m, int i, int j)	$/;"	m	class:Utilities.Bytes
-setClass	Code/Wow_Objects/player.cs	/^    public void setClass(Wow_Class class_) $/;"	m	class:Wow_Objects.Player
+setClass	Code/Wow_Objects/player.cs	/^    private void setClass(Wow.Class class_)$/;"	m	class:Wow_Objects.Player	file:
 setCount	Code/Readers/File_Info/signupinfo.cs	/^    private int setCount(string[] lines)$/;"	m	class:Readers.SignUpInfo	file:
-setInterrupt	Code/Wow_Objects/player.cs	/^    public void setInterrupt(bool interrupt) $/;"	m	class:Wow_Objects.Player
-setOT	Code/Wow_Objects/player.cs	/^    public void setOT(bool OT) $/;"	m	class:Wow_Objects.Player
-setRole	Code/Wow_Objects/player.cs	/^    public void setRole(Role role_) $/;"	m	class:Wow_Objects.Player
-signUpInfo	Code/Readers/discord.cs	/^    private SignUpInfo signUpInfo;$/;"	f	class:Readers.Discord	file:
+setIsAdmin	Code/Wow_Objects/player.cs	/^    private void setIsAdmin(bool isAdmin) $/;"	m	class:Wow_Objects.Player	file:
+setRole	Code/Wow_Objects/player.cs	/^    private void setRole(Wow.Role role)$/;"	m	class:Wow_Objects.Player	file:
+signUp	Code/Writers/updater.cs	/^    private SignUp signUp;$/;"	f	class:Writers.Updater	file:
+signUpInfo	Code/Readers/signup.cs	/^    private SignUpInfo signUpInfo;$/;"	f	class:Readers.SignUp	file:
 startIndex	Code/Readers/File_Info/rosterinfo.cs	/^    private int startIndex;$/;"	f	class:Readers.RosterInfo	file:
 tableNames	Code/Readers/File_Info/rosterinfo.cs	/^    private readonly List<string> tableNames;$/;"	f	class:Readers.RosterInfo	file:
 tank_a	Code/Containers/assignmentreceivers.cs	/^    private List<string> tank_a; \/\/ hold name of tanks whom should receive tank assignments$/;"	f	class:Containers.AssignmentReceivers	file:

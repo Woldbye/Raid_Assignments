@@ -3,7 +3,7 @@ MAIN_FILE = raid_assign
 
 #change this to the depth of the project folders
 #if needed, add a prefix for a common project folder
-CSHARP_SOURCE_FILES = $(wildcard */*/*/*/*.cs */*/*/*.cs */*/*.cs */*.cs *.cs)
+CSHARP_SOURCE_FILES = $(wildcard */*/*/*/*/*/*.cs */*/*/*/*/*.cs */*/*/*/*.cs */*/*/*.cs */*/*.cs */*.cs *.cs)
 
 #add needed flags to the compilerCSHARP_FLAGS = -out:$(EXECUTABLE)
 CSHARP_FLAGS = -out:$(EXECUTABLE)

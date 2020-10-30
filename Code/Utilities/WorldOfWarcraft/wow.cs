@@ -5,7 +5,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Enumerator;
 
-namespace Wow_Objects
+namespace Utilities.WorldOfWarcraft
 {
   public static class Wow
   {

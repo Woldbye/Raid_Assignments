@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using Enumerator;
 using System.Collections;
 using Utilities;
-using Wow_Objects;
+using Utilities.WorldOfWarcraft;
 using Containers;
 using System.Linq;
-using Assignments;
+using Templates.Tasks.Assignments;
 
 namespace Readers // utilities
 { 
@@ -24,7 +24,7 @@ namespace Readers // utilities
     Warlock, // 7
     Priest // 8// 4 bits
   }
-
+  // TO:DO REWRITE THSI FUCKING MESS :)
   public class SignUp : ITextReader<string[]>
   { 
     private SignUpInfo signUpInfo;
@@ -56,7 +56,7 @@ namespace Readers // utilities
     {
       List<string> playerNames = new List<string>();
       // go to each index contained in SignUp
-      int factionCount = Faction.GetNames(typeof(Faction)).Length;
+      int factionCount = SignUpType.GetNames(typeof(SignUpType)).Length;
       for (int i=0; i < factionCount; i++)
       {
         int faction = i;

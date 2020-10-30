@@ -1,5 +1,5 @@
 using System;
-using Wow_Objects;
+using Utilities.WorldOfWarcraft;
 using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
@@ -10,6 +10,13 @@ namespace Utilities // utilities
   public static class Errors
   {
     public const int ERROR_CODE = Int32.MinValue;
+  }
+
+  public static class Search
+  {
+    public const int Fail = -1;
+    public const int Success = 1;
+
   }
 
   public static class Exceptions 

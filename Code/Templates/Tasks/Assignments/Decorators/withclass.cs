@@ -1,32 +1,31 @@
-using Template;
 using Enumerator;
 using Utilities.LookUp;
 using System.Text;
-using Wow_Objects;
-using Assignments;
+using Utilities.WorldOfWarcraft;
+using System;
+using Utilities;
+using Templates.Tasks;
 
-namespace Assignments.Decorator
+namespace Templates.Tasks.Assignments
 {
 	// Class decorator for assignment
-	public class WithClass : AssignmentDecorator
+	public class WithClass : DecoratedAssignment
 	{
-		private Wow.Class _class;
-		
-		public Wow.Class Class 
-		{
-			get { return this._class; }
-			private set { this._class = value; }
-		}
+		public Wow.Class Class { get { return (Wow.Class) base[AssignmentDecoration.WowClass]; } }
 
     public static readonly string[] CLASS_TO_RAW = {
     	"druid", "hunter", "mage", "priest", "rogue", "shaman", "warlock",
     	"warrior"
     };
 
+		public WithClass(Assignment assignment, Wow.Class wow_class, object[] previousAssignmentDecorations) : base(assignment, previousAssignmentDecorations)
+		{
+			base[AssignmentDecoration.WowClass] = wow_class;
+		}
+
 		public WithClass(Assignment assignment, Wow.Class wow_class) : base(assignment)
 		{
-			this.Class = wow_class;
-			base.addContent(Assignment.Content.Class);
+			base[AssignmentDecoration.WowClass] = wow_class;
 		}
 
 		public override string ToRaw()
@@ -35,6 +34,8 @@ namespace Assignments.Decorator
 			StringBuilder rawBuilder = new StringBuilder(baseRaw);
 			rawBuilder.Remove(baseRaw.Length - 1, 1);
 			rawBuilder.Append((char) TemplateTask.Seperator.Mid);
+			rawBuilder.Append(DecoratedAssignment.Flags[AssignmentDecoration.WowClass]);
+      rawBuilder.Append(TemplateTask.Seperator.Value);
 			rawBuilder.Append(WithClass.CLASS_TO_RAW[(int) this.Class]);
 			rawBuilder.Append((char) TemplateTask.Seperator.End);
 			return rawBuilder.ToString();

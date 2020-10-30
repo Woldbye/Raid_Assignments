@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using System.Collections.Generic;
 using Enumerator;
 using Containers;
-using Assignments;
+using Templates.Tasks.Assignments;
 
 namespace Readers {
   // Constructor receives path to raid_roster.txt, and the table object 

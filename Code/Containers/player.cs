@@ -1,11 +1,12 @@
 using Utilities;
+using Utilities.WorldOfWarcraft;
 using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 using Enumerator;
 
-namespace Wow_Objects
+namespace Utilities.WorldOfWarcraft
 {
   // To:do
   // Consider making Decorator pattern for Player at some point :)
@@ -44,6 +45,11 @@ namespace Wow_Objects
       { 
         return Convert.ToBoolean(this.info & 1);
       }
+    }
+
+    public override int GetHashCode()
+    {
+      return this.info;
     }
 
     public bool IsAssigned

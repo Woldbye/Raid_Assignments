@@ -3,7 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Collections;
 using Utilities;
-using Wow_Objects;
+using Utilities.WorldOfWarcraft;
 using System.Linq;
 using Readers;
 using Enumerator;
@@ -95,7 +95,7 @@ namespace Containers
           break;
         // classes
         case MsgType.Druid:
-          List<string> druids = this.class_a[(int) Wow_Class.Druid];
+          List<string> druids = this.class_a[(int) Wow.Class.Druid];
           foreach(string druid in druids)
           {
             ret += druid;
@@ -106,7 +106,7 @@ namespace Containers
           }
           break;
         case MsgType.Hunter:
-          List<string> hunters = this.class_a[(int) Wow_Class.Hunter];
+          List<string> hunters = this.class_a[(int) Wow.Class.Hunter];
           foreach(string hunter in hunters)
           {
             ret += hunter;
@@ -117,7 +117,7 @@ namespace Containers
           }
           break;
         case MsgType.Mage:
-          List<string> mages = this.class_a[(int) Wow_Class.Mage];
+          List<string> mages = this.class_a[(int) Wow.Class.Mage];
           foreach(string mage in mages)
           {
             ret += mage;
@@ -128,7 +128,7 @@ namespace Containers
           }
           break;
         case MsgType.Priest:
-          List<string> priests = this.class_a[(int) Wow_Class.Priest];
+          List<string> priests = this.class_a[(int) Wow.Class.Priest];
           foreach(string priest in priests)
           {
             ret += priest;
@@ -139,7 +139,7 @@ namespace Containers
           }
           break;
         case MsgType.Rogue:
-          List<string> rogues = this.class_a[(int) Wow_Class.Rogue];
+          List<string> rogues = this.class_a[(int) Wow.Class.Rogue];
           foreach(string rogue in rogues)
           {
             ret += rogue;
@@ -150,7 +150,7 @@ namespace Containers
           }
           break;
         case MsgType.Shaman:
-          List<string> shamans = this.class_a[(int) Wow_Class.Shaman];
+          List<string> shamans = this.class_a[(int) Wow.Class.Shaman];
           foreach(string shaman in shamans)
           {
             ret += shaman;
@@ -161,7 +161,7 @@ namespace Containers
           }
           break;
         case MsgType.Warlock:
-          List<string> warlocks = this.class_a[(int) Wow_Class.Warlock];
+          List<string> warlocks = this.class_a[(int) Wow.Class.Warlock];
           foreach(string warlock in warlocks)
           {
             ret += warlock;
@@ -172,7 +172,7 @@ namespace Containers
           }
           break;
         case MsgType.Warrior:
-          List<string> warriors = this.class_a[(int) Wow_Class.Warrior];
+          List<string> warriors = this.class_a[(int) Wow.Class.Warrior];
           foreach(string warrior in warriors)
           {
             ret += warrior;
@@ -183,7 +183,7 @@ namespace Containers
           }
           break;
         case MsgType.Kiter:
-          List<string> kiters = this.class_a[(int) Wow_Class.Hunter];
+          List<string> kiters = this.class_a[(int) Wow.Class.Hunter];
           foreach(string kiter in kiters)
           {
             ret += kiter;
@@ -261,7 +261,7 @@ namespace Containers
     private List<string> initHealer() 
     {
       List<string> healers = new List<string>();
-      int[] healerClasses = {(int) Wow_Class.Druid, (int) Wow_Class.Priest, (int) Wow_Class.Shaman};
+      int[] healerClasses = {(int) Wow.Class.Druid, (int) Wow.Class.Priest, (int) Wow.Class.Shaman};
       for (int i=0; i < healerClasses.Length; i++) 
       {
         int healerClass = healerClasses[i];
@@ -274,7 +274,7 @@ namespace Containers
     private List<string> initRanged() 
     {
       List<string> ranged = new List<string>();
-      int[] rangedClasses = { (int) Wow_Class.Warlock, (int) Wow_Class.Mage, (int) Wow_Class.Hunter};
+      int[] rangedClasses = { (int) Wow.Class.Warlock, (int) Wow.Class.Mage, (int) Wow.Class.Hunter};
       for (int i=0; i < rangedClasses.Length; i++) 
       {
         int rangedClass = rangedClasses[i];
@@ -289,7 +289,7 @@ namespace Containers
     private List<string> initMelee() 
     {
       List<string> melee = new List<string>();
-      int[] meleeClasses = { (int) Wow_Class.Warrior, (int) Wow_Class.Rogue, (int) Wow_Class.Druid};
+      int[] meleeClasses = { (int) Wow.Class.Warrior, (int) Wow.Class.Rogue, (int) Wow.Class.Druid};
       for (int i=0; i < meleeClasses.Length; i++) 
       {
         int meleeClass = meleeClasses[i];
@@ -303,7 +303,7 @@ namespace Containers
     private List<string> initTank() 
     {
       List<string> tanks = new List<string>();
-      int[] tankClasses = { (int) Wow_Class.Druid, (int) Wow_Class.Warrior};
+      int[] tankClasses = { (int) Wow.Class.Druid, (int) Wow.Class.Warrior};
       for (int i=0; i < tankClasses.Length; i++) 
       {
         int tankClass = tankClasses[i];
@@ -318,7 +318,7 @@ namespace Containers
     private List<string> initInterrupt() 
     {
       List<string> interrupters = new List<string>();
-      int[] interruptClasses = { (int) Wow_Class.Rogue, (int) Wow_Class.Mage, (int) Wow_Class.Warrior, (int) Wow_Class.Shaman};
+      int[] interruptClasses = { (int) Wow.Class.Rogue, (int) Wow.Class.Mage, (int) Wow.Class.Warrior, (int) Wow.Class.Shaman};
       for (int i=0; i < interruptClasses.Length; i++) 
       {
         int interruptClass = interruptClasses[i];
@@ -333,7 +333,7 @@ namespace Containers
       return this.class_a[wow_class]; 
     }
 
-    public List<string> getNamesOfClass(Wow_Class wow_class)  
+    public List<string> getNamesOfClass(Wow.Class wow_class)  
     {
       return this.class_a[(int) wow_class]; 
     }

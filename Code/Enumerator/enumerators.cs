@@ -33,40 +33,6 @@ namespace Enumerator {
 		Warrior // 8 111
 	}
 
-	// If alliance replace shaman with paladin
-	public enum Wow_Class 
-	{
-		Druid, // 0
-		Hunter, // 1
-		Mage, // 2
-		Priest, // 3
-		Rogue, // 4
-		Shaman, // 5
-		Warlock, // 6
-		Warrior // 7
-	}; // 3 bits
-
-	public enum Faction
-	{
-		Tank, // 0
-		Hunter, // 1
-		Druid, // 2
-		Warrior, // 3
-		Mage, // 4
-		Shaman, // 5
-		Rogue, // 6
-		Warlock, // 7
-		Priest // 8
-	}; // 4 bits
-
-	public enum Role 
-	{
-		Tank, // 0
-		Healer, // 1
-		Melee, // 2
-		Ranged // 3
-	}; // 2 bit
-
 	public enum Date
 	{
 		Error = -1,

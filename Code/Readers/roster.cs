@@ -5,7 +5,7 @@ using Enumerator;
 using System.Collections;
 using Utilities;
 using Containers;
-using Wow_Objects;
+using Utilities.WorldOfWarcraft;
 using System.Linq;
 using Readers;
 

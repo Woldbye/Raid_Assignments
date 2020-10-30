@@ -1,61 +1,224 @@
+using Template;
 using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Collections;
+using System.Text;
+using Utilities.WorldOfWarcraft;
+using Containers;
 using Utilities;
-using Wow_Objects;
-using System.Linq;
-using Enumerator;
 using Indexes;
+using Assignments.Decorator;
 
-
-namespace Containers
+namespace Assignments
 {
-  // Assignment Type
-  public enum AssType
+  // type of assignment
+  public enum AssignmentType
   {
-    Message, // 0
-    Player // 1
-  };
-  
-  // can either be message 0 or player 1
-  // next bits decide type 
-  public abstract class Assignment : IEquatable<Assignment>, IComparable<Assignment>
+    Tank, // 0
+    Heal, // 1
+    Interrupt, // 2
+    Kite // 3
+  }
+
+  public enum SortOrder
   {
-    protected abstract uint Info { get; set; }
-    public static int BitsNeededForType = AssType.Message.Max().GetBitsNeeded();
+    Precede = -1,
+    Same = 0,
+    Follow = 1,
+  }
 
-    public abstract string DebugString();
 
-    public static int StringToAssType(string value)
+  public abstract class Assignment : TemplateTask, IEquatable<Assignment>, IComparable<Assignment>
+  {
+    private AssignmentType _type; // Assignment Type
+    private byte _info;
+
+    public virtual byte Info
     {
-      int typeAsInt = LookUp.ASS_TYPE_TO_CHAR.IndexOfIgnoreCase(value);
-      if (typeAsInt < 0)
-      {
-        Exceptions.ThrowAssignment(value);
-      }  
-      return typeAsInt;
+      get { return this._info; }
+      set { this._info = value; }
+    } 
+
+    // singleton pattern
+    private static AssignmentExtensions _Extensions = (Assignment._Extensions == null) ? new AssignmentExtensions() : 
+                                                                                         Assignment._Extensions;
+    public static AssignmentExtensions Extensions => _Extensions;
+
+    public enum Extension
+    {
+      Invalid = -1,
+      WowClass = 0,
+      Priority,
+      StringIndex,
     }
 
-    public static int StringToType(int enumInstanceInt, string value, string[][] typesToStr)
+    public AssignmentType AssignmentType
     {
-      if (enumInstanceInt < 0 | enumInstanceInt >= typesToStr.Length)
+      get { return this._type; }
+      private set { this._type = value; }
+    }
+
+    public static readonly string[] TYPE_TO_STR = {"Tank", "Heal", "Interrupt", "Kite"};
+    public static readonly string[] TYPE_TO_RAW = {"tank", "heal", "interrupt", "kite"};
+
+    public Assignment(AssignmentType type) : base(TaskType.Assignment)
+    {
+      this.AssignmentType = type;
+    }
+
+    public virtual void addContent(params Type[] types)
+    {
+      foreach (Type type in types)
       {
-        Exceptions.ThrowArgument(String.Format("[{0}] isn't a valid index into the typeLookUpArrays", enumInstanceInt));
+        Assignment.Extension extension = Assignment.Extensions.IndexOf(type);
+        if (extension != Assignment.Extension.Invalid)
+        {
+          this._info |= Assignment.Extensions.Flags[(int) extension];
+          Console.WriteLine("Added content: " + type);
+        } else {
+          Assignment.Extensions.InvalidTypeError(type);
+        }
       }
-      string[] testSample = typesToStr[enumInstanceInt];
-      int typeAsInt = testSample.IndexOfIgnoreCase(value);
-      Console.WriteLine(enumInstanceInt);
-      Console.WriteLine(typesToStr.Length);
-      Console.WriteLine(value);
-      Console.WriteLine(typeAsInt);
-      if (typeAsInt < 0)
-      {
-        Exceptions.ThrowAssignment(value);
-      }  
-      return typeAsInt;
     }
 
+    // Sort order:
+    // Assignment Type
+      // by decorator:
+      // Class
+        // Priority
+          // non-specific (WithIndex)
+    
+    // delegate to other function
+    public virtual bool Contains(params Assignment.Extension[] extensions)
+    {
+      Type[] asTypes = new Type[extensions.Length];
+      int i = 0;
+      foreach (Assignment.Extension extension in extensions)
+      {
+        asTypes[i] = Assignment.Extensions.ExtensionToType(extension);
+        i++;
+      };
+      return this.Contains(asTypes);
+    }
+    // FIX
+    public virtual bool Contains(params Type[] types)
+    {
+      Print.ByteAsBin(this.GetDecorationInfo()); 
+      byte flag = 0x00;
+      foreach (Type type in types)
+      {
+        Assignment.Extension extension = Assignment.Extensions.IndexOf(type);
+        if (extension != Assignment.Extension.Invalid)
+        {
+          flag |= Assignment.Extensions.Flags[(int) extension];       
+        } else {
+          return false;
+        }
+      }
+      return ((Info & flag) == flag);
+    }
+
+    public override int GetHashCode()
+    {
+      return (int) ((Info << 2) | (byte) this._type);
+    }
+
+    private int CompareAs(Assignment.Extension cmpType, Assignment other)
+    {
+      if (other == null)
+      {
+        return (int) SortOrder.Follow;
+      }
+      bool thisContainsType = this.Contains(cmpType);
+      bool otherContainsType = other.Contains(cmpType);
+      Console.WriteLine(String.Format("Comparing {0} with  {1} as {2}", this.ToRaw(), other.ToRaw(), cmpType));
+      // if neither has type
+      if (!thisContainsType && !otherContainsType)
+      {
+        Console.WriteLine("1st same");
+        return (int) SortOrder.Same;
+      }
+      // if one has type and other doesnt
+      if (thisContainsType && !otherContainsType)
+      {
+        return (int) SortOrder.Follow;
+      }
+
+      if (!thisContainsType && otherContainsType)
+      {
+        return (int) SortOrder.Precede;
+      }
+      int ret = 0;
+      // last case both have type
+      switch (cmpType)
+      {
+        case Assignment.Extension.WowClass:
+          WithClass thisWithClass = thisAsDecorator as WithClass;
+          WithClass otherWithClass = otherAsDecorator as WithClass;
+          if (thisWithClass == null | otherWithClass == null)
+          {
+
+            Console.WriteLine("2st same");
+            return (int) SortOrder.Same;
+          }
+          Console.WriteLine("1..");
+          ret = thisWithClass.CompareTo(otherWithClass);
+          return ret;
+        case Assignment.Extension.Priority:
+          WithPriority thisWithPriority = thisAsDecorator as WithPriority;
+          WithPriority otherWithPriority = thisAsDecorator as WithPriority;
+          if (thisWithPriority == null | otherWithPriority == null)
+          {
+
+        Console.WriteLine("3st same");
+            return (int) SortOrder.Same;
+          }
+          Console.WriteLine("2..");
+          ret = thisWithPriority.CompareTo(otherWithPriority);
+          return ret;
+        case Assignment.Extension.StringIndex:
+          WithIndex thisWithIndex = this as WithIndex;
+          WithIndex otherWithIndex = other as WithIndex;
+          if (thisWithIndex == null | otherWithIndex == null)
+          {
+
+        Console.WriteLine("4st same");
+            return (int) SortOrder.Same;
+          }
+          Console.WriteLine("3..");
+          return thisWithIndex.CompareTo(otherWithIndex);
+        default:
+          return (int) SortOrder.Same;
+      }
+    }
+
+    public bool Equals(Assignment other)
+    {
+      if (other == null)
+      {
+        return false;
+      }
+
+      if (!this.Info.Equals(other.Info) |
+          !this.AssignmentType.Equals(other.AssignmentType))
+      {
+        return false;
+      }
+
+      for (Assignment.Extension ext = Assignment.Extension.WowClass; 
+           ext <= Assignment.Extension.StringIndex; 
+           ext++)
+      {
+        if (this.CompareAs(ext, other) != (int) SortOrder.Same)
+        {
+          return false;
+        }
+      }
+
+      return true;
+    }
+
+    // Make true or false loop to type check:
+    // example:
+    // for (int i=Assignment.Extension.WowClass; )
     public override bool Equals(object obj)
     {
         if (obj == null) 
@@ -70,47 +233,52 @@ namespace Containers
           return Equals(objAsAss);
         } 
     }
-
-    protected void setType(int type)
-    {
-      if (!AssType.IsDefined(typeof(AssType), type))
-      {
-        Exceptions.ThrowArgument("Invalid argument type="+type);
-      }
-      int end = 32;
-      int start = end-Assignment.BitsNeededForType;
-      this.Info = (uint) Bytes.setBitsToNum((int) this.Info, type, start, end);
-    }
-
-    public int getAssignmentType()
-    {
-      return Bytes.bitExtracted((int) this.Info, 
-                                Assignment.BitsNeededForType,
-                                32-Assignment.BitsNeededForType);
-    }
-
-    public override int GetHashCode()
-    {
-      return (int) this.Info;
-    }
-
-    public bool Equals(Assignment other)
-    {
-      if (other == null) 
-      {
-        return false;
-      }
-      return (this.Info.Equals(other.Info));
-    }
-
+    // TO:DO Implement
     public int CompareTo(Assignment other)
     {
       if (other == null)
       {
-        return 1;
-      } else {
-        return other.Info.CompareTo(this.Info); 
+        return (int) SortOrder.Follow;
       }
+
+      if (!this.AssignmentType.Equals(other.AssignmentType))
+      {
+        return this.AssignmentType.CompareTo(other.AssignmentType);
+      }
+      
+      if (Info != other.Info)
+      {
+        return other.Info.CompareTo(Info);
+      }
+
+      for (Assignment.Extension ext = Assignment.Extension.WowClass; 
+           ext <= Assignment.Extension.StringIndex; 
+           ext++)
+      {
+        int comparison = other.CompareAs(ext, this);
+        Console.WriteLine("Result: " + (SortOrder) comparison);
+        if (comparison != (int) SortOrder.Same)
+        {
+          return comparison;
+        }
+      }
+
+      return (int) SortOrder.Same;
+    }
+
+    public override string ToRaw()
+    {
+      StringBuilder replacement = new StringBuilder(TemplateTask.Seperator.Mid.ToString());
+      replacement.Append(Assignment.TYPE_TO_RAW[(int) this.AssignmentType]);
+      replacement.Append(TemplateTask.Seperator.End.ToString());
+      return base.ToRaw().Replace(TemplateTask.Seperator.End.ToString(),
+                                  replacement.ToString());
+    }
+
+    public override string ToString()
+    {
+      return String.Format("<Assignment>\n\t<Type>\n\t\t{0}",
+                           Assignment.TYPE_TO_STR[(int) this.AssignmentType]);
     }
   }
 }
